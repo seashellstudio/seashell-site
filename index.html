@@ -1,0 +1,844 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Seashell Studio | Professional Digital Presence</title>
+    <!-- Google Fonts: Plus Jakarta Sans & Manrope -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Manrope:wght@400;500;600&family=Inter:wght@400;500;600&family=Lora:ital,wght@0,400;0,500;1,400&family=Lato:wght@400;700&family=Nunito:wght@400;600;700&family=Raleway:wght@400;500;600&family=Work+Sans:wght@400;500;600&display=swap"
+        rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0"
+        rel="stylesheet">
+
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="style-step12.css">
+    <link rel="stylesheet" href="style-step35.css">
+</head>
+
+<body class="theme-dark">
+
+    <div id="app">
+        <!-- Views Container -->
+        <main id="view-container">
+            <!-- Specific View Content will be injected or toggled here -->
+
+            <!-- ====== LAYOUT: LANDING PAGE ====== -->
+            <section id="view-landing" class="view active">
+                <div class="landing-background">
+                    <img src="assets/Open sea.jpeg" alt="Seashell Studio open sea background" class="bg-img">
+                    <div class="bg-overlay"></div>
+                </div>
+
+                <header class="global-header">
+                    <div class="landing-brand-mark">
+                        <img src="assets/Seashell Logo.png" alt="Seashell Studio logo" class="landing-brand-logo">
+                        <span class="landing-brand-name">Seashell Studio</span>
+                    </div>
+                </header>
+
+                <div class="landing-content">
+                    <div class="landing-copy">
+                        <div class="branding">
+                            <h1 class="hero-title">
+                                <span class="hero-line hero-line-primary">Get a Professional</span>
+                                <span class="hero-line hero-line-secondary">Website for Your Business</span>
+                                <span class="hero-line hero-line-accent">Starting at $300.</span>
+                            </h1>
+                        </div>
+                        <div class="secondary-headers">
+                            <h2 class="sub-heading-primary text-sunset-accent">Fill out a quick form, we build you a custom Website within a Month</h2>
+                            <p class="sub-heading-secondary">Apply in less than 60 seconds.</p>
+                        </div>
+                        <div class="cta-container">
+                            <button class="btn btn-primary btn-large btn-start" onclick="navigateToStep(1)">Build My
+                                Website!</button>
+                        </div>
+                    </div>
+                </div>
+
+                <footer class="global-footer"></footer>
+            </section>
+
+            <!-- ====== LAYOUT: ONBOARDING ====== -->
+            <section id="view-onboarding" class="view">
+
+                <!-- Left Sidebar -->
+                <aside class="sidebar" id="app-sidebar">
+                    <div class="sidebar-content">
+                        <div class="sidebar-header">
+                            <div class="logo-box">
+                                <img src="assets/Seashell Logo.png"
+                                    alt="Seashell Studio logo" class="logo-img">
+                            </div>
+                            <div class="logo-text">
+                                <h2 class="company-name">Seashell Studio</h2>
+                                <p class="progress-label">Onboarding Progress</p>
+                            </div>
+                        </div>
+
+                        <div class="btn-welcome-container">
+                            <button class="btn btn-sunset shadow-lg hover-scale-105 btn-welcome"
+                                onclick="navigateToStep(0)">
+                                <span class="material-symbols-outlined icon-home">home</span>
+                                <span class="fw-headline">Home</span>
+                            </button>
+                        </div>
+
+                        <nav class="sidebar-nav" id="sidebar-nav">
+                            <div class="nav-line"></div>
+
+                            <button class="nav-item" onclick="navigateToStep(1)" data-step="1">
+                                <div class="nav-circle"><span class="nav-num">1</span></div>
+                                <span class="nav-text">Colour Palette</span>
+                                <div class="nav-highlight"></div>
+                            </button>
+
+                            <button class="nav-item" onclick="navigateToStep(2)" data-step="2">
+                                <div class="nav-circle"><span class="nav-num">2</span></div>
+                                <span class="nav-text">Style</span>
+                                <div class="nav-highlight"></div>
+                            </button>
+
+                            <button class="nav-item" onclick="navigateToStep(3)" data-step="3">
+                                <div class="nav-circle"><span class="nav-num">3</span></div>
+                                <span class="nav-text">Layout</span>
+                                <div class="nav-highlight"></div>
+                            </button>
+
+                            <button class="nav-item" onclick="navigateToStep(4)" data-step="4">
+                                <div class="nav-circle"><span class="nav-num">4</span></div>
+                                <span class="nav-text">Features</span>
+                                <div class="nav-highlight"></div>
+                            </button>
+
+                            <button class="nav-item" onclick="navigateToStep(5)" data-step="5">
+                                <div class="nav-circle"><span class="nav-num">5</span></div>
+                                <span class="nav-text">Final Details</span>
+                                <div class="nav-highlight"></div>
+                            </button>
+                        </nav>
+                    </div>
+                </aside>
+
+                <!-- Onboarding Main Content Area -->
+                <div class="onboarding-main">
+
+                    <!-- Step 1 Container -->
+                    <div id="step-1" class="step-container">
+                        <div class="container-inner flex-row">
+                            <!-- Step 1 Content: Split or Full? It's centered block -->
+                            <div class="step-1-content max-w-5xl mx-auto space-y-8 animate-in w-full">
+                                <header class="step-header step-1-header text-center md:text-left">
+                                    <h2 class="step-title" style="margin-bottom:0.5rem">Pick Your <span
+                                            class="text-gradient">Palette</span></h2>
+                                    <p class="step-subtitle">Choose colours that reflect your brand. We will use them in your first website draft.</p>
+                                </header>
+
+                                <div class="space-y-4">
+                                    <h3 class="section-label text-center md:text-left">Brand Color Palettes</h3>
+                                    <div class="palette-grid">
+                                        <div class="palette-option active-palette" onclick="selectPalette(this, '#1C2541')">
+                                            <div style="background:#0B132B"></div>
+                                            <div style="background:#1C2541"></div>
+                                            <div style="background:#3A506B"></div>
+                                            <div style="background:#5BC0BE"></div>
+                                            <div style="background:#CDEFF0"></div>
+                                        </div>
+                                        <div class="palette-option" onclick="selectPalette(this, '#0EA5E9')">
+                                            <div style="background:#020617"></div>
+                                            <div style="background:#0EA5E9"></div>
+                                            <div style="background:#38BDF8"></div>
+                                            <div style="background:#7DD3FC"></div>
+                                            <div style="background:#BAE6FD"></div>
+                                        </div>
+                                        <div class="palette-option" onclick="selectPalette(this, '#B91C1C')">
+                                            <div style="background:#450A0A"></div>
+                                            <div style="background:#B91C1C"></div>
+                                            <div style="background:#EF4444"></div>
+                                            <div style="background:#166534"></div>
+                                            <div style="background:#86EFAC"></div>
+                                        </div>
+                                        <div class="palette-option" onclick="selectPalette(this, '#047857')">
+                                            <div style="background:#064E3B"></div>
+                                            <div style="background:#047857"></div>
+                                            <div style="background:#10B981"></div>
+                                            <div style="background:#D4AF37"></div>
+                                            <div style="background:#FACC15"></div>
+                                        </div>
+                                        <div class="palette-option" onclick="selectPalette(this, '#7F1D1D')">
+                                            <div style="background:#450A0A"></div>
+                                            <div style="background:#7F1D1D"></div>
+                                            <div style="background:#B91C1C"></div>
+                                            <div style="background:#EF4444"></div>
+                                            <div style="background:#FCA5A5"></div>
+                                        </div>
+                                        <div class="palette-option" onclick="selectPalette(this, '#22C55E')">
+                                            <div style="background:#1D4ED8"></div>
+                                            <div style="background:#22C55E"></div>
+                                            <div style="background:#F59E0B"></div>
+                                            <div style="background:#EF4444"></div>
+                                            <div style="background:#8B5CF6"></div>
+                                        </div>
+                                        <div class="palette-option" onclick="selectPalette(this, '#C4B5FD')">
+                                            <div style="background:#A5B4FC"></div>
+                                            <div style="background:#C4B5FD"></div>
+                                            <div style="background:#F5D0FE"></div>
+                                            <div style="background:#FDE68A"></div>
+                                            <div style="background:#BAE6FD"></div>
+                                        </div>
+                                        <div class="palette-option" onclick="selectPalette(this, '#DC2626')">
+                                            <div style="background:#111827"></div>
+                                            <div style="background:#1F2937"></div>
+                                            <div style="background:#374151"></div>
+                                            <div style="background:#DC2626"></div>
+                                            <div style="background:#F87171"></div>
+                                        </div>
+                                        <div class="palette-option" onclick="selectPalette(this, '#E6D5B8')">
+                                            <div style="background:#F5F1E8"></div>
+                                            <div style="background:#E6D5B8"></div>
+                                            <div style="background:#C2A878"></div>
+                                            <div style="background:#8B6F47"></div>
+                                            <div style="background:#3E2F1C"></div>
+                                        </div>
+                                        <div class="palette-option" onclick="selectPalette(this, '#2563EB')">
+                                            <div style="background:#1E3A8A"></div>
+                                            <div style="background:#2563EB"></div>
+                                            <div style="background:#3B82F6"></div>
+                                            <div style="background:#93C5FD"></div>
+                                            <div style="background:#1E40AF"></div>
+                                        </div>
+                                        <div class="palette-option" onclick="selectPalette(this, '#1D4ED8')">
+                                            <div style="background:#0F172A"></div>
+                                            <div style="background:#1D4ED8"></div>
+                                            <div style="background:#0EA5E9"></div>
+                                            <div style="background:#22D3EE"></div>
+                                            <div style="background:#67E8F9"></div>
+                                        </div>
+                                        <div class="palette-option" onclick="selectPalette(this, '#6D28D9')">
+                                            <div style="background:#4C1D95"></div>
+                                            <div style="background:#6D28D9"></div>
+                                            <div style="background:#7C3AED"></div>
+                                            <div style="background:#A78BFA"></div>
+                                            <div style="background:#C4B5FD"></div>
+                                        </div>
+                                        <div class="palette-option" onclick="selectPalette(this, '#A21CAF')">
+                                            <div style="background:#701A75"></div>
+                                            <div style="background:#A21CAF"></div>
+                                            <div style="background:#C026D3"></div>
+                                            <div style="background:#E879F9"></div>
+                                            <div style="background:#F5D0FE"></div>
+                                        </div>
+                                        <div class="palette-option" onclick="selectPalette(this, '#312E81')">
+                                            <div style="background:#1E1B4B"></div>
+                                            <div style="background:#312E81"></div>
+                                            <div style="background:#4338CA"></div>
+                                            <div style="background:#6366F1"></div>
+                                            <div style="background:#818CF8"></div>
+                                        </div>
+                                        <div class="palette-option" onclick="selectPalette(this, '#047857')">
+                                            <div style="background:#064E3B"></div>
+                                            <div style="background:#047857"></div>
+                                            <div style="background:#059669"></div>
+                                            <div style="background:#10B981"></div>
+                                            <div style="background:#6EE7B7"></div>
+                                        </div>
+                                        <div class="palette-option" onclick="selectPalette(this, '#065F46')">
+                                            <div style="background:#022C22"></div>
+                                            <div style="background:#065F46"></div>
+                                            <div style="background:#16A34A"></div>
+                                            <div style="background:#22C55E"></div>
+                                            <div style="background:#4ADE80"></div>
+                                        </div>
+                                        <div class="palette-option" onclick="selectPalette(this, '#4D7C0F')">
+                                            <div style="background:#3F6212"></div>
+                                            <div style="background:#4D7C0F"></div>
+                                            <div style="background:#65A30D"></div>
+                                            <div style="background:#84CC16"></div>
+                                            <div style="background:#BEF264"></div>
+                                        </div>
+                                        <div class="palette-option" onclick="selectPalette(this, '#A16207')">
+                                            <div style="background:#713F12"></div>
+                                            <div style="background:#A16207"></div>
+                                            <div style="background:#CA8A04"></div>
+                                            <div style="background:#EAB308"></div>
+                                            <div style="background:#FACC15"></div>
+                                        </div>
+                                        <div class="palette-option" onclick="selectPalette(this, '#7C2D12')">
+                                            <div style="background:#431407"></div>
+                                            <div style="background:#7C2D12"></div>
+                                            <div style="background:#9A3412"></div>
+                                            <div style="background:#C2410C"></div>
+                                            <div style="background:#F97316"></div>
+                                        </div>
+                                        <div class="palette-option" onclick="selectPalette(this, '#B91C1C')">
+                                            <div style="background:#7F1D1D"></div>
+                                            <div style="background:#B91C1C"></div>
+                                            <div style="background:#DC2626"></div>
+                                            <div style="background:#EF4444"></div>
+                                            <div style="background:#F87171"></div>
+                                        </div>
+                                        <div class="palette-option" onclick="selectPalette(this, '#BE185D')">
+                                            <div style="background:#831843"></div>
+                                            <div style="background:#BE185D"></div>
+                                            <div style="background:#DB2777"></div>
+                                            <div style="background:#EC4899"></div>
+                                            <div style="background:#F472B6"></div>
+                                        </div>
+                                        <div class="palette-option" onclick="selectPalette(this, '#0F172A')">
+                                            <div style="background:#020617"></div>
+                                            <div style="background:#0F172A"></div>
+                                            <div style="background:#1E293B"></div>
+                                            <div style="background:#334155"></div>
+                                            <div style="background:#475569"></div>
+                                        </div>
+                                        <div class="palette-option" onclick="selectPalette(this, '#292524')">
+                                            <div style="background:#1C1917"></div>
+                                            <div style="background:#292524"></div>
+                                            <div style="background:#44403C"></div>
+                                            <div style="background:#78716C"></div>
+                                            <div style="background:#A8A29E"></div>
+                                        </div>
+                                        <div class="palette-option" onclick="selectPalette(this, '#6366F1')">
+                                            <div style="background:#1D4ED8"></div>
+                                            <div style="background:#6366F1"></div>
+                                            <div style="background:#8B5CF6"></div>
+                                            <div style="background:#EC4899"></div>
+                                            <div style="background:#F97316"></div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="space-y-4" style="margin-top:2rem">
+                                    <h3 class="section-label text-center md:text-left">Background Colour</h3>
+                                    <div class="mode-options-flex">
+                                        <!-- Option: Dark -->
+                                        <div class="mode-option active" id="mode-dark" onclick="updateBgMode('dark')">
+                                            <div class="mode-inner">
+                                                <span class="material-symbols-outlined icon-dim">dark_mode</span>
+                                                <span class="mode-text font-bold">Dark Mode</span>
+                                            </div>
+                                            <div class="custom-radio active">
+                                                <div class="radio-dot active"></div>
+                                            </div>
+                                        </div>
+                                        <!-- Option: Light -->
+                                        <div class="mode-option" id="mode-light" onclick="updateBgMode('light')">
+                                            <div class="mode-inner">
+                                                <span class="material-symbols-outlined icon-dim">light_mode</span>
+                                                <span class="mode-text">Light Mode</span>
+                                            </div>
+                                            <div class="custom-radio">
+                                                <div class="radio-dot"></div>
+                                            </div>
+                                        </div>
+                                        <!-- Option: Palette -->
+                                        <div class="mode-option" id="mode-palette" onclick="updateBgMode('palette')">
+                                            <div class="mode-inner">
+                                                <span class="material-symbols-outlined icon-dim">palette</span>
+                                                <span class="mode-text">Match Palette</span>
+                                            </div>
+                                            <div class="custom-radio">
+                                                <div class="radio-dot"></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Step 2 Container -->
+                    <div id="step-2" class="step-container">
+                        <div class="container-inner flex-split">
+                            <div class="split-left font-selection-area">
+                                <h1 class="step-title" style="font-size:3.5rem; margin-bottom:1rem">Font & <span
+                                        class="text-primary-container">Style</span></h1>
+                                <p class="step-subtitle" style="margin-bottom:2rem">Decide the typography style.</p>
+
+                                <div class="font-list-scroll">
+                                    <div class="font-option-card" data-font="Inter" onclick="selectFont(this)">
+                                        <div class="font-card-left">
+                                            <div class="font-icon" style="font-family:Inter">Aa</div>
+                                            <div class="font-details">
+                                                <p class="font-name" style="font-family:Inter">Inter</p>
+                                                <p class="font-desc">Technical & Clear</p>
+                                            </div>
+                                        </div>
+                                        <div class="custom-radio">
+                                            <div class="radio-dot"></div>
+                                        </div>
+                                    </div>
+                                    <div class="font-option-card active" data-font="Plus Jakarta Sans"
+                                        onclick="selectFont(this)">
+                                        <div class="font-card-left">
+                                            <div class="font-icon active-icon" style="font-family:'Plus Jakarta Sans'">
+                                                Aa</div>
+                                            <div class="font-details">
+                                                <p class="font-name active-text"
+                                                    style="font-family:'Plus Jakarta Sans'">Plus Jakarta Sans</p>
+                                                <p class="font-desc active-desc">Premium & Editorial</p>
+                                            </div>
+                                        </div>
+                                        <div class="custom-radio active">
+                                            <div class="radio-dot active"></div>
+                                        </div>
+                                    </div>
+                                    <div class="font-option-card" data-font="Lora" onclick="selectFont(this)">
+                                        <div class="font-card-left">
+                                            <div class="font-icon" style="font-family:Lora">Aa</div>
+                                            <div class="font-details">
+                                                <p class="font-name" style="font-family:Lora">Lora</p>
+                                                <p class="font-desc">Sophisticated Serif</p>
+                                            </div>
+                                        </div>
+                                        <div class="custom-radio">
+                                            <div class="radio-dot"></div>
+                                        </div>
+                                    </div>
+                                    <div class="font-option-card" data-font="Lato" onclick="selectFont(this)">
+                                        <div class="font-card-left">
+                                            <div class="font-icon" style="font-family:Lato">Aa</div>
+                                            <div class="font-details">
+                                                <p class="font-name" style="font-family:Lato">Lato</p>
+                                                <p class="font-desc">Clean & Professional</p>
+                                            </div>
+                                        </div>
+                                        <div class="custom-radio">
+                                            <div class="radio-dot"></div>
+                                        </div>
+                                    </div>
+                                    <div class="font-option-card" data-font="Nunito" onclick="selectFont(this)">
+                                        <div class="font-card-left">
+                                            <div class="font-icon" style="font-family:Nunito">Aa</div>
+                                            <div class="font-details">
+                                                <p class="font-name" style="font-family:Nunito">Nunito</p>
+                                                <p class="font-desc">Friendly & Rounded</p>
+                                            </div>
+                                        </div>
+                                        <div class="custom-radio">
+                                            <div class="radio-dot"></div>
+                                        </div>
+                                    </div>
+                                    <div class="font-option-card" data-font="Raleway" onclick="selectFont(this)">
+                                        <div class="font-card-left">
+                                            <div class="font-icon" style="font-family:Raleway">Aa</div>
+                                            <div class="font-details">
+                                                <p class="font-name" style="font-family:Raleway">Raleway</p>
+                                                <p class="font-desc">Elegant & Artistic</p>
+                                            </div>
+                                        </div>
+                                        <div class="custom-radio">
+                                            <div class="radio-dot"></div>
+                                        </div>
+                                    </div>
+                                    <div class="font-option-card" data-font="Work Sans" onclick="selectFont(this)">
+                                        <div class="font-card-left">
+                                            <div class="font-icon" style="font-family:'Work Sans'">Aa</div>
+                                            <div class="font-details">
+                                                <p class="font-name" style="font-family:'Work Sans'">Work Sans</p>
+                                                <p class="font-desc">Optimized & Sturdy</p>
+                                            </div>
+                                        </div>
+                                        <div class="custom-radio">
+                                            <div class="radio-dot"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="split-right font-preview-area">
+                                <div class="glass-card preview-card">
+                                    <div class="preview-inner">
+                                        <div class="preview-header">
+                                            <span class="preview-label">Live Preview</span>
+                                            <div class="preview-divider"></div>
+                                        </div>
+                                        <div class="preview-body">
+                                            <h3 class="preview-title" id="preview-text"
+                                                style="font-family:'Plus Jakarta Sans'">
+                                                Building the <span
+                                                    style="font-style:italic; font-weight:300">future</span> of data.
+                                            </h3>
+                                            <p class="preview-para" id="preview-paragraph"
+                                                style="font-family:'Plus Jakarta Sans'">
+                                                Our platform empowers creators to visualize complex information through
+                                                an editorial lens, where every pixel tells a story of precision and
+                                                light.
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Step 3 Container -->
+                    <div id="step-3" class="step-container">
+                        <div class="h-full flex-split layout-step-shell" style="max-height: 800px; padding: 2rem 0">
+                            <!-- Left Panel: Section List -->
+                            <div class="split-left layout-step-sidebar" style="display:flex; flex-direction:column;">
+                                <div class="shrink-0" style="margin-bottom:2rem;">
+                                    <h1 class="step-title" style="font-size:3rem; margin-bottom:1rem">Layout
+                                    </h1>
+                                    <p class="step-subtitle text-sm">Select the sections of your website.</p>
+                                </div>
+                                <div class="flex-1 overflow-y-auto custom-scrollbar" id="section-list"
+                                    style="padding-right:1rem; display:flex; flex-direction:column; gap:0.5rem">
+                                    <!-- Populated by JS -->
+                                </div>
+                            </div>
+
+                            <!-- Right Panel: Dynamic Preview -->
+                            <div class="split-right layout-step-preview"
+                                style="position: relative; display:flex;">
+                                <div class="preview-mockup">
+                                    <div class="mockup-inner">
+                                        <div class="mockup-header">
+                                            <div class="dots">
+                                                <div class="dot red"></div>
+                                                <div class="dot yellow"></div>
+                                                <div class="dot green"></div>
+                                            </div>
+                                            <div class="active-count" id="active-sections-count">2 ACTIVE SECTIONS</div>
+                                        </div>
+                                        <div class="mockup-canvas" id="preview-canvas">
+                                            <!-- Populated by JS -->
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Step 4 Container -->
+                    <div id="step-4" class="step-container">
+                        <div class="container-inner">
+                            <div class="step-header">
+                                <h1 class="step-title">Optional Features</h1>
+                                <p class="step-subtitle">Choose additional features for your website.</p>
+                            </div>
+
+                            <div class="features-layout">
+                                <div class="features-row features-row-primary">
+                                    <!-- Contact Card -->
+                                    <button class="glass-card feature-toggle-card" onclick="toggleCard(this)">
+                                        <div class="feature-card-header">
+                                            <div class="feature-card-heading">
+                                                <h3 class="card-title">Contact</h3>
+                                                <p class="feature-meta">Quick setup</p>
+                                            </div>
+                                            <div class="icon-box">
+                                                <span class="material-symbols-outlined text-orange-400">mail</span>
+                                            </div>
+                                        </div>
+                                        <div class="feature-card-body">
+                                            <p class="card-desc">Allow users to send messages right from your site</p>
+                                        </div>
+                                    </button>
+
+                                    <!-- Payment Card -->
+                                    <button class="glass-card feature-toggle-card" onclick="toggleCard(this)">
+                                        <div class="feature-card-header">
+                                            <div class="feature-card-heading">
+                                                <h3 class="card-title">Payment</h3>
+                                                <p class="feature-meta">Quick setup</p>
+                                            </div>
+                                            <div class="icon-box">
+                                                <span class="material-symbols-outlined text-orange-400">payments</span>
+                                            </div>
+                                        </div>
+                                        <div class="feature-card-body">
+                                            <p class="card-desc">Secure checkout for customer payments</p>
+                                        </div>
+                                    </button>
+
+                                    <!-- Booking Card -->
+                                    <button class="glass-card feature-toggle-card" onclick="toggleCard(this)">
+                                        <div class="feature-card-header">
+                                            <div class="feature-card-heading">
+                                                <h3 class="card-title">Booking</h3>
+                                                <p class="feature-meta">Premium feature</p>
+                                            </div>
+                                            <div class="icon-box">
+                                                <span class="material-symbols-outlined text-orange-400">calendar_today</span>
+                                            </div>
+                                        </div>
+                                        <div class="feature-card-body">
+                                            <p class="card-desc">Simple scheduling for appointments and reservations</p>
+                                        </div>
+                                    </button>
+
+                                    <!-- Blog Card -->
+                                    <button class="glass-card feature-toggle-card" onclick="toggleCard(this)">
+                                        <div class="feature-card-header">
+                                            <div class="feature-card-heading">
+                                                <h3 class="card-title">Blog</h3>
+                                                <p class="feature-meta">Premium feature</p>
+                                            </div>
+                                            <div class="icon-box">
+                                                <span class="material-symbols-outlined text-orange-400">article</span>
+                                            </div>
+                                        </div>
+                                        <div class="feature-card-body">
+                                            <p class="card-desc">Share updates, stories, and insights on your site</p>
+                                        </div>
+                                    </button>
+
+                                    <!-- Newsletter Card -->
+                                    <button class="glass-card feature-toggle-card" onclick="toggleCard(this)">
+                                        <div class="feature-card-header">
+                                            <div class="feature-card-heading">
+                                                <h3 class="card-title">Newsletter</h3>
+                                                <p class="feature-meta">Premium feature</p>
+                                            </div>
+                                            <div class="icon-box">
+                                                <span class="material-symbols-outlined text-orange-400">mail_lock</span>
+                                            </div>
+                                        </div>
+                                        <div class="feature-card-body">
+                                            <p class="card-desc">Collect emails from visitors who want to stay updated</p>
+                                        </div>
+                                    </button>
+                                </div>
+
+                                <div class="features-row features-row-secondary">
+                                    <!-- Social Integrations Card -->
+                                    <div class="glass-card social-card" role="group" aria-labelledby="social-feature-title">
+                                        <div class="feature-card-header">
+                                            <div class="feature-card-heading">
+                                                <h3 class="card-title" id="social-feature-title">Social Media</h3>
+                                                <p class="feature-meta">Quick setup</p>
+                                            </div>
+                                            <div class="icon-box">
+                                                <span class="material-symbols-outlined text-orange-400">share</span>
+                                            </div>
+                                        </div>
+                                            <p class="card-desc">Add Social Links to your site. Select platform, we'll find them</p>
+
+                                        <div class="social-grid" aria-label="Social platform options">
+                                            <button type="button" class="social-option"
+                                                onclick="toggleSelectableOption(event, this)" aria-pressed="false">
+                                                <span class="social-option-check" aria-hidden="true">
+                                                    <span class="material-symbols-outlined">check</span>
+                                                </span>
+                                                <span class="social-option-icon" aria-hidden="true">
+                                                    <svg viewBox="0 0 24 24" role="presentation" focusable="false">
+                                                        <path d="M8.2 3.75h7.6c2.45 0 4.45 2 4.45 4.45v7.6c0 2.45-2 4.45-4.45 4.45H8.2c-2.45 0-4.45-2-4.45-4.45V8.2c0-2.45 2-4.45 4.45-4.45m0 1.65A2.8 2.8 0 0 0 5.4 8.2v7.6a2.8 2.8 0 0 0 2.8 2.8h7.6a2.8 2.8 0 0 0 2.8-2.8V8.2a2.8 2.8 0 0 0-2.8-2.8zm8.08 1.25a.98.98 0 1 1 0 1.96.98.98 0 0 1 0-1.96M12 7.2A4.8 4.8 0 1 1 7.2 12 4.8 4.8 0 0 1 12 7.2m0 1.65A3.15 3.15 0 1 0 15.15 12 3.16 3.16 0 0 0 12 8.85"></path>
+                                                    </svg>
+                                                </span>
+                                                <span class="social-option-name">Instagram</span>
+                                            </button>
+
+                                            <button type="button" class="social-option"
+                                                onclick="toggleSelectableOption(event, this)" aria-pressed="false">
+                                                <span class="social-option-check" aria-hidden="true">
+                                                    <span class="material-symbols-outlined">check</span>
+                                                </span>
+                                                <span class="social-option-icon" aria-hidden="true">
+                                                    <svg viewBox="0 0 24 24" role="presentation" focusable="false">
+                                                        <path d="M5 4.5h3.4l4 5.14L16.8 4.5H20l-5.88 7.07L20.3 19.5h-3.43l-4.22-5.41-4.5 5.41H4.9l6.1-7.33z"></path>
+                                                    </svg>
+                                                </span>
+                                                <span class="social-option-name">Twitter (X)</span>
+                                            </button>
+
+                                            <button type="button" class="social-option"
+                                                onclick="toggleSelectableOption(event, this)" aria-pressed="false">
+                                                <span class="social-option-check" aria-hidden="true">
+                                                    <span class="material-symbols-outlined">check</span>
+                                                </span>
+                                                <span class="social-option-icon" aria-hidden="true">
+                                                    <svg viewBox="0 0 24 24" role="presentation" focusable="false">
+                                                        <path d="M15.35 4H18.6c.26 1.33 1.15 2.52 2.4 3.12v2.55a8.02 8.02 0 0 1-3.22-1.02v5.42c0 3.41-2.65 5.93-6.12 5.93-3.22 0-5.66-2.29-5.66-5.28 0-3.06 2.47-5.44 5.83-5.44.45 0 .83.03 1.22.13v2.84a3.7 3.7 0 0 0-1.16-.19c-1.63 0-2.89 1.13-2.89 2.63 0 1.45 1.13 2.55 2.66 2.55 1.83 0 2.72-1.1 2.72-3.3z"></path>
+                                                    </svg>
+                                                </span>
+                                                <span class="social-option-name">TikTok</span>
+                                            </button>
+
+                                            <button type="button" class="social-option"
+                                                onclick="toggleSelectableOption(event, this)" aria-pressed="false">
+                                                <span class="social-option-check" aria-hidden="true">
+                                                    <span class="material-symbols-outlined">check</span>
+                                                </span>
+                                                <span class="social-option-icon" aria-hidden="true">
+                                                    <svg viewBox="0 0 24 24" role="presentation" focusable="false">
+                                                        <path d="M13.35 20v-7.15h2.42l.36-2.79h-2.78V8.29c0-.81.23-1.36 1.39-1.36h1.48V4.44c-.26-.03-1.14-.11-2.16-.11-2.14 0-3.6 1.31-3.6 3.72v2.01H8v2.79h2.62V20z"></path>
+                                                    </svg>
+                                                </span>
+                                                <span class="social-option-name">Facebook</span>
+                                            </button>
+
+                                            <button type="button" class="social-option"
+                                                onclick="toggleSelectableOption(event, this)" aria-pressed="false">
+                                                <span class="social-option-check" aria-hidden="true">
+                                                    <span class="material-symbols-outlined">check</span>
+                                                </span>
+                                                <span class="social-option-icon" aria-hidden="true">
+                                                    <svg viewBox="0 0 24 24" role="presentation" focusable="false">
+                                                        <path d="M6.85 8.15a1.66 1.66 0 1 1 0-3.31 1.66 1.66 0 0 1 0 3.31M5.4 9.55h2.9V19.5H5.4zm4.7 0h2.78v1.36h.04c.39-.73 1.34-1.5 2.76-1.5 2.95 0 3.5 1.94 3.5 4.47v5.62h-2.9v-4.98c0-1.19-.02-2.72-1.66-2.72-1.67 0-1.93 1.3-1.93 2.63v5.07h-2.9z"></path>
+                                                    </svg>
+                                                </span>
+                                                <span class="social-option-name">LinkedIn</span>
+                                            </button>
+                                        </div>
+                                    </div>
+
+                                    <!-- Language Card -->
+                                    <div class="glass-card language-card" role="group" aria-labelledby="language-feature-title">
+                                        <div class="feature-card-header">
+                                            <div class="feature-card-heading">
+                                                <h3 class="card-title" id="language-feature-title">Language</h3>
+                                                <p class="feature-meta">Premium feature</p>
+                                            </div>
+                                            <div class="icon-box">
+                                                <span class="material-symbols-outlined text-orange-400">translate</span>
+                                            </div>
+                                        </div>
+                                        <p class="card-desc">Let visitors switch languages with a translate button</p>
+
+                                        <div class="language-suggestions" aria-label="Common languages">
+                                            <button type="button" class="language-chip"
+                                                onclick="setLanguageSuggestion(event, 'Punjabi')">Punjabi</button>
+                                            <button type="button" class="language-chip"
+                                                onclick="setLanguageSuggestion(event, 'Mandarin')">Mandarin</button>
+                                            <button type="button" class="language-chip"
+                                                onclick="setLanguageSuggestion(event, 'Arabic')">Arabic</button>
+                                            <button type="button" class="language-chip"
+                                                onclick="setLanguageSuggestion(event, 'Spanish')">Spanish</button>
+                                            <button type="button" class="language-chip"
+                                                onclick="setLanguageSuggestion(event, 'Portuguese')">Portuguese</button>
+                                            <button type="button" class="language-chip"
+                                                onclick="setLanguageSuggestion(event, 'Urdu')">Urdu</button>
+                                            <button type="button" class="language-chip"
+                                                onclick="setLanguageSuggestion(event, 'Gujarati')">Gujarati</button>
+                                            <button type="button" class="language-chip"
+                                                onclick="setLanguageSuggestion(event, 'Serbian')">Serbian</button>
+                                            <button type="button" class="language-chip"
+                                                onclick="setLanguageSuggestion(event, 'French')">French</button>
+                                            <button type="button" class="language-chip"
+                                                onclick="setLanguageSuggestion(event, 'Hindi')">Hindi</button>
+                                        </div>
+
+                                        <div class="language-field-group">
+                                            <label class="language-label" for="language-input">Other (type)</label>
+                                            <div class="language-input-wrap">
+                                                <input id="language-input" class="language-input" type="text"
+                                                    placeholder="Type a language"
+                                                    oninput="syncLanguageFeatureState()"
+                                                    autocomplete="off"
+                                                    autocorrect="off"
+                                                    autocapitalize="words"
+                                                    spellcheck="false">
+                                                <button type="button" class="language-clear-btn" id="language-clear-btn"
+                                                    onclick="clearLanguageInput(event)" aria-label="Clear language">
+                                                    <span class="material-symbols-outlined">close</span>
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Step 5 Container -->
+                    <div id="step-5" class="step-container">
+                        <div class="container-inner">
+                            <div class="mb-8" style="position:relative; z-index:10;">
+                                <h1 class="step-title" style="font-size:3.5rem; margin-bottom:0.5rem">Almost done
+                                </h1>
+                                <p class="step-subtitle">Final details before we launch.</p>
+                            </div>
+
+                            <div class="form-grid finish-form-layout" style="position:relative; z-index:10;">
+                                <div class="finish-form-main">
+                                    <div class="input-group">
+                                        <label>Business Name</label>
+                                        <input type="text" id="input-business-name" placeholder="e.g. Seashell Studio">
+                                    </div>
+
+                                    <div class="input-group">
+                                        <label>Email Address</label>
+                                        <input type="email" id="input-email" placeholder="hello@studio.com">
+                                    </div>
+
+                                    <div class="input-group">
+                                        <label>Main Customers</label>
+                                        <input type="text" id="input-customers" placeholder="Who are we building for?">
+                                    </div>
+
+                                    <div class="input-group">
+                                        <label>Location</label>
+                                        <div class="input-icon-wrapper">
+                                            <input type="text" id="input-location" placeholder="123 Anywhere Street"
+                                                style="padding-left:2.5rem;">
+                                            <span class="material-symbols-outlined icon-pos">location_on</span>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="finish-form-side">
+                                    <div class="input-group">
+                                        <label>Brand Assets</label>
+                                        <div class="upload-box">
+                                            <div class="upload-bg-hover"></div>
+                                            <span class="material-symbols-outlined"
+                                                style="font-size:2rem; color:var(--primary); margin-bottom:0.25rem;">cloud_upload</span>
+                                            <span class="upload-title">Upload Media</span>
+                                            <span class="upload-desc">Logo or Assets</span>
+                                        </div>
+                                    </div>
+
+                                    <div class="input-group">
+                                        <label>Project Timeline</label>
+                                        <div class="timeline-bar" role="group" aria-label="Project Timeline">
+                                            <button type="button" class="timeline-btn active" aria-pressed="true"
+                                                onclick="selectTimeline(this)">2 - 4
+                                                WEEKS</button>
+                                            <button type="button" class="timeline-btn" aria-pressed="false"
+                                                onclick="selectTimeline(this)">3 - 6
+                                                WEEKS</button>
+                                            <button type="button" class="timeline-btn" aria-pressed="false"
+                                                onclick="selectTimeline(this)">1 - 2
+                                                MONTHS</button>
+                                        </div>
+                                    </div>
+
+                                    <div class="input-group">
+                                        <label>References (Optional)</label>
+                                        <textarea id="input-reference" placeholder="Add a reference..." rows="4"></textarea>
+                                    </div>
+                                </div>
+
+                                <div class="finish-grid-full">
+                                    <div class="input-group">
+                                        <label>Final Notes (Optional)</label>
+                                        <textarea id="input-final-notes" placeholder="Anything else we should know?" rows="4"></textarea>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+                <!-- Global Bottom Right FAB for Onboarding -->
+                <div class="floating-action-btn">
+                    <button type="button" class="btn btn-fab" id="btn-next" aria-label="Next Step" onclick="nextStep()">
+                        Next
+                    </button>
+                </div>
+
+            </section>
+        </main>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="main.js"></script>
+</body>
+
+</html>

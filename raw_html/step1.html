@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,200..800;1,200..800&amp;family=Manrope:wght@200..800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script>
+      window.selectedPaletteColor = '#CED2FF';
+      window.currentMode = 'dark';
+
+      function getContrastYIQ(hexcolor){
+        hexcolor = hexcolor.replace('#', '');
+        var r = parseInt(hexcolor.substr(0,2),16);
+        var g = parseInt(hexcolor.substr(2,2),16);
+        var b = parseInt(hexcolor.substr(4,2),16);
+        var yiq = ((r*299)+(g*587)+(b*114))/1000;
+        return (yiq >= 128) ? 'black' : 'white';
+      }
+
+      window.selectPalette = function(el, color) {
+        document.querySelectorAll('.palette-grid > div').forEach(div => {
+          div.classList.remove('ring-2', 'ring-primary');
+          div.classList.add('hover:opacity-80');
+        });
+        el.classList.add('ring-2', 'ring-primary');
+        el.classList.remove('hover:opacity-80');
+        
+        window.selectedPaletteColor = color;
+        if (window.currentMode === 'palette') {
+          window.updateBgMode('palette');
+        }
+      };
+
+      window.updateBgMode = function(mode) {
+        window.currentMode = mode;
+        const options = document.querySelectorAll('.bg-mode-option');
+        options.forEach(opt => {
+          opt.classList.remove('bg-surface-container-low', 'border-2', 'border-primary', 'ring-2', 'ring-primary/20');
+          opt.classList.add('bg-surface-container', 'border', 'border-outline-variant/20');
+          opt.querySelector('span').classList.remove('text-white', 'text-black', 'font-bold');
+          opt.querySelector('span').classList.add('text-on-surface-variant');
+          const radio = opt.querySelector('.radio-icon');
+          radio.classList.replace('border-4', 'border-2');
+          radio.classList.replace('border-primary', 'border-zinc-700');
+          radio.querySelector('.radio-dot').classList.replace('bg-primary', 'bg-transparent');
+        });
+
+        const selected = document.getElementById('mode-' + mode);
+        selected.classList.add('bg-surface-container-low', 'border-2', 'border-primary', 'ring-2', 'ring-primary/20');
+        selected.classList.remove('bg-surface-container', 'border', 'border-outline-variant/20');
+        selected.querySelector('span').classList.add('font-bold');
+        const radio = selected.querySelector('.radio-icon');
+        radio.classList.replace('border-2', 'border-4');
+        radio.classList.replace('border-zinc-700', 'border-primary');
+        radio.querySelector('.radio-dot').classList.replace('bg-transparent', 'bg-primary');
+
+        let bgColor = '#131313';
+        if (mode === 'light') bgColor = '#f8f7f5';
+        if (mode === 'palette') bgColor = window.selectedPaletteColor;
+        
+        const mainElement = document.querySelector('main');
+        mainElement.style.backgroundColor = bgColor;
+        mainElement.style.transition = 'background-color 0.3s ease';
+        
+        const contrast = getContrastYIQ(bgColor);
+        const mainHeader = document.querySelector('h2');
+        const subText = document.querySelector('header p');
+        const labels = document.querySelectorAll('h3');
+
+        if (contrast === 'black') {
+          mainHeader.classList.replace('text-white', 'text-zinc-900');
+          subText.classList.replace('text-on-surface-variant', 'text-zinc-600');
+          labels.forEach(lbl => lbl.classList.replace('text-zinc-500', 'text-zinc-700'));
+          selected.querySelector('span').classList.replace('text-on-surface-variant', 'text-black');
+        } else {
+          mainHeader.classList.replace('text-zinc-900', 'text-white');
+          subText.classList.replace('text-zinc-600', 'text-on-surface-variant');
+          labels.forEach(lbl => lbl.classList.replace('text-zinc-700', 'text-zinc-500'));
+          selected.querySelector('span').classList.replace('text-on-surface-variant', 'text-white');
+        }
+      };
+    </script>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "on-surface-variant": "#dac2b2",
+              "surface": "#131313",
+              "surface-container": "#201f1f",
+              "surface-container-high": "#2a2a2a",
+              "outline": "#a28d7e",
+              "primary": "#ffc69a",
+              "primary-container": "#ff9f4a",
+              "surface-container-low": "#1c1b1b",
+              "background": "#131313",
+              "on-surface": "#e5e2e1",
+              "outline-variant": "#544337"
+            },
+            fontFamily: {
+              "headline": ["Plus Jakarta Sans"],
+              "body": ["Manrope"],
+              "label": ["Manrope"]
+            },
+            borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
+          },
+        },
+      }
+    </script>
+<style>
+        body { font-family: 'Manrope', sans-serif; }
+        h1, h2, h3 { font-family: 'Plus Jakarta Sans', sans-serif; }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        /* Custom scrollbar for main content */
+        .custom-scrollbar::-webkit-scrollbar { width: 4px; }
+        .custom-scrollbar::-webkit-scrollbar-track { background: transparent; }
+        .custom-scrollbar::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.1); border-radius: 10px; }
+    </style>
+</head>
+<body class="bg-surface text-on-surface selection:bg-primary/30 selection:text-primary overflow-hidden h-screen flex">
+<!-- SideNavBar -->
+<aside class="h-full z-40 hidden md:flex flex-col bg-zinc-950/60 backdrop-blur-2xl w-72 shadow-[20px_0_60px_-15px_rgba(255,159,74,0.08)] border-r border-white/5">
+<div class="px-8 py-10">
+<div class="flex items-center gap-3">
+<img alt="C-Shell Logo" class="w-10 h-10 object-contain" src="https://lh3.googleusercontent.com/aida/ADBb0uiSHS4Z0x7TSZgvxTSMimpECcINzfIpm8xRxTomCJvlIqArY5ziWzemVr-Z4wS95q6m11Mw0EqQD1Kf54t8eaTPskapHG1lNl9xx5j-2CtL1aoKhPBgWutWAC9IB7N_8QggvWhLt2JKgbeydifnIt62Bt3e6_vZl6QgNoRCU7qjoCBTEZh_nh0MQmrxGTeuxJqIQxVmYjovm6efH_pK8eJV9jK6cyr4yrhkNEenPrvnSIR9RTYPudduh09MZol58NV5RvyBpVbQ" style=""/>
+<h1 class="text-2xl font-black text-white tracking-tighter" style="">Seashell Studio</h1>
+</div>
+<p class="font-label text-xs uppercase tracking-widest text-zinc-500 mt-2" style="">Onboarding Progress</p>
+</div>
+<nav class="flex-1 px-4 space-y-1">
+<!-- Welcome Section Header -->
+<div class="mb-6">
+<div class="flex items-center gap-4 px-4 py-4 text-zinc-400 bg-white/5 rounded-xl border border-white/5 transition-all mb-2">
+<span class="material-symbols-outlined text-orange-400" style="">auto_awesome</span>
+<div>
+<span class="font-label text-xs uppercase tracking-widest font-bold block text-white" style="">Getting Started</span>
+<span class="text-[10px] text-zinc-500" style="">Welcome to the platform</span>
+</div>
+</div>
+</div>
+<!-- Navigation Steps -->
+<div class="space-y-1">
+<div class="flex items-center gap-4 px-4 py-3 text-orange-400 border-r-4 border-orange-400 bg-orange-400/10 transition-all duration-300 ease-in-out cursor-default group">
+<span class="material-symbols-outlined" style="">person</span>
+<div class="flex flex-col">
+<span class="font-label text-[10px] uppercase tracking-widest text-orange-400/70" style="">Step 1</span>
+<span class="font-label text-xs uppercase tracking-widest font-bold" style="">Colour Palette</span>
+</div>
+</div>
+<div class="flex items-center gap-4 px-4 py-3 text-zinc-600 hover:bg-zinc-900/40 transition-all duration-300 ease-in-out cursor-pointer group">
+<span class="material-symbols-outlined group-hover:text-zinc-400" style="">tune</span>
+<div class="flex flex-col">
+<span class="font-label text-[10px] uppercase tracking-widest" style="">Step 2</span>
+<span class="font-label text-xs uppercase tracking-widest" style="">Style</span>
+</div>
+</div>
+<div class="flex items-center gap-4 px-4 py-3 text-zinc-600 hover:bg-zinc-900/40 transition-all duration-300 ease-in-out cursor-pointer group">
+<span class="material-symbols-outlined group-hover:text-zinc-400" style="">grid_view</span>
+<div class="flex flex-col">
+<span class="font-label text-[10px] uppercase tracking-widest" style="">Step 3</span>
+<span class="font-label text-xs uppercase tracking-widest" style="">Layout</span>
+</div>
+</div>
+<div class="flex items-center gap-4 px-4 py-3 text-zinc-600 hover:bg-zinc-900/40 transition-all duration-300 ease-in-out cursor-pointer group">
+<span class="material-symbols-outlined group-hover:text-zinc-400" style="">share</span>
+<div class="flex flex-col">
+<span class="font-label text-[10px] uppercase tracking-widest" style="">Step 4</span>
+<span class="font-label text-xs uppercase tracking-widest" style="">Features</span>
+</div>
+</div>
+<div class="flex items-center gap-4 px-4 py-3 text-zinc-600 hover:bg-zinc-900/40 transition-all duration-300 ease-in-out cursor-pointer group">
+<span class="material-symbols-outlined group-hover:text-zinc-400" style="">check_circle</span>
+<div class="flex flex-col">
+<span class="font-label text-[10px] uppercase tracking-widest" style="">Step 5</span>
+<span class="font-label text-xs uppercase tracking-widest" style="">Finish</span>
+</div>
+</div>
+</div>
+</nav>
+</aside>
+<!-- Main Content Canvas -->
+<main class="flex-1 relative flex items-center justify-center h-screen bg-surface overflow-hidden">
+<!-- Centered Content Wrapper -->
+<section class="max-w-5xl w-full px-8 md:px-16 space-y-8 animate-in fade-in duration-700">
+<!-- Editorial Header -->
+<header class="space-y-2 text-center md:text-left">
+<h2 class="text-4xl md:text-6xl font-headline font-bold text-white tracking-tighter" style="">
+                    Pick Your <span class="text-transparent bg-clip-text bg-gradient-to-br from-primary to-primary-container" style="">Palette</span>
+</h2>
+<p class="font-body text-on-surface-variant text-base md:text-lg max-w-xl mx-auto md:mx-0" style="">
+                    Choose colors that represent your brand personality. These will be used across your workspace and client-facing interfaces.
+                </p>
+</header>
+<!-- Color Grid -->
+<div class="space-y-4">
+<h3 class="font-label text-[10px] uppercase tracking-widest text-zinc-500 text-center md:text-left" style="">Brand Color Palettes</h3>
+<div class="palette-grid grid grid-cols-3 sm:grid-cols-4 md:grid-cols-6 gap-2">
+<!-- Row 1 -->
+<div class="aspect-[2/1] bg-surface-container rounded-lg overflow-hidden flex cursor-pointer ring-2 ring-primary group" onclick="window.selectPalette(this, '#CED2FF')">
+<div class="flex-1 bg-[#5C4DFF]"></div><div class="flex-1 bg-[#868CFF]"></div><div class="flex-1 bg-[#CED2FF]"></div><div class="flex-1 bg-[#3A29B5]"></div>
+</div>
+<div class="aspect-[2/1] bg-surface-container rounded-lg overflow-hidden flex cursor-pointer hover:opacity-80 transition-opacity" onclick="window.selectPalette(this, '#FFCCD5')">
+<div class="flex-1 bg-[#FF4D6D]"></div><div class="flex-1 bg-[#FF8FA3]"></div><div class="flex-1 bg-[#FFCCD5]"></div><div class="flex-1 bg-[#B91D1D]"></div>
+</div>
+<div class="aspect-[2/1] bg-surface-container rounded-lg overflow-hidden flex cursor-pointer hover:opacity-80 transition-opacity" onclick="window.selectPalette(this, '#FEF1D1')">
+<div class="flex-1 bg-[#FFB703]"></div><div class="flex-1 bg-[#FDDF9C]"></div><div class="flex-1 bg-[#FEF1D1]"></div><div class="flex-1 bg-[#E85D04]"></div>
+</div>
+<div class="aspect-[2/1] bg-surface-container rounded-lg overflow-hidden flex cursor-pointer hover:opacity-80 transition-opacity" onclick="window.selectPalette(this, '#BFF8E3')">
+<div class="flex-1 bg-[#06D6A0]"></div><div class="flex-1 bg-[#6EF3D6]"></div><div class="flex-1 bg-[#BFF8E3]"></div><div class="flex-1 bg-[#075E54]"></div>
+</div>
+<div class="aspect-[2/1] bg-surface-container rounded-lg overflow-hidden flex cursor-pointer hover:opacity-80 transition-opacity" onclick="window.selectPalette(this, '#D1F1FF')">
+<div class="flex-1 bg-[#00A8E8]"></div><div class="flex-1 bg-[#76DDFB]"></div><div class="flex-1 bg-[#D1F1FF]"></div><div class="flex-1 bg-[#006494]"></div>
+</div>
+<div class="aspect-[2/1] bg-surface-container rounded-lg overflow-hidden flex cursor-pointer hover:opacity-80 transition-opacity" onclick="window.selectPalette(this, '#8D99AE')">
+<div class="flex-1 bg-[#242F40]"></div><div class="flex-1 bg-[#4E5D6C]"></div><div class="flex-1 bg-[#8D99AE]"></div><div class="flex-1 bg-[#EDF2F4]"></div>
+</div>
+<!-- Row 2 -->
+<div class="aspect-[2/1] bg-surface-container rounded-lg overflow-hidden flex cursor-pointer hover:opacity-80 transition-opacity" onclick="window.selectPalette(this, '#A1FFCE')">
+<div class="flex-1 bg-[#008F7A]"></div><div class="flex-1 bg-[#2CD8D5]"></div><div class="flex-1 bg-[#A1FFCE]"></div><div class="flex-1 bg-[#124E4B]"></div>
+</div>
+<div class="aspect-[2/1] bg-surface-container rounded-lg overflow-hidden flex cursor-pointer hover:opacity-80 transition-opacity" onclick="window.selectPalette(this, '#FBEAFF')">
+<div class="flex-1 bg-[#845EC2]"></div><div class="flex-1 bg-[#B39CD0]"></div><div class="flex-1 bg-[#FBEAFF]"></div><div class="flex-1 bg-[#4B4453]"></div>
+</div>
+<div class="aspect-[2/1] bg-surface-container rounded-lg overflow-hidden flex cursor-pointer hover:opacity-80 transition-opacity" onclick="window.selectPalette(this, '#F9F7D9')">
+<div class="flex-1 bg-[#FF8066]"></div><div class="flex-1 bg-[#FFC75F]"></div><div class="flex-1 bg-[#F9F7D9]"></div><div class="flex-1 bg-[#C34A36]"></div>
+</div>
+<div class="aspect-[2/1] bg-surface-container rounded-lg overflow-hidden flex cursor-pointer hover:opacity-80 transition-opacity" onclick="window.selectPalette(this, '#E6E6FA')">
+<div class="flex-1 bg-[#D65DB1]"></div><div class="flex-1 bg-[#FF6F91]"></div><div class="flex-1 bg-[#E6E6FA]"></div><div class="flex-1 bg-[#845EC2]"></div>
+</div>
+<div class="aspect-[2/1] bg-surface-container rounded-lg overflow-hidden flex cursor-pointer hover:opacity-80 transition-opacity" onclick="window.selectPalette(this, '#FFF594')">
+<div class="flex-1 bg-[#8DED0D]"></div><div class="flex-1 bg-[#4EE37E]"></div><div class="flex-1 bg-[#FFF594]"></div><div class="flex-1 bg-[#4E670E]"></div>
+</div>
+<div class="aspect-[2/1] bg-surface-container rounded-lg overflow-hidden flex cursor-pointer hover:opacity-80 transition-opacity" onclick="window.selectPalette(this, '#8AF3FF')">
+<div class="flex-1 bg-[#00C9A7]"></div><div class="flex-1 bg-[#4D8076]"></div><div class="flex-1 bg-[#8AF3FF]"></div><div class="flex-1 bg-[#1B5061]"></div>
+</div>
+<!-- Row 3 -->
+<div class="aspect-[2/1] bg-surface-container rounded-lg overflow-hidden flex cursor-pointer hover:opacity-80 transition-opacity" onclick="window.selectPalette(this, '#FFD600')">
+<div class="flex-1 bg-[#FF3D00]"></div><div class="flex-1 bg-[#FF6D00]"></div><div class="flex-1 bg-[#FFD600]"></div><div class="flex-1 bg-[#9E1A1A]"></div>
+</div>
+<div class="aspect-[2/1] bg-surface-container rounded-lg overflow-hidden flex cursor-pointer hover:opacity-80 transition-opacity" onclick="window.selectPalette(this, '#FAD0C4')">
+<div class="flex-1 bg-[#FF6EC7]"></div><div class="flex-1 bg-[#FF9A9E]"></div><div class="flex-1 bg-[#FAD0C4]"></div><div class="flex-1 bg-[#D4145A]"></div>
+</div>
+<div class="aspect-[2/1] bg-surface-container rounded-lg overflow-hidden flex cursor-pointer hover:opacity-80 transition-opacity" onclick="window.selectPalette(this, '#BDBDBD')">
+<div class="flex-1 bg-[#2C2C2C]"></div><div class="flex-1 bg-[#616161]"></div><div class="flex-1 bg-[#BDBDBD]"></div><div class="flex-1 bg-[#F5F5F5]"></div>
+</div>
+<div class="aspect-[2/1] bg-surface-container rounded-lg overflow-hidden flex cursor-pointer hover:opacity-80 transition-opacity" onclick="window.selectPalette(this, '#E0E0E0')">
+<div class="flex-1 bg-[#424242]"></div><div class="flex-1 bg-[#757575]"></div><div class="flex-1 bg-[#E0E0E0]"></div><div class="flex-1 bg-[#212121]"></div>
+</div>
+<div class="aspect-[2/1] bg-surface-container rounded-lg overflow-hidden flex cursor-pointer hover:opacity-80 transition-opacity" onclick="window.selectPalette(this, '#F1FDF8')">
+<div class="flex-1 bg-[#005B41]"></div><div class="flex-1 bg-[#008170]"></div><div class="flex-1 bg-[#F1FDF8]"></div><div class="flex-1 bg-[#002319]"></div>
+</div>
+<div class="aspect-[2/1] bg-surface-container rounded-lg overflow-hidden flex cursor-pointer hover:opacity-80 transition-opacity" onclick="window.selectPalette(this, '#E6E6FA')">
+<div class="flex-1 bg-[#1A1A40]"></div><div class="flex-1 bg-[#2E2EBA]"></div><div class="flex-1 bg-[#E6E6FA]"></div><div class="flex-1 bg-[#2D3192]"></div>
+</div>
+</div>
+</div>
+<!-- Background Appearance -->
+<div class="space-y-4">
+<h3 class="font-label text-[10px] uppercase tracking-widest text-zinc-500 text-center md:text-left" style="">Interface Mode</h3>
+<div class="flex flex-col md:flex-row gap-3">
+<!-- Option: Dark (Selected) -->
+<div class="bg-mode-option flex-1 p-4 rounded-xl bg-surface-container-low border-2 border-primary ring-2 ring-primary/20 flex items-center justify-between cursor-pointer transition-all" id="mode-dark" onclick="window.updateBgMode('dark')">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-zinc-400" style="">dark_mode</span>
+<span class="font-body text-sm font-bold text-white" style="">Dark Mode</span>
+</div>
+<div class="radio-icon w-4 h-4 rounded-full border-4 border-primary flex items-center justify-center">
+<div class="radio-dot w-1.5 h-1.5 rounded-full bg-primary"></div>
+</div>
+</div>
+<!-- Option: Light -->
+<div class="bg-mode-option flex-1 p-4 rounded-xl bg-surface-container hover:bg-surface-container-high border border-outline-variant/20 flex items-center justify-between cursor-pointer transition-all" id="mode-light" onclick="window.updateBgMode('light')">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-zinc-500" style="">light_mode</span>
+<span class="font-body text-sm text-on-surface-variant" style="">Light Mode</span>
+</div>
+<div class="radio-icon w-4 h-4 rounded-full border-2 border-zinc-700 flex items-center justify-center">
+<div class="radio-dot w-1.5 h-1.5 rounded-full bg-transparent"></div>
+</div>
+</div>
+<!-- Option: Match Palette -->
+<div class="bg-mode-option flex-1 p-4 rounded-xl bg-surface-container hover:bg-surface-container-high border border-outline-variant/20 flex items-center justify-between cursor-pointer transition-all" id="mode-palette" onclick="window.updateBgMode('palette')">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-zinc-500" style="">palette</span>
+<span class="font-body text-sm text-on-surface-variant" style="">Match Palette</span>
+</div>
+<div class="radio-icon w-4 h-4 rounded-full border-2 border-zinc-700 flex items-center justify-center">
+<div class="radio-dot w-1.5 h-1.5 rounded-full bg-transparent"></div>
+</div>
+</div>
+</div>
+</div>
+<!-- CTA Area -->
+</section>
+<div class="absolute bottom-8 right-8 z-50">
+<button class="flex items-center justify-center bg-gradient-to-br from-primary to-primary-container text-black w-14 h-14 rounded-full shadow-2xl transition-all hover:scale-110 active:scale-95 group">
+<span class="material-symbols-outlined text-2xl transition-transform group-hover:translate-x-1">arrow_forward</span>
+</button>
+</div></main>
+</body></html>

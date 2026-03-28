@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>C-Shell Studio Onboarding - Font Selection</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,200..800;1,200..800&amp;family=Manrope:wght@200..800&amp;family=Inter:wght@100..900&amp;family=Roboto+Mono:ital,wght@0,100..700;1,100..700&amp;family=Playfair+Display:ital,wght@0,400..900;1,400..900&amp;family=Montserrat:ital,wght@0,100..900;1,100..900&amp;family=Poppins:ital,wght@0,100..900;1,100..900&amp;family=Lora:ital,wght@0,400..700;1,400..700&amp;family=Lato:wght@100;300;400;700;900&amp;family=Nunito:wght@200..1000&amp;family=Raleway:wght@100..900&amp;family=Work+Sans:wght@100..900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "on-surface-variant": "#dac2b2",
+                        "on-primary-fixed-variant": "#6e3900",
+                        "on-primary-fixed": "#2f1500",
+                        "surface": "#131313",
+                        "on-error": "#690005",
+                        "secondary-fixed": "#ffe16e",
+                        "secondary-fixed-dim": "#e9c400",
+                        "tertiary-fixed": "#ffdbcf",
+                        "inverse-on-surface": "#313030",
+                        "surface-container": "#201f1f",
+                        "inverse-primary": "#914d00",
+                        "secondary": "#fff0c3",
+                        "inverse-surface": "#e5e2e1",
+                        "surface-container-high": "#2a2a2a",
+                        "surface-bright": "#3a3939",
+                        "outline": "#a28d7e",
+                        "on-tertiary-fixed-variant": "#7b2f10",
+                        "on-tertiary": "#5c1a00",
+                        "surface-variant": "#353534",
+                        "on-tertiary-fixed": "#380c00",
+                        "surface-dim": "#131313",
+                        "primary-fixed-dim": "#ffb77e",
+                        "on-primary-container": "#6e3900",
+                        "on-background": "#e5e2e1",
+                        "on-secondary-fixed-variant": "#544600",
+                        "primary-fixed": "#ffdcc3",
+                        "on-surface": "#e5e2e1",
+                        "error-container": "#93000a",
+                        "primary": "#ffc69a",
+                        "surface-container-highest": "#353534",
+                        "primary-container": "#ff9f4a",
+                        "surface-tint": "#ffb77e",
+                        "surface-container-low": "#1c1b1b",
+                        "secondary-container": "#f9d200",
+                        "on-secondary-container": "#6c5a00",
+                        "tertiary-fixed-dim": "#ffb59c",
+                        "background": "#131313",
+                        "on-tertiary-container": "#7b2f11",
+                        "tertiary-container": "#ff9c79",
+                        "on-primary": "#4d2600",
+                        "on-error-container": "#ffdad6",
+                        "error": "#ffb4ab",
+                        "tertiary": "#ffc4b0",
+                        "outline-variant": "#544337",
+                        "on-secondary-fixed": "#221b00",
+                        "surface-container-lowest": "#0e0e0e",
+                        "on-secondary": "#3a3000"
+                    },
+                    fontFamily: {
+                        "headline": ["Plus Jakarta Sans"],
+                        "body": ["Manrope"],
+                        "label": ["Manrope"]
+                    },
+                    borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
+                },
+            },
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        body {
+            background-color: #0e0e0e;
+            color: #e5e2e1;
+            overflow: hidden;
+        }
+        .glass-card {
+            background: rgba(19, 19, 19, 0.4);
+            backdrop-filter: blur(40px);
+        }
+        .font-option.active {
+            background-color: rgba(255, 159, 74, 0.1);
+            box-shadow: 0 0 0 1px rgba(255, 159, 74, 0.3);
+        }
+        .font-option.active .radio-outer {
+            border-color: #ff9f4a;
+        }
+        .font-option.active .radio-inner {
+            background-color: #ff9f4a;
+            transform: scale(1);
+        }
+
+        /* Themed Scrollbar Styling */
+        #font-selector-container::-webkit-scrollbar {
+            width: 5px;
+        }
+        #font-selector-container::-webkit-scrollbar-track {
+            background: rgba(255, 255, 255, 0.02);
+            border-radius: 10px;
+        }
+        #font-selector-container::-webkit-scrollbar-thumb {
+            background: rgba(255, 159, 74, 0.4);
+            border-radius: 10px;
+        }
+        #font-selector-container::-webkit-scrollbar-thumb:hover {
+            background: rgba(255, 159, 74, 0.6);
+        }
+        #font-selector-container {
+            scrollbar-width: thin;
+            scrollbar-color: rgba(255, 159, 74, 0.4) rgba(255, 255, 255, 0.02);
+        }
+    </style>
+</head>
+<body class="font-body selection:bg-primary-container/30">
+<div class="flex h-screen overflow-hidden">
+<!-- SideNavBar -->
+<nav class="fixed left-0 top-0 h-full z-40 hidden md:flex flex-col bg-zinc-950/60 backdrop-blur-2xl w-64 shadow-[20px_0_60px_-15px_rgba(255,159,74,0.08)] pt-12">
+<div class="px-8 mb-8 flex flex-col gap-2">
+<div class="flex items-center gap-3">
+<img alt="C-Shell Logo" class="w-8 h-8 object-contain" src="https://lh3.googleusercontent.com/aida/ADBb0uiSHS4Z0x7TSZgvxTSMimpECcINzfIpm8xRxTomCJvlIqArY5ziWzemVr-Z4wS95q6m11Mw0EqQD1Kf54t8eaTPskapHG1lNl9xx5j-2CtL1aoKhPBgWutWAC9IB7N_8QggvWhLt2JKgbeydifnIt62Bt3e6_vZl6QgNoRCU7qjoCBTEZh_nh0MQmrxGTeuxJqIQxVmYjovm6efH_pK8eJV9jK6cyr4yrhkNEenPrvnSIR9RTYPudduh09MZol58NV5RvyBpVbQ" style=""/>
+<h2 class="text-lg font-bold text-white font-headline whitespace-nowrap">Seashell Studio</h2>
+</div>
+<p class="text-zinc-500 text-[10px] font-label uppercase tracking-[0.2em] mt-1">Onboarding Progress</p>
+</div>
+<!-- Welcome Button -->
+<div class="px-6 mb-6">
+<button class="w-full flex items-center gap-3 px-5 py-3.5 bg-gradient-to-r from-orange-400/10 to-transparent border border-orange-400/20 rounded-xl text-orange-300 hover:from-orange-400/20 transition-all group">
+<span class="material-symbols-outlined text-[20px] group-hover:rotate-12 transition-transform">waves</span>
+<span class="text-[11px] font-bold uppercase tracking-widest">Welcome</span>
+</button>
+</div>
+<div class="flex flex-col flex-1">
+<!-- Step 1: Colour Palette -->
+<div class="flex items-center px-8 py-4 gap-4 text-zinc-600 hover:bg-zinc-900/40 transition-all duration-300 cursor-pointer">
+<span class="material-symbols-outlined text-[20px]">palette</span>
+<span class="text-[11px] font-label uppercase tracking-widest">Colour Palette</span>
+</div>
+<!-- Step 2: Style - ACTIVE -->
+<div class="flex items-center px-8 py-4 gap-4 text-orange-400 border-r-2 border-orange-400 bg-orange-400/5 transition-all duration-300">
+<span class="material-symbols-outlined text-[20px]">brush</span>
+<span class="text-[11px] font-label uppercase tracking-widest">Style</span>
+</div>
+<!-- Step 3: Layout -->
+<div class="flex items-center px-8 py-4 gap-4 text-zinc-600 hover:bg-zinc-900/40 transition-all duration-300 cursor-pointer">
+<span class="material-symbols-outlined text-[20px]">dashboard</span>
+<span class="text-[11px] font-label uppercase tracking-widest">Layout</span>
+</div>
+<!-- Step 4: Features -->
+<div class="flex items-center px-8 py-4 gap-4 text-zinc-600 hover:bg-zinc-900/40 transition-all duration-300 cursor-pointer">
+<span class="material-symbols-outlined text-[20px]">filter_hdr</span>
+<span class="text-[11px] font-label uppercase tracking-widest">Features</span>
+</div>
+<!-- Step 5: Finish -->
+<div class="flex items-center px-8 py-4 gap-4 text-zinc-600 hover:bg-zinc-900/40 transition-all duration-300 cursor-pointer">
+<span class="material-symbols-outlined text-[20px]">check_circle</span>
+<span class="text-[11px] font-label uppercase tracking-widest">Finish</span>
+</div>
+</div>
+<div class="px-8 pb-8">
+<button class="text-zinc-500 hover:text-orange-300 transition-colors text-xs font-label uppercase tracking-widest"></button>
+</div>
+</nav>
+<!-- Main Content Canvas -->
+<main class="flex-1 ml-0 md:ml-64 relative p-8 md:p-12 lg:p-20 flex flex-col items-start justify-center overflow-hidden h-screen">
+<div class="w-full max-w-6xl grid grid-cols-1 lg:grid-cols-12 gap-16 relative z-10 h-full items-center">
+<!-- Left Content: Selector -->
+<div class="lg:col-span-5 flex flex-col h-full max-h-[700px] justify-center space-y-8 py-10">
+<div class="space-y-4 shrink-0">
+<h1 class="text-5xl md:text-6xl font-headline font-extrabold text-white tracking-tighter leading-none whitespace-nowrap">Font &amp; <span class="text-primary-container">Style</span></h1>
+<p class="text-on-surface-variant max-w-sm text-lg font-body">Select the typography that best mirrors your brand's digital soul.</p>
+</div>
+<div class="space-y-3 max-w-sm overflow-y-auto pr-4" id="font-selector-container">
+<!-- Font Option 1: Inter -->
+<div class="font-option group flex items-center justify-between p-4 rounded-xl bg-surface-container-low hover:bg-surface-container-highest transition-all duration-300 cursor-pointer" data-font="Inter">
+<div class="flex items-center gap-4">
+<div class="w-10 h-10 flex items-center justify-center rounded-lg bg-surface-bright text-white font-bold" style="font-family: Inter;">Aa</div>
+<div>
+<p class="text-white font-bold" style="font-family: Inter;">Inter</p>
+<p class="text-on-surface-variant text-[10px] font-label tracking-wide uppercase">Technical &amp; Clear</p>
+</div>
+</div>
+<div class="radio-outer w-5 h-5 rounded-full border-2 border-outline-variant flex items-center justify-center group-hover:border-primary transition-colors">
+<div class="radio-inner w-2.5 h-2.5 rounded-full bg-transparent scale-0 transition-transform"></div>
+</div>
+</div>
+<!-- Font Option 2: Plus Jakarta Sans (Active) -->
+<div class="font-option active group flex items-center justify-between p-4 rounded-xl transition-all duration-300 cursor-pointer" data-font="Plus Jakarta Sans">
+<div class="flex items-center gap-4">
+<div class="w-10 h-10 flex items-center justify-center rounded-lg bg-primary-container text-on-primary-container font-bold" style="font-family: 'Plus Jakarta Sans';">Aa</div>
+<div>
+<p class="text-white font-bold" style="font-family: 'Plus Jakarta Sans';">Plus Jakarta Sans</p>
+<p class="text-primary-container text-[10px] font-label tracking-wide uppercase">Premium &amp; Editorial</p>
+</div>
+</div>
+<div class="radio-outer w-5 h-5 rounded-full border-2 border-primary-container flex items-center justify-center">
+<div class="radio-inner w-2.5 h-2.5 rounded-full bg-primary-container scale-100"></div>
+</div>
+</div>
+<!-- Font Option 3: Lora -->
+<div class="font-option group flex items-center justify-between p-4 rounded-xl bg-surface-container-low hover:bg-surface-container-highest transition-all duration-300 cursor-pointer" data-font="Lora">
+<div class="flex items-center gap-4">
+<div class="w-10 h-10 flex items-center justify-center rounded-lg bg-surface-bright text-white font-bold" style="font-family: 'Lora';">Aa</div>
+<div>
+<p class="text-white font-bold" style="font-family: 'Lora';">Lora</p>
+<p class="text-on-surface-variant text-[10px] font-label tracking-wide uppercase">Sophisticated Serif</p>
+</div>
+</div>
+<div class="radio-outer w-5 h-5 rounded-full border-2 border-outline-variant flex items-center justify-center group-hover:border-primary transition-colors">
+<div class="radio-inner w-2.5 h-2.5 rounded-full bg-transparent scale-0 transition-transform"></div>
+</div>
+</div>
+<!-- Font Option 4: Lato -->
+<div class="font-option group flex items-center justify-between p-4 rounded-xl bg-surface-container-low hover:bg-surface-container-highest transition-all duration-300 cursor-pointer" data-font="Lato">
+<div class="flex items-center gap-4">
+<div class="w-10 h-10 flex items-center justify-center rounded-lg bg-surface-bright text-white font-bold" style="font-family: 'Lato';">Aa</div>
+<div>
+<p class="text-white font-bold" style="font-family: 'Lato';">Lato</p>
+<p class="text-on-surface-variant text-[10px] font-label tracking-wide uppercase">Clean &amp; Professional</p>
+</div>
+</div>
+<div class="radio-outer w-5 h-5 rounded-full border-2 border-outline-variant flex items-center justify-center group-hover:border-primary transition-colors">
+<div class="radio-inner w-2.5 h-2.5 rounded-full bg-transparent scale-0 transition-transform"></div>
+</div>
+</div>
+<!-- Font Option 5: Nunito -->
+<div class="font-option group flex items-center justify-between p-4 rounded-xl bg-surface-container-low hover:bg-surface-container-highest transition-all duration-300 cursor-pointer" data-font="Nunito">
+<div class="flex items-center gap-4">
+<div class="w-10 h-10 flex items-center justify-center rounded-lg bg-surface-bright text-white font-bold" style="font-family: 'Nunito';">Aa</div>
+<div>
+<p class="text-white font-bold" style="font-family: 'Nunito';">Nunito</p>
+<p class="text-on-surface-variant text-[10px] font-label tracking-wide uppercase">Friendly &amp; Rounded</p>
+</div>
+</div>
+<div class="radio-outer w-5 h-5 rounded-full border-2 border-outline-variant flex items-center justify-center group-hover:border-primary transition-colors">
+<div class="radio-inner w-2.5 h-2.5 rounded-full bg-transparent scale-0 transition-transform"></div>
+</div>
+</div>
+<!-- Font Option 6: Raleway -->
+<div class="font-option group flex items-center justify-between p-4 rounded-xl bg-surface-container-low hover:bg-surface-container-highest transition-all duration-300 cursor-pointer" data-font="Raleway">
+<div class="flex items-center gap-4">
+<div class="w-10 h-10 flex items-center justify-center rounded-lg bg-surface-bright text-white font-bold" style="font-family: 'Raleway';">Aa</div>
+<div>
+<p class="text-white font-bold" style="font-family: 'Raleway';">Raleway</p>
+<p class="text-on-surface-variant text-[10px] font-label tracking-wide uppercase">Elegant &amp; Artistic</p>
+</div>
+</div>
+<div class="radio-outer w-5 h-5 rounded-full border-2 border-outline-variant flex items-center justify-center group-hover:border-primary transition-colors">
+<div class="radio-inner w-2.5 h-2.5 rounded-full bg-transparent scale-0 transition-transform"></div>
+</div>
+</div>
+<!-- Font Option 7: Work Sans -->
+<div class="font-option group flex items-center justify-between p-4 rounded-xl bg-surface-container-low hover:bg-surface-container-highest transition-all duration-300 cursor-pointer" data-font="Work Sans">
+<div class="flex items-center gap-4">
+<div class="w-10 h-10 flex items-center justify-center rounded-lg bg-surface-bright text-white font-bold" style="font-family: 'Work Sans';">Aa</div>
+<div>
+<p class="text-white font-bold" style="font-family: 'Work Sans';">Work Sans</p>
+<p class="text-on-surface-variant text-[10px] font-label tracking-wide uppercase">Optimized &amp; Sturdy</p>
+</div>
+</div>
+<div class="radio-outer w-5 h-5 rounded-full border-2 border-outline-variant flex items-center justify-center group-hover:border-primary transition-colors">
+<div class="radio-inner w-2.5 h-2.5 rounded-full bg-transparent scale-0 transition-transform"></div>
+</div>
+</div>
+<!-- Original: Roboto Mono -->
+<div class="font-option group flex items-center justify-between p-4 rounded-xl bg-surface-container-low hover:bg-surface-container-highest transition-all duration-300 cursor-pointer" data-font="Roboto Mono">
+<div class="flex items-center gap-4">
+<div class="w-10 h-10 flex items-center justify-center rounded-lg bg-surface-bright text-white font-bold" style="font-family: 'Roboto Mono';">Aa</div>
+<div>
+<p class="text-white font-bold" style="font-family: 'Roboto Mono';">Roboto Mono</p>
+<p class="text-on-surface-variant text-[10px] font-label tracking-wide uppercase">Developer Centric</p>
+</div>
+</div>
+<div class="radio-outer w-5 h-5 rounded-full border-2 border-outline-variant flex items-center justify-center group-hover:border-primary transition-colors">
+<div class="radio-inner w-2.5 h-2.5 rounded-full bg-transparent scale-0 transition-transform"></div>
+</div>
+</div>
+<!-- Original: Manrope -->
+<div class="font-option group flex items-center justify-between p-4 rounded-xl bg-surface-container-low hover:bg-surface-container-highest transition-all duration-300 cursor-pointer" data-font="Manrope">
+<div class="flex items-center gap-4">
+<div class="w-10 h-10 flex items-center justify-center rounded-lg bg-surface-bright text-white font-bold" style="font-family: Manrope;">Aa</div>
+<div>
+<p class="text-white font-bold" style="font-family: Manrope;">Manrope</p>
+<p class="text-on-surface-variant text-[10px] font-label tracking-wide uppercase">Humanist &amp; Fluid</p>
+</div>
+</div>
+<div class="radio-outer w-5 h-5 rounded-full border-2 border-outline-variant flex items-center justify-center group-hover:border-primary transition-colors">
+<div class="radio-inner w-2.5 h-2.5 rounded-full bg-transparent scale-0 transition-transform"></div>
+</div>
+</div>
+<!-- Original: Playfair Display -->
+<div class="font-option group flex items-center justify-between p-4 rounded-xl bg-surface-container-low hover:bg-surface-container-highest transition-all duration-300 cursor-pointer" data-font="Playfair Display">
+<div class="flex items-center gap-4">
+<div class="w-10 h-10 flex items-center justify-center rounded-lg bg-surface-bright text-white font-bold" style="font-family: 'Playfair Display';">Aa</div>
+<div>
+<p class="text-white font-bold" style="font-family: 'Playfair Display';">Playfair Display</p>
+<p class="text-on-surface-variant text-[10px] font-label tracking-wide uppercase">Classic &amp; Elegant</p>
+</div>
+</div>
+<div class="radio-outer w-5 h-5 rounded-full border-2 border-outline-variant flex items-center justify-center group-hover:border-primary transition-colors">
+<div class="radio-inner w-2.5 h-2.5 rounded-full bg-transparent scale-0 transition-transform"></div>
+</div>
+</div>
+<!-- Original: Montserrat -->
+<div class="font-option group flex items-center justify-between p-4 rounded-xl bg-surface-container-low hover:bg-surface-container-highest transition-all duration-300 cursor-pointer" data-font="Montserrat">
+<div class="flex items-center gap-4">
+<div class="w-10 h-10 flex items-center justify-center rounded-lg bg-surface-bright text-white font-bold" style="font-family: Montserrat;">Aa</div>
+<div>
+<p class="text-white font-bold" style="font-family: Montserrat;">Montserrat</p>
+<p class="text-on-surface-variant text-[10px] font-label tracking-wide uppercase">Geometric &amp; Versatile</p>
+</div>
+</div>
+<div class="radio-outer w-5 h-5 rounded-full border-2 border-outline-variant flex items-center justify-center group-hover:border-primary transition-colors">
+<div class="radio-inner w-2.5 h-2.5 rounded-full bg-transparent scale-0 transition-transform"></div>
+</div>
+</div>
+</div>
+</div>
+<!-- Right Content: Preview Card -->
+<div class="lg:col-span-7 flex items-center justify-center lg:justify-end">
+<div class="glass-card w-full max-w-lg aspect-[4/5] rounded-[2rem] p-12 relative overflow-hidden group">
+<div class="relative z-10 h-full flex flex-col items-start"><div class="space-y-2 mb-auto">
+<span class="text-secondary-container font-label uppercase tracking-widest text-[10px] opacity-80">Live Typography Preview</span>
+<div class="h-[2px] w-8 bg-secondary-container/40 rounded-full"></div>
+</div>
+<div class="space-y-6 my-auto">
+<h3 class="text-white text-5xl md:text-6xl font-extrabold tracking-tight leading-[1.1]" id="preview-text" style='font-family: "Plus Jakarta Sans";'>
+    Building the <span class="italic font-light">future</span> of data.
+  </h3>
+<p class="text-on-surface-variant text-lg font-body max-w-md leading-relaxed" id="preview-paragraph" style='font-family: "Plus Jakarta Sans";'>
+    Our platform empowers creators to visualize complex information through an editorial lens, where every pixel tells a story of precision and light.
+  </p>
+</div></div>
+</div>
+</div>
+</div>
+</main>
+<!-- BottomNavBar / FAB -->
+<div class="fixed bottom-10 right-10 z-50">
+<button class="flex items-center justify-center bg-gradient-to-br from-[#ff9f4a] to-[#ff7e00] rounded-full h-16 w-16 shadow-[0_10px_40px_rgba(255,159,74,0.4)] hover:scale-110 hover:brightness-110 active:scale-95 duration-300 group transition-all cursor-pointer border-none">
+<span class="material-symbols-outlined text-zinc-950 font-bold text-2xl">arrow_forward</span>
+</button>
+</div>
+</div>
+<script>
+        const fontOptions = document.querySelectorAll('.font-option');
+        const previewText = document.getElementById('preview-text');
+        const previewPara = document.getElementById('preview-paragraph');
+
+        fontOptions.forEach(option => {
+            option.addEventListener('click', () => {
+                // 1. Update UI Selection States
+                fontOptions.forEach(opt => {
+                    opt.classList.remove('active', 'bg-primary-container/10');
+                    opt.classList.add('bg-surface-container-low');
+                    
+                    // Reset radio inner dots
+                    const radioInner = opt.querySelector('.radio-inner');
+                    const radioOuter = opt.querySelector('.radio-outer');
+                    radioInner.classList.remove('bg-primary-container', 'scale-100');
+                    radioInner.classList.add('bg-transparent', 'scale-0');
+                    radioOuter.classList.remove('border-primary-container');
+                    radioOuter.classList.add('border-outline-variant');
+
+                    // Reset icon box
+                    const iconBox = opt.querySelector('.w-10');
+                    iconBox.classList.remove('bg-primary-container', 'text-on-primary-container');
+                    iconBox.classList.add('bg-surface-bright', 'text-white');
+
+                    // Reset subtitle color
+                    const subtitle = opt.querySelector('p:last-child');
+                    subtitle.classList.remove('text-primary-container');
+                    subtitle.classList.add('text-on-surface-variant');
+                });
+
+                // 2. Set Active State
+                option.classList.add('active');
+                option.classList.remove('bg-surface-container-low');
+                
+                const activeRadioInner = option.querySelector('.radio-inner');
+                const activeRadioOuter = option.querySelector('.radio-outer');
+                activeRadioInner.classList.add('bg-primary-container', 'scale-100');
+                activeRadioInner.classList.remove('bg-transparent', 'scale-0');
+                activeRadioOuter.classList.add('border-primary-container');
+                activeRadioOuter.classList.remove('border-outline-variant');
+
+                const activeIconBox = option.querySelector('.w-10');
+                activeIconBox.classList.add('bg-primary-container', 'text-on-primary-container');
+                activeIconBox.classList.remove('bg-surface-bright', 'text-white');
+
+                const activeSubtitle = option.querySelector('p:last-child');
+                activeSubtitle.classList.add('text-primary-container');
+                activeSubtitle.classList.remove('text-on-surface-variant');
+
+                // 3. Update Preview Font for both headline and paragraph
+                const selectedFont = option.getAttribute('data-font');
+                previewText.style.fontFamily = `'${selectedFont}', sans-serif`;
+                previewPara.style.fontFamily = `'${selectedFont}', sans-serif`;
+            });
+        });
+    </script>
+</body></html>
