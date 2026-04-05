@@ -126,9 +126,32 @@
 
                 <!-- Onboarding Main Content Area -->
                 <div class="onboarding-main">
+                    <div class="mobile-progress-shell" id="mobile-progress-shell" aria-label="Onboarding progress">
+                        <div class="mobile-progress-shell-inner">
+                            <button type="button" class="mobile-progress-brand" onclick="navigateToStep(0)" aria-label="Return to home">
+                                <img src="assets/Seashell Logo.png" alt="Seashell Studio logo" class="mobile-progress-logo">
+                                <span class="mobile-progress-brand-name">Seashell Studio</span>
+                            </button>
+                            <div class="mobile-progress-meta">
+                                <div class="mobile-progress-text-row">
+                                    <span class="mobile-progress-step-label" id="mobile-step-label">Step 1 of 5</span>
+                                    <span class="mobile-progress-step-name" id="mobile-step-name">Colour Palette</span>
+                                </div>
+                                <div class="mobile-progress-track" role="presentation" aria-hidden="true">
+                                    <span class="mobile-progress-segment active" data-step="1"></span>
+                                    <span class="mobile-progress-segment" data-step="2"></span>
+                                    <span class="mobile-progress-segment" data-step="3"></span>
+                                    <span class="mobile-progress-segment" data-step="4"></span>
+                                    <span class="mobile-progress-segment" data-step="5"></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
 
                     <!-- Step 1 Container -->
                     <div id="step-1" class="step-container">
+                        <div class="step-mobile-fit-viewport">
+                        <div class="step-mobile-fit-content" id="step-1-mobile-fit">
                         <div class="container-inner flex-row">
                             <!-- Step 1 Content: Split or Full? It's centered block -->
                             <div class="step-1-content max-w-5xl mx-auto space-y-8 animate-in w-full">
@@ -138,8 +161,10 @@
                                     <p class="step-subtitle">Choose colours that reflect your brand. We will use them in your first website draft.</p>
                                 </header>
 
-                                <div class="space-y-4">
+                                <div class="space-y-4 palette-selection-block">
                                     <h3 class="section-label text-center md:text-left">Brand Color Palettes</h3>
+                                    <div class="palette-scroll-shell">
+                                    <div class="palette-scroll-viewport">
                                     <div class="palette-grid">
                                         <div class="palette-option active-palette" onclick="selectPalette(this, '#1C2541')">
                                             <div style="background:#0B132B"></div>
@@ -310,9 +335,11 @@
                                             <div style="background:#F97316"></div>
                                         </div>
                                     </div>
+                                    </div>
+                                    </div>
                                 </div>
 
-                                <div class="space-y-4" style="margin-top:2rem">
+                                <div class="space-y-4 background-mode-block" style="margin-top:2rem">
                                     <h3 class="section-label text-center md:text-left">Background Colour</h3>
                                     <div class="mode-options-flex">
                                         <!-- Option: Dark -->
@@ -348,6 +375,8 @@
                                     </div>
                                 </div>
                             </div>
+                        </div>
+                        </div>
                         </div>
                     </div>
 
@@ -478,6 +507,12 @@
 
                     <!-- Step 3 Container -->
                     <div id="step-3" class="step-container">
+                        <div class="step-mobile-fit-viewport">
+                        <div class="step-mobile-fit-content" id="step-3-mobile-fit">
+                        <div class="mobile-step-heading mobile-step3-heading">
+                            <h1 class="step-title" style="font-size:3rem; margin-bottom:1rem">Layout</h1>
+                            <p class="step-subtitle text-sm">Select the sections of your website.</p>
+                        </div>
                         <div class="h-full flex-split layout-step-shell" style="max-height: 800px; padding: 2rem 0">
                             <!-- Left Panel: Section List -->
                             <div class="split-left layout-step-sidebar" style="display:flex; flex-direction:column;">
@@ -494,7 +529,7 @@
 
                             <!-- Right Panel: Dynamic Preview -->
                             <div class="split-right layout-step-preview"
-                                style="position: relative; display:flex;">
+                                style="position: relative; display:flex; align-items:center; justify-content:center;">
                                 <div class="preview-mockup">
                                     <div class="mockup-inner">
                                         <div class="mockup-header">
@@ -512,18 +547,21 @@
                                 </div>
                             </div>
                         </div>
+                        </div>
+                        </div>
                     </div>
 
                     <!-- Step 4 Container -->
                     <div id="step-4" class="step-container">
                         <div class="container-inner">
-                            <div class="step-header">
-                                <h1 class="step-title">Optional Features</h1>
-                                <p class="step-subtitle">Choose additional features for your website.</p>
-                            </div>
+                                <div class="features-composition" id="features-composition">
+                                    <div class="step-header">
+                                        <h1 class="step-title">Optional Features</h1>
+                                        <p class="step-subtitle">Choose additional features for your website.</p>
+                                    </div>
 
-                            <div class="features-layout">
-                                <div class="features-row features-row-primary">
+                                    <div class="features-layout">
+                                        <div class="features-row features-row-primary">
                                     <!-- Contact Card -->
                                     <button class="glass-card feature-toggle-card" onclick="toggleCard(this)">
                                         <div class="feature-card-header">
@@ -605,7 +643,7 @@
                                     </button>
                                 </div>
 
-                                <div class="features-row features-row-secondary">
+                                        <div class="features-row features-row-secondary">
                                     <!-- Social Integrations Card -->
                                     <div class="glass-card social-card" role="group" aria-labelledby="social-feature-title">
                                         <div class="feature-card-header">
@@ -740,13 +778,16 @@
                                             </div>
                                         </div>
                                     </div>
+                                        </div>
+                                    </div>
                                 </div>
-                            </div>
                         </div>
                     </div>
 
                     <!-- Step 5 Container -->
                     <div id="step-5" class="step-container">
+                        <div class="step-mobile-fit-viewport">
+                        <div class="step-mobile-fit-content" id="step-5-mobile-fit">
                         <div class="container-inner">
                             <div class="mb-8" style="position:relative; z-index:10;">
                                 <h1 class="step-title" style="font-size:3.5rem; margin-bottom:0.5rem">Almost done
@@ -822,12 +863,18 @@
                                 </div>
                             </div>
                         </div>
+                        </div>
+                        </div>
                     </div>
 
                 </div>
 
                 <!-- Global Bottom Right FAB for Onboarding -->
                 <div class="floating-action-btn">
+                    <button type="button" class="btn btn-fab-back" id="btn-back" aria-label="Previous Step" onclick="prevStep()">
+                        <span class="material-symbols-outlined" aria-hidden="true">arrow_back</span>
+                        <span>Back</span>
+                    </button>
                     <button type="button" class="btn btn-fab" id="btn-next" aria-label="Next Step" onclick="nextStep()">
                         Next
                     </button>

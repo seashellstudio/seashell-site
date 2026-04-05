@@ -12,11 +12,22 @@
     <!-- Core styles -->
     <link rel="stylesheet" href="style.css">
     <style>
+        :root {
+            --bg-primary: var(--surface, #131313);
+            --text-primary: var(--on-surface, #e5e2e1);
+            --text-secondary: var(--on-surface-variant, #dac2b2);
+            --bg-card: rgba(42, 42, 42, 0.4);
+            --border-light: rgba(255, 255, 255, 0.08);
+            --secondary: var(--primary-container, #ff9f4a);
+        }
+
         body {
             display: flex;
             align-items: center;
             justify-content: center;
             min-height: 100vh;
+            min-height: 100svh;
+            height: 100%;
             margin: 0;
             padding: 2rem;
             background: var(--bg-primary);
@@ -119,6 +130,50 @@
             background: var(--secondary);
             bottom: -200px;
             right: -100px;
+        }
+
+        @media (max-width: 640px) {
+            body {
+                padding: 1rem;
+            }
+
+            .thank-you-container {
+                padding: 2.75rem 1.25rem;
+                border-radius: 1.5rem;
+            }
+
+            .thank-you-title {
+                font-size: clamp(2.4rem, 13vw, 3rem);
+            }
+
+            .thank-you-subtitle {
+                font-size: 1rem;
+                margin-bottom: 2rem;
+            }
+
+            .return-btn {
+                width: 100%;
+                justify-content: center;
+                min-height: 3.25rem;
+                padding: 0.95rem 1.25rem;
+            }
+
+            .blob-1,
+            .blob-2 {
+                width: 260px;
+                height: 260px;
+                filter: blur(70px);
+            }
+
+            .blob-1 {
+                top: -60px;
+                left: -80px;
+            }
+
+            .blob-2 {
+                right: -70px;
+                bottom: -90px;
+            }
         }
     </style>
 </head>
