@@ -610,6 +610,7 @@ ul, li { list-style: none; }
   padding-top: 2.25rem;
   padding-bottom: 5.75rem;
   --step-4-fit-scale: 1;
+  --step-4-translate-y: 0px;
 }
 
 #step-4 .step-mobile-fit-viewport {
@@ -628,7 +629,8 @@ ul, li { list-style: none; }
   width: 100%;
   max-width: 1260px;
   margin-inline: auto;
-  transform: scale(var(--step-4-fit-scale));
+  /* scale applies first (rightmost in list), then translateY — centers block on mobile via --step-4-translate-y */
+  transform: translateY(var(--step-4-translate-y, 0px)) scale(var(--step-4-fit-scale));
   transform-origin: top center;
   will-change: transform;
 }
@@ -1977,7 +1979,8 @@ ul, li { list-style: none; }
     min-width: 0;
     min-height: 0;
     display: flex;
-    align-items: flex-start;
+    flex-direction: column;
+    align-items: center;
     justify-content: center;
     overflow: hidden;
   }
@@ -1987,6 +1990,7 @@ ul, li { list-style: none; }
     flex: 0 0 auto;
     max-width: none;
     margin-inline: 0;
+    transform-origin: center center;
   }
 
   #step-4 .container-inner {
