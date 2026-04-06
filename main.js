@@ -185,30 +185,34 @@ function updateMobileActionBarOffset() {
     onboardingView.style.setProperty('--mobile-floating-action-height', `${actionBarHeight}px`);
 }
 
-function updateFeaturesCompositionScale() {
+/** Desktop-only: fit #step-4-mobile-fit into the step (mobile uses updateStepCompositionScale). */
+function updateStepFourDesktopCompositionScale() {
     const stepFour = document.getElementById('step-4');
-    const composition = document.getElementById('features-composition');
+    const fit = document.getElementById('step-4-mobile-fit');
 
-    if (!stepFour || !composition) return;
-    if (!stepFour.classList.contains('active')) return;
+    if (!stepFour || !fit || !stepFour.classList.contains('active')) return;
+    if (isMobileViewport()) return;
 
-    if (window.innerWidth < 1060) {
-        stepFour.style.setProperty('--features-composition-scale', '1');
-        return;
-    }
+    stepFour.style.setProperty('--step-4-fit-scale', '1');
 
-    stepFour.style.setProperty('--features-composition-scale', '1');
+    const stepStyle = getComputedStyle(stepFour);
+    const paddingTop = parseFloat(stepStyle.paddingTop) || 0;
+    const paddingBottom = parseFloat(stepStyle.paddingBottom) || 0;
+    const paddingLeft = parseFloat(stepStyle.paddingLeft) || 0;
+    const paddingRight = parseFloat(stepStyle.paddingRight) || 0;
+    const availableHeight = stepFour.clientHeight - paddingTop - paddingBottom;
+    const availableWidth = stepFour.clientWidth - paddingLeft - paddingRight;
 
-    const availableWidth = stepFour.clientWidth;
-    const availableHeight = stepFour.clientHeight;
-    const compositionWidth = composition.scrollWidth;
-    const compositionHeight = composition.scrollHeight;
+    const prevHeight = fit.style.height;
+    fit.style.height = 'auto';
+    const contentHeight = fit.scrollHeight;
+    const contentWidth = fit.scrollWidth;
+    fit.style.height = prevHeight;
 
-    if (!availableWidth || !availableHeight || !compositionWidth || !compositionHeight) return;
+    if (!availableWidth || !availableHeight || !contentWidth || !contentHeight) return;
 
-    /* Uniform scale keeps type, icons, and SVGs proportional (non-uniform X/Y stretched them). */
-    const scale = Math.min(1, availableWidth / compositionWidth, availableHeight / compositionHeight);
-    stepFour.style.setProperty('--features-composition-scale', scale.toFixed(4));
+    const scale = Math.min(1, availableWidth / contentWidth, availableHeight / contentHeight);
+    stepFour.style.setProperty('--step-4-fit-scale', scale.toFixed(4));
 }
 
 function updateStepCompositionScale(stepId, contentId, cssVariable, maxScale = 1) {
@@ -262,7 +266,8 @@ function updateOnboardingStepScales() {
     updateStepCompositionScale('step-1', 'step-1-mobile-fit', '--step-1-mobile-scale');
     updateStepCompositionScale('step-3', 'step-3-mobile-fit', '--step-3-mobile-scale');
     updateStepCompositionScale('step-5', 'step-5-mobile-fit', '--step-5-mobile-scale');
-    updateFeaturesCompositionScale();
+    updateStepCompositionScale('step-4', 'step-4-mobile-fit', '--step-4-fit-scale');
+    updateStepFourDesktopCompositionScale();
     requestAnimationFrame(updateFinalDetailsReferenceAlignment);
 }
 
@@ -840,7 +845,7 @@ document.addEventListener('DOMContentLoaded', () => {
         $('#step-1 .step-mobile-fit-viewport'),
         $('#step-3 .step-mobile-fit-viewport'),
         $('#step-5 .step-mobile-fit-viewport'),
-        $('#step-4 .container-inner')
+        $('#step-4 .step-mobile-fit-viewport')
     ], () => {
         updateOnboardingStepScales();
     });
