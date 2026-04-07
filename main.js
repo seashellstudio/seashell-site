@@ -215,25 +215,13 @@ function updateStepFourDesktopCompositionScale() {
     stepFour.style.setProperty('--step-4-fit-scale', scale.toFixed(4));
 }
 
-/** Vertically center scaled #step-4-mobile-fit inside the viewport (mobile only). */
-function updateStepFourMobileTranslateY() {
+function resetStepFourMobileTransformState() {
     const stepFour = document.getElementById('step-4');
-    const viewport = stepFour ? stepFour.querySelector('.step-mobile-fit-viewport') : null;
-    const fit = document.getElementById('step-4-mobile-fit');
-
-    if (!stepFour || !viewport || !fit) return;
-
-    if (!isMobileViewport() || !stepFour.classList.contains('active')) {
-        stepFour.style.setProperty('--step-4-translate-y', '0px');
-        return;
+    if (!stepFour) return;
+    if (isMobileViewport()) {
+        stepFour.style.setProperty('--step-4-fit-scale', '1');
     }
-
-    const vr = viewport.getBoundingClientRect();
-    const fr = fit.getBoundingClientRect();
-    const vcy = vr.top + vr.height / 2;
-    const fcy = fr.top + fr.height / 2;
-    const delta = vcy - fcy;
-    stepFour.style.setProperty('--step-4-translate-y', `${delta}px`);
+    stepFour.style.setProperty('--step-4-translate-y', '0px');
 }
 
 function updateStepCompositionScale(stepId, contentId, cssVariable, maxScale = 1) {
@@ -287,12 +275,12 @@ function updateOnboardingStepScales() {
     updateStepCompositionScale('step-1', 'step-1-mobile-fit', '--step-1-mobile-scale');
     updateStepCompositionScale('step-3', 'step-3-mobile-fit', '--step-3-mobile-scale');
     updateStepCompositionScale('step-5', 'step-5-mobile-fit', '--step-5-mobile-scale');
-    updateStepCompositionScale('step-4', 'step-4-mobile-fit', '--step-4-fit-scale');
+    resetStepFourMobileTransformState();
     updateStepFourDesktopCompositionScale();
     requestAnimationFrame(() => {
-        updateStepFourMobileTranslateY();
+        resetStepFourMobileTransformState();
         requestAnimationFrame(() => {
-            updateStepFourMobileTranslateY();
+            resetStepFourMobileTransformState();
             requestAnimationFrame(updateFinalDetailsReferenceAlignment);
         });
     });
