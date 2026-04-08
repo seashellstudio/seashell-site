@@ -672,7 +672,7 @@
   }
 
   #step-2 .font-selection-area > .step-title {
-    order: 1;
+    order: -2;
     flex-shrink: 0;
     font-size: clamp(2rem, 1.53rem + 1.88vw, 2.75rem) !important;
     line-height: 1.02;
@@ -681,7 +681,7 @@
   }
 
   #step-2 .font-selection-area > .step-subtitle {
-    order: 2;
+    order: -1;
     flex-shrink: 0;
     max-width: 100%;
     white-space: normal;
@@ -690,12 +690,9 @@
     line-height: 1.4;
   }
 
-  #step-2 .font-preview-area {
-    order: 3;
-    flex-shrink: 0;
-  }
-
   #step-2 .preview-card {
+    order: 1;
+    flex-shrink: 0;
     width: min(100%, 30rem);
     max-width: 30rem;
     padding: clamp(1.1rem, 0.96rem + 0.56vw, 1.45rem);
@@ -724,7 +721,7 @@
   }
 
   #step-2 .font-selection-area > .font-list-scroll {
-    order: 4;
+    order: 2;
     flex: 1 1 auto;
     height: auto;
     min-height: 0;
