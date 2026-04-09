@@ -231,9 +231,9 @@ function updateStepCompositionScale(stepId, contentId, cssVariable, maxScale = 1
 
     if (!step) return;
 
-    step.style.setProperty(cssVariable, String(maxScale));
+    step.style.setProperty(cssVariable, '1');
 
-    if (!isMobileViewport() || !viewport || !content || !step.classList.contains('active')) {
+    if (isMobileViewport() || !viewport || !content || !step.classList.contains('active')) {
         return;
     }
 
@@ -257,7 +257,7 @@ function updateFinalDetailsReferenceAlignment() {
 
     referenceField.style.height = '';
 
-    if (!step.classList.contains('active')) {
+    if (isMobileViewport() || !step.classList.contains('active')) {
         return;
     }
 
@@ -273,7 +273,9 @@ function updateFinalDetailsReferenceAlignment() {
 
 function updateOnboardingStepScales() {
     updateStepCompositionScale('step-1', 'step-1-mobile-fit', '--step-1-mobile-scale');
+    updateStepCompositionScale('step-2', 'step-2-mobile-fit', '--step-2-mobile-scale');
     updateStepCompositionScale('step-3', 'step-3-mobile-fit', '--step-3-mobile-scale');
+    updateStepCompositionScale('step-4', 'step-4-mobile-fit', '--step-4-mobile-scale');
     updateStepCompositionScale('step-5', 'step-5-mobile-fit', '--step-5-mobile-scale');
     resetStepFourMobileTransformState();
     updateStepFourDesktopCompositionScale();
@@ -858,6 +860,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     observeResize([
         $('#step-1 .step-mobile-fit-viewport'),
+        $('#step-2 .step-mobile-fit-viewport'),
         $('#step-3 .step-mobile-fit-viewport'),
         $('#step-5 .step-mobile-fit-viewport'),
         $('#step-4 .step-mobile-fit-viewport')

@@ -1,0 +1,471 @@
+@media (max-width: 1059px) {
+  #view-onboarding {
+    --mobile-step-shell-gap: clamp(0.95rem, 0.84rem + 0.42vw, 1.15rem);
+    --mobile-step-content-gap: clamp(0.85rem, 0.75rem + 0.38vw, 1.05rem);
+    --mobile-step-surface-padding: clamp(0.9rem, 0.82rem + 0.31vw, 1.05rem);
+    --mobile-step-surface-radius: var(--mobile-wireframe-band-radius, 1.15rem);
+    --mobile-step-surface-border: 1px solid rgba(255, 255, 255, 0.06);
+    --mobile-step-surface-fill: linear-gradient(
+      180deg,
+      rgba(39, 39, 42, 0.74),
+      rgba(24, 24, 27, 0.58)
+    );
+    --mobile-step-surface-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.03);
+    --mobile-step-usable-height: calc(
+      100svh - var(--mobile-onboarding-top-gap) - var(--mobile-onboarding-bottom-gap)
+    );
+    --mobile-step-usable-height: calc(
+      100dvh - var(--mobile-onboarding-top-gap) - var(--mobile-onboarding-bottom-gap)
+    );
+  }
+
+  #view-onboarding .onboarding-main {
+    overflow: hidden;
+  }
+
+  #view-onboarding .step-container {
+    justify-content: flex-start;
+    align-items: stretch;
+    overflow: hidden;
+  }
+
+  #view-onboarding .step-mobile-fit-viewport {
+    width: 100%;
+    flex: 1 1 auto;
+    min-height: 0;
+    display: flex;
+    align-items: stretch;
+    justify-content: center;
+    overflow: hidden;
+  }
+
+  #step-1 .step-mobile-fit-content,
+  #step-2 .step-mobile-fit-content,
+  #step-3 .step-mobile-fit-content,
+  #step-4 .step-mobile-fit-content,
+  #step-5 .step-mobile-fit-content {
+    width: 100% !important;
+    max-width: var(--mobile-onboarding-content-width) !important;
+    height: var(--mobile-step-usable-height) !important;
+    max-height: var(--mobile-step-usable-height) !important;
+    min-height: 0 !important;
+    margin-inline: auto;
+    transform: none !important;
+    will-change: auto;
+    display: flex;
+  }
+
+  #step-1 .container-inner,
+  #step-2 .container-inner,
+  #step-3 .container-inner,
+  #step-4 .container-inner,
+  #step-5 .container-inner {
+    width: 100% !important;
+    max-width: none !important;
+    height: 100% !important;
+    min-height: 0 !important;
+    margin: 0 auto !important;
+    padding: 0 !important;
+    display: flex !important;
+    flex-direction: column;
+    overflow: hidden;
+  }
+
+  #step-1 .step-shell--wireframe,
+  #step-2 .step-shell--wireframe,
+  #step-3 .step-shell--wireframe,
+  #step-4 .step-shell--features,
+  #step-5 .step-shell--details {
+    width: 100% !important;
+    height: 100% !important;
+    min-height: 0 !important;
+    display: flex !important;
+    flex-direction: column;
+    gap: var(--mobile-step-shell-gap);
+    position: relative !important;
+  }
+
+  #step-1 .step-header-zone,
+  #step-2 .step-header-zone,
+  #step-3 .step-header-zone,
+  #step-4 .step-header-zone,
+  #step-5 .step-header-zone {
+    position: static !important;
+    inset: auto !important;
+    width: 100% !important;
+    margin: 0 !important;
+    text-align: left !important;
+    flex: 0 0 auto;
+    z-index: auto !important;
+  }
+
+  #step-1 .step-title,
+  #step-2 .step-title,
+  #step-3 .step-title,
+  #step-4 .step-title,
+  #step-5 .step-title {
+    max-width: 100%;
+    margin-bottom: 0.45rem !important;
+    line-height: 0.98;
+  }
+
+  #step-1 .step-subtitle,
+  #step-2 .step-subtitle,
+  #step-3 .step-subtitle,
+  #step-4 .step-subtitle,
+  #step-5 .step-subtitle {
+    max-width: 34ch;
+    margin: 0 !important;
+    line-height: 1.32;
+  }
+
+  #step-1 .step-content-zone,
+  #step-2 .step-content-zone,
+  #step-3 .step-content-zone,
+  #step-4 .features-composition,
+  #step-5 .finish-form-layout {
+    flex: 1 1 auto;
+    min-height: 0 !important;
+  }
+
+  #step-1 .step-content-zone--stack,
+  #step-2 .step-content-zone--stack,
+  #step-3 .step-content-zone--stack {
+    width: 100%;
+    display: grid !important;
+    grid-template-columns: minmax(0, 1fr);
+    align-content: stretch;
+    gap: var(--mobile-step-content-gap);
+    min-height: 0 !important;
+  }
+
+  #step-1 .step-content-zone--stack {
+    grid-template-rows: minmax(0, 1fr) minmax(0, 1.08fr);
+  }
+
+  #step-2 .step-content-zone--style {
+    grid-template-rows: minmax(0, 0.92fr) minmax(0, 1.08fr);
+  }
+
+  #step-3 .layout-step-shell {
+    grid-template-rows: minmax(0, 0.9fr) minmax(0, 1.1fr);
+    max-height: none !important;
+    height: 100% !important;
+    padding: 0 !important;
+  }
+
+  #step-1 .step-band--primary,
+  #step-1 .step-band--secondary,
+  #step-2 .step-band--primary,
+  #step-2 .step-band--secondary,
+  #step-3 .step-band--primary,
+  #step-3 .step-band--secondary {
+    position: static !important;
+    inset: auto !important;
+    width: 100% !important;
+    height: auto !important;
+    min-height: 0 !important;
+    padding: var(--mobile-step-surface-padding) !important;
+    background: var(--mobile-step-surface-fill);
+    border: var(--mobile-step-surface-border);
+    border-radius: var(--mobile-step-surface-radius);
+    box-shadow: var(--mobile-step-surface-shadow);
+    overflow: hidden;
+    display: flex !important;
+    flex-direction: column;
+    gap: clamp(0.6rem, 0.54rem + 0.25vw, 0.72rem);
+  }
+
+  #step-1 .background-mode-block {
+    margin-top: 0 !important;
+  }
+
+  #step-1 .palette-selection-block,
+  #step-1 .background-mode-block,
+  #step-2 .font-preview-area,
+  #step-2 .font-selection-area,
+  #step-3 .layout-step-preview,
+  #step-3 .layout-step-sidebar {
+    min-height: 0;
+  }
+
+  #step-1 .palette-selection-block {
+    display: flex;
+    flex-direction: column;
+  }
+
+  #step-1 .palette-scroll-shell {
+    flex: 1 1 auto;
+    min-height: 0;
+    max-height: none !important;
+    overflow: hidden;
+  }
+
+  #step-1 .palette-scroll-viewport {
+    height: 100% !important;
+    max-height: none !important;
+    overflow-y: auto;
+    overflow-x: hidden;
+    padding: 0 0.25rem 0.35rem 0;
+  }
+
+  #step-1 .palette-grid {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 0.45rem;
+  }
+
+  #step-1 .mode-options-flex {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    grid-template-rows: repeat(3, minmax(0, 1fr));
+    gap: 0.55rem;
+    flex: 1 1 auto;
+    min-height: 0;
+  }
+
+  #step-1 .mode-option {
+    min-height: 0;
+    height: auto;
+  }
+
+  #step-2 .font-preview-area {
+    grid-row: 1;
+  }
+
+  #step-2 .font-selection-area {
+    grid-row: 2;
+  }
+
+  #step-2 .font-preview-area,
+  #step-2 .font-selection-area {
+    position: static !important;
+  }
+
+  #step-2 .preview-card {
+    width: 100%;
+    height: 100%;
+    max-width: none;
+    margin: 0;
+  }
+
+  #step-2 .preview-inner {
+    min-height: 0;
+  }
+
+  #step-2 .preview-body {
+    flex: 1 1 auto;
+    min-height: 0;
+  }
+
+  #step-2 .font-list-scroll {
+    flex: 1 1 auto;
+    min-height: 0;
+    max-height: none;
+    overflow-y: auto;
+    padding-right: 0.2rem;
+  }
+
+  #step-3 .mobile-step-heading {
+    display: block;
+  }
+
+  #step-3 .layout-step-preview,
+  #step-3 .layout-step-sidebar {
+    position: static !important;
+  }
+
+  #step-3 .layout-step-preview {
+    grid-row: 1;
+  }
+
+  #step-3 .layout-step-sidebar {
+    grid-row: 2;
+    display: flex !important;
+    flex-direction: column;
+  }
+
+  #step-3 .layout-step-sidebar-header {
+    display: none !important;
+  }
+
+  #step-3 #section-list {
+    flex: 1 1 auto;
+    min-height: 0;
+    overflow-y: auto !important;
+    padding-right: 0.2rem !important;
+    padding-bottom: 0.35rem !important;
+    display: flex !important;
+    flex-direction: column;
+    gap: 0.5rem !important;
+  }
+
+  #step-3 .preview-mockup,
+  #step-3 .mockup-inner {
+    width: 100%;
+    height: 100%;
+    max-width: none;
+    min-height: 0;
+  }
+
+  #step-3 .mockup-canvas {
+    min-height: 0;
+  }
+
+  #step-4 .features-composition {
+    width: 100%;
+    height: 100%;
+    display: flex !important;
+    flex-direction: column;
+    gap: var(--mobile-step-shell-gap);
+    overflow: hidden;
+  }
+
+  #step-4 .features-layout {
+    position: static !important;
+    inset: auto !important;
+    width: 100% !important;
+    height: 100% !important;
+    min-height: 0 !important;
+    padding: 0 !important;
+    display: grid !important;
+    grid-template-columns: minmax(0, 0.94fr) minmax(0, 1.06fr);
+    gap: var(--mobile-step-content-gap);
+    background: transparent;
+    border: 0;
+    box-shadow: none;
+    overflow: hidden;
+  }
+
+  #step-4 .features-row-primary {
+    display: grid !important;
+    grid-template-columns: minmax(0, 1fr) !important;
+    grid-template-rows: repeat(5, minmax(0, 1fr));
+    gap: clamp(0.55rem, 0.5rem + 0.19vw, 0.65rem);
+    min-height: 0;
+  }
+
+  #step-4 .features-row-secondary {
+    display: grid !important;
+    grid-template-columns: minmax(0, 1fr) !important;
+    grid-template-rows: repeat(2, minmax(0, 1fr));
+    gap: clamp(0.55rem, 0.5rem + 0.19vw, 0.65rem);
+    min-height: 0;
+  }
+
+  #step-4 .feature-toggle-card,
+  #step-4 .social-card,
+  #step-4 .language-card {
+    width: 100%;
+    min-height: 0;
+    height: auto;
+    overflow: hidden;
+  }
+
+  #step-4 .social-card,
+  #step-4 .language-card {
+    display: flex;
+    flex-direction: column;
+  }
+
+  #step-4 .social-grid,
+  #step-4 .language-suggestions {
+    min-height: 0;
+    overflow-y: auto;
+  }
+
+  #step-4 .language-field-group {
+    margin-top: auto;
+  }
+
+  #step-5 .mb-8 {
+    margin-bottom: 0 !important;
+  }
+
+  #step-5 .finish-form-layout {
+    position: static !important;
+    inset: auto !important;
+    width: 100% !important;
+    height: 100% !important;
+    min-height: 0 !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    display: grid !important;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1.04fr);
+    grid-template-rows: minmax(0, 1fr) minmax(6.5rem, 0.7fr);
+    gap: var(--mobile-step-content-gap);
+    z-index: auto !important;
+  }
+
+  #step-5 .finish-form-main,
+  #step-5 .finish-form-side {
+    min-width: 0;
+    min-height: 0;
+    height: 100%;
+    display: grid !important;
+    overflow: hidden;
+  }
+
+  #step-5 .finish-form-main {
+    grid-template-rows: repeat(4, minmax(0, 1fr));
+    gap: clamp(0.5rem, 0.45rem + 0.19vw, 0.6rem);
+  }
+
+  #step-5 .finish-form-side {
+    grid-template-rows: minmax(0, 1.28fr) minmax(0, 0.9fr) minmax(0, 1fr);
+    gap: clamp(0.5rem, 0.45rem + 0.19vw, 0.6rem);
+  }
+
+  #step-5 .finish-grid-full {
+    grid-column: 1 / -1;
+    min-height: 0;
+    height: 100%;
+    margin-top: 0;
+    padding-top: 0 !important;
+    overflow: hidden;
+  }
+
+  #step-5 .finish-form-main .input-group,
+  #step-5 .finish-form-side .input-group,
+  #step-5 .finish-grid-full .input-group {
+    display: grid;
+    grid-template-rows: auto minmax(0, 1fr);
+    gap: 0.3rem;
+    min-height: 0;
+    margin: 0;
+    padding: 0 !important;
+    overflow: hidden;
+  }
+
+  #step-5 .timeline-bar {
+    height: 100%;
+  }
+
+  #step-5 .timeline-btn {
+    min-height: 0;
+    height: 100%;
+  }
+
+  #step-5 .upload-box {
+    height: 100%;
+    min-height: 0;
+  }
+
+  #step-5 #input-reference,
+  #step-5 #input-final-notes {
+    height: 100%;
+    min-height: 0;
+  }
+
+  #step-5 .input-icon-wrapper {
+    min-height: 0;
+  }
+
+  #view-onboarding .floating-action-btn {
+    left: 50%;
+    bottom: var(--mobile-onboarding-edge-padding);
+    width: var(--mobile-onboarding-content-width);
+    transform: translateX(-50%);
+    justify-content: space-between;
+    gap: clamp(0.7rem, 0.57rem + 0.5vw, 0.9rem);
+  }
+}

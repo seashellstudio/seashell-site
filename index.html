@@ -17,6 +17,7 @@
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="style-step12.css">
     <link rel="stylesheet" href="style-step35.css">
+    <link rel="stylesheet" href="wireframe-mobile.css">
 </head>
 
 <body class="theme-dark">
@@ -154,14 +155,15 @@
                         <div class="step-mobile-fit-content" id="step-1-mobile-fit">
                         <div class="container-inner flex-row">
                             <!-- Step 1 Content: Split or Full? It's centered block -->
-                            <div class="step-1-content max-w-5xl mx-auto space-y-8 animate-in w-full">
-                                <header class="step-header step-1-header text-center md:text-left">
-                                    <h2 class="step-title" style="margin-bottom:0.5rem">Pick Your <span
+                            <div class="step-shell step-shell--wireframe step-1-content max-w-5xl mx-auto animate-in w-full">
+                                <header class="step-header step-header-zone step-1-header text-center md:text-left">
+                                    <h2 class="step-title">Pick Your <span
                                             class="text-gradient">Palette</span></h2>
                                     <p class="step-subtitle">Choose colours that reflect your brand.</p>
                                 </header>
 
-                                <div class="space-y-4 palette-selection-block">
+                                <div class="step-content-zone step-content-zone--stack">
+                                <div class="step-band step-band--primary space-y-4 palette-selection-block">
                                     <h3 class="section-label text-center md:text-left">Brand Color Palettes</h3>
                                     <div class="palette-scroll-shell">
                                     <div class="palette-scroll-viewport">
@@ -339,7 +341,7 @@
                                     </div>
                                 </div>
 
-                                <div class="space-y-4 background-mode-block" style="margin-top:2rem">
+                                <div class="step-band step-band--secondary space-y-4 background-mode-block">
                                     <h3 class="section-label text-center md:text-left">Background Colour</h3>
                                     <div class="mode-options-flex">
                                         <!-- Option: Dark -->
@@ -374,6 +376,7 @@
                                         </div>
                                     </div>
                                 </div>
+                                </div>
                             </div>
                         </div>
                         </div>
@@ -382,12 +385,18 @@
 
                     <!-- Step 2 Container -->
                     <div id="step-2" class="step-container">
-                        <div class="container-inner flex-split">
-                            <div class="split-left font-selection-area">
-                                <h1 class="step-title" style="font-size:3.5rem; margin-bottom:1rem">Font & <span
+                        <div class="step-mobile-fit-viewport">
+                        <div class="step-mobile-fit-content" id="step-2-mobile-fit">
+                        <div class="container-inner">
+                            <div class="step-shell step-shell--wireframe step-shell--editorial">
+                            <header class="step-header step-header-zone text-center md:text-left">
+                                <h1 class="step-title">Font & <span
                                         class="text-primary-container">Style</span></h1>
-                                <p class="step-subtitle" style="margin-bottom:2rem">Decide the typography style.</p>
+                                <p class="step-subtitle">Decide the typography style.</p>
+                            </header>
 
+                            <div class="step-content-zone step-content-zone--stack step-content-zone--style">
+                            <div class="step-band step-band--primary split-left font-selection-area">
                                 <div class="font-list-scroll">
                                     <div class="font-option-card" data-font="Inter" onclick="selectFont(this)">
                                         <div class="font-card-left">
@@ -479,7 +488,7 @@
                                 </div>
                             </div>
 
-                            <div class="split-right font-preview-area">
+                            <div class="step-band step-band--secondary split-right font-preview-area">
                                 <div class="glass-card preview-card">
                                     <div class="preview-inner">
                                         <div class="preview-header">
@@ -502,6 +511,10 @@
                                     </div>
                                 </div>
                             </div>
+                            </div>
+                            </div>
+                        </div>
+                        </div>
                         </div>
                     </div>
 
@@ -509,27 +522,26 @@
                     <div id="step-3" class="step-container">
                         <div class="step-mobile-fit-viewport">
                         <div class="step-mobile-fit-content" id="step-3-mobile-fit">
-                        <div class="mobile-step-heading mobile-step3-heading">
-                            <h1 class="step-title" style="font-size:3rem; margin-bottom:1rem">Layout</h1>
+                        <div class="step-shell step-shell--wireframe step-shell--layout">
+                        <header class="step-header step-header-zone mobile-step-heading mobile-step3-heading text-center md:text-left">
+                            <h1 class="step-title">Layout</h1>
                             <p class="step-subtitle text-sm">Select the sections of your website.</p>
-                        </div>
-                        <div class="h-full flex-split layout-step-shell" style="max-height: 800px; padding: 2rem 0">
+                        </header>
+                        <div class="step-content-zone step-content-zone--stack h-full flex-split layout-step-shell">
                             <!-- Left Panel: Section List -->
-                            <div class="split-left layout-step-sidebar" style="display:flex; flex-direction:column;">
-                                <div class="shrink-0" style="margin-bottom:2rem;">
-                                    <h1 class="step-title" style="font-size:3rem; margin-bottom:1rem">Layout
+                            <div class="step-band step-band--primary split-left layout-step-sidebar">
+                                <div class="shrink-0 layout-step-sidebar-header">
+                                    <h1 class="step-title">Layout
                                     </h1>
                                     <p class="step-subtitle text-sm">Select the sections of your website.</p>
                                 </div>
-                                <div class="flex-1 overflow-y-auto custom-scrollbar" id="section-list"
-                                    style="padding-right:1rem; display:flex; flex-direction:column; gap:0.5rem">
+                                <div class="flex-1 overflow-y-auto custom-scrollbar" id="section-list">
                                     <!-- Populated by JS -->
                                 </div>
                             </div>
 
                             <!-- Right Panel: Dynamic Preview -->
-                            <div class="split-right layout-step-preview"
-                                style="position: relative; display:flex; align-items:center; justify-content:center;">
+                            <div class="step-band step-band--secondary split-right layout-step-preview">
                                 <div class="preview-mockup">
                                     <div class="mockup-inner">
                                         <div class="mockup-header">
@@ -549,6 +561,7 @@
                         </div>
                         </div>
                         </div>
+                        </div>
                     </div>
 
                     <!-- Step 4 Container -->
@@ -556,8 +569,9 @@
                         <div class="step-mobile-fit-viewport">
                         <div class="step-mobile-fit-content" id="step-4-mobile-fit">
                         <div class="container-inner">
+                                <div class="step-shell step-shell--wireframe step-shell--features">
                                 <div class="features-composition" id="features-composition">
-                                    <div class="step-header">
+                                    <div class="step-header step-header-zone">
                                         <h1 class="step-title">Optional Features</h1>
                                         <p class="step-subtitle">Choose additional features for your website.</p>
                                     </div>
@@ -783,6 +797,7 @@
                                         </div>
                                     </div>
                                 </div>
+                                </div>
                         </div>
                         </div>
                         </div>
@@ -793,13 +808,14 @@
                         <div class="step-mobile-fit-viewport">
                         <div class="step-mobile-fit-content" id="step-5-mobile-fit">
                         <div class="container-inner">
-                            <div class="mb-8" style="position:relative; z-index:10;">
-                                <h1 class="step-title" style="font-size:3.5rem; margin-bottom:0.5rem">Almost done
+                            <div class="step-shell step-shell--wireframe step-shell--details">
+                            <div class="step-header step-header-zone mb-8">
+                                <h1 class="step-title">Almost done
                                 </h1>
                                 <p class="step-subtitle">Final details before we launch.</p>
                             </div>
 
-                            <div class="form-grid finish-form-layout" style="position:relative; z-index:10;">
+                            <div class="form-grid finish-form-layout">
                                 <div class="finish-form-main">
                                     <div class="input-group">
                                         <label>Business Name</label>
@@ -865,6 +881,7 @@
                                         <textarea id="input-final-notes" placeholder="Anything else we should know?" rows="4"></textarea>
                                     </div>
                                 </div>
+                            </div>
                             </div>
                         </div>
                         </div>

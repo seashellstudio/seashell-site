@@ -590,6 +590,23 @@ ul, li { list-style: none; }
   color: var(--on-surface-variant); font-size: var(--step-subtitle-size); max-width: 36rem; line-height: 1.5;
 }
 
+.step-shell {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  min-width: 0;
+}
+
+.step-header-zone,
+.step-content-zone,
+.step-band {
+  min-width: 0;
+}
+
+.step-content-zone {
+  width: 100%;
+}
+
 /* Glass Cards */
 .glass-card {
   background: rgba(42, 42, 42, 0.4);
@@ -1390,6 +1407,10 @@ ul, li { list-style: none; }
       var(--mobile-onboarding-bottom-breathing-room) +
       env(safe-area-inset-bottom, 0px)
     );
+    --mobile-wireframe-header-gap: clamp(0.9rem, 0.8rem + 0.38vw, 1.1rem);
+    --mobile-wireframe-band-gap: clamp(0.9rem, 0.8rem + 0.38vw, 1.1rem);
+    --mobile-wireframe-band-radius: clamp(1rem, 0.88rem + 0.5vw, 1.2rem);
+    --mobile-wireframe-band-padding: clamp(0.9rem, 0.84rem + 0.25vw, 1rem);
     min-height: 100%;
   }
 
@@ -1534,23 +1555,60 @@ ul, li { list-style: none; }
     scroll-padding-bottom: var(--mobile-onboarding-inner-safe-padding);
   }
 
+  .step-shell--wireframe {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    min-height: 0;
+    gap: var(--mobile-wireframe-header-gap);
+  }
+
+  .step-header-zone {
+    flex: 0 0 auto;
+    width: 100%;
+    margin-bottom: 0;
+    align-self: stretch;
+  }
+
+  .step-content-zone--stack {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    gap: var(--mobile-wireframe-band-gap);
+    width: 100%;
+    min-height: 0;
+    flex: 1 1 auto;
+    align-content: start;
+  }
+
+  .step-band {
+    min-width: 0;
+    min-height: 0;
+  }
+
+  .step-band--primary,
+  .step-band--secondary {
+    border-radius: var(--mobile-wireframe-band-radius);
+  }
+
   .container-inner {
     max-width: var(--mobile-onboarding-content-width);
     width: 100%;
   }
 
   .step-header {
-    margin-bottom: 2rem;
+    margin-bottom: 0;
   }
 
   .step-title {
     max-width: 100%;
     font-size: clamp(2rem, 1.53rem + 1.88vw, 2.75rem);
+    line-height: 1.01;
   }
 
   .step-subtitle {
     max-width: 100%;
     font-size: clamp(0.96rem, 0.94rem + 0.1vw, 1rem);
+    line-height: 1.36;
   }
 
   .features-row-primary {
@@ -1638,12 +1696,20 @@ ul, li { list-style: none; }
     padding: clamp(1rem, 0.88rem + 0.5vw, 1.2rem);
   }
 
+  #step-1 .step-shell--wireframe,
+  #step-2 .step-shell--wireframe,
+  #step-3 .step-shell--wireframe,
+  #step-4 .step-shell--wireframe,
+  #step-5 .step-shell--wireframe {
+    width: 100%;
+  }
+
   .step-1-header {
-    padding: clamp(1rem, 0.88rem + 0.5vw, 1.2rem) clamp(1rem, 0.94rem + 0.25vw, 1rem);
+    padding: 0;
   }
 
   #step-1.theme-light .step-1-header {
-    padding: clamp(1.1rem, 1rem + 0.44vw, 1.35rem) 1rem;
+    padding: 0;
   }
 
   #step-2 .step-title,
@@ -1656,6 +1722,14 @@ ul, li { list-style: none; }
   .btn-fab {
     width: auto;
     min-width: clamp(7rem, 6.53rem + 1.88vw, 7.75rem);
+  }
+
+  #step-1 .step-content-zone,
+  #step-2 .step-content-zone,
+  #step-3 .step-content-zone,
+  #step-4 .features-composition,
+  #step-5 .finish-form-layout {
+    min-height: 0;
   }
 }
 
@@ -1898,6 +1972,12 @@ ul, li { list-style: none; }
     overflow-y: hidden;
   }
 
+  #step-4 .step-shell--features {
+    width: 100%;
+    min-height: 0;
+    flex: 1 1 0;
+  }
+
   #step-4 .step-mobile-fit-viewport {
     flex: 1 1 auto;
     min-width: 0;
@@ -1941,6 +2021,11 @@ ul, li { list-style: none; }
     gap: clamp(0.38rem, 0.31rem + 0.28vw, 0.55rem);
     overflow: hidden;
     padding: 0;
+  }
+
+  #step-4 .step-header-zone {
+    text-align: left !important;
+    padding-bottom: clamp(0.1rem, 0.08rem + 0.08vw, 0.16rem);
   }
 
   /* Two-column layout: left = primary features, right = social + language. */
@@ -2033,8 +2118,9 @@ ul, li { list-style: none; }
   #step-4 .feature-toggle-card,
   #step-4 .social-card,
   #step-4 .language-card {
-    padding: clamp(0.34rem, 0.3rem + 0.16vw, 0.44rem) clamp(0.38rem, 0.34rem + 0.14vw, 0.48rem);
-    gap: clamp(0.2rem, 0.18rem + 0.1vw, 0.28rem);
+    padding: clamp(0.44rem, 0.38rem + 0.18vw, 0.54rem) clamp(0.44rem, 0.4rem + 0.16vw, 0.56rem);
+    gap: clamp(0.24rem, 0.22rem + 0.1vw, 0.32rem);
+    border-radius: var(--mobile-wireframe-band-radius);
   }
 
   #step-4 .feature-card-header {

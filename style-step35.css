@@ -459,6 +459,11 @@
     --step-5-mobile-scale: 1;
   }
 
+  #step-5 .step-shell--details {
+    width: 100%;
+    min-height: 0;
+  }
+
   #step-5 .step-mobile-fit-viewport {
     width: 100%;
     display: flex;
@@ -479,11 +484,14 @@
       29.75rem,
       calc(var(--mobile-onboarding-content-width) - clamp(1.1rem, 0.86rem + 0.94vw, 1.55rem))
     );
+    display: flex;
   }
 
   .finish-form-layout {
     grid-template-columns: minmax(0, 1.05fr) minmax(clamp(9.5rem, 8.4rem + 4.38vw, 11.25rem), 0.95fr);
     gap: clamp(0.7rem, 0.64rem + 0.25vw, 0.82rem) clamp(0.78rem, 0.69rem + 0.38vw, 0.92rem);
+    flex: 1 1 auto;
+    min-height: 0;
   }
 
   .finish-form-main,
@@ -507,6 +515,10 @@
   
   #step-5 .mb-8 {
     margin-bottom: clamp(1.7rem, 1.58rem + 0.5vw, 1.9rem);
+  }
+
+  #step-5 .step-header-zone {
+    text-align: left !important;
   }
 
   .input-group {
@@ -573,10 +585,22 @@
 
   .upload-box {
     height: clamp(6rem, 5.84rem + 0.63vw, 6.5rem);
+    border-radius: var(--mobile-wireframe-band-radius);
   }
 
   #step-5 #input-final-notes {
     min-height: clamp(5.85rem, 5.56rem + 1.13vw, 6.4rem);
+  }
+
+  #step-5 .finish-form-main .input-group,
+  #step-5 .finish-form-side .input-group,
+  #step-5 .finish-grid-full .input-group {
+    padding: clamp(0.14rem, 0.12rem + 0.08vw, 0.2rem);
+    border-radius: var(--mobile-wireframe-band-radius);
+  }
+
+  #step-5 .finish-grid-full {
+    padding-top: clamp(0.08rem, 0.06rem + 0.08vw, 0.14rem);
   }
 }
 
