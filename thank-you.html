@@ -1,194 +1,230 @@
 <!DOCTYPE html>
-<html lang="en" data-theme="dark">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Thank You | Seashell Studio</title>
-    <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" rel="stylesheet" />
-    <!-- Core styles -->
-    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Cormorant+Garamond:wght@500;600;700&display=swap" rel="stylesheet">
     <style>
         :root {
-            --bg-primary: var(--surface, #131313);
-            --text-primary: var(--on-surface, #e5e2e1);
-            --text-secondary: var(--on-surface-variant, #dac2b2);
-            --bg-card: rgba(42, 42, 42, 0.4);
-            --border-light: rgba(255, 255, 255, 0.08);
-            --secondary: var(--primary-container, #ff9f4a);
+            --thanks-bg: #090a0d;
+            --thanks-text: #f7f0ea;
+            --thanks-text-soft: rgba(247, 240, 234, 0.72);
+            --thanks-text-dim: rgba(247, 240, 234, 0.58);
+            --thanks-accent: var(--primary-container, #ff9f4a);
+            --thanks-accent-soft: var(--primary, #ffc69a);
+            --thanks-line: rgba(255, 255, 255, 0.08);
+            --thanks-shadow: 0 24px 70px rgba(0, 0, 0, 0.32);
+            --thanks-display: "Cormorant Garamond", serif;
+            --thanks-body: "Manrope", sans-serif;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        html,
+        body {
+            width: 100%;
+            min-height: 100%;
+            margin: 0;
         }
 
         body {
+            display: grid;
+            place-items: center;
+            padding: 1rem;
+            background:
+                radial-gradient(circle at top left, rgba(255, 159, 74, 0.14), transparent 20%),
+                linear-gradient(180deg, rgba(13, 16, 24, 0.98), rgba(8, 10, 14, 1));
+            color: var(--thanks-text);
+            font-family: var(--thanks-body);
+            overflow: hidden;
+        }
+
+        .thanks-shell {
+            width: min(42rem, 100%);
+            padding: clamp(1.4rem, 4vw, 2.6rem);
+            border-radius: 2rem;
+            background: linear-gradient(180deg, rgba(18, 22, 30, 0.92), rgba(12, 15, 21, 0.84));
+            border: 1px solid var(--thanks-line);
+            box-shadow: var(--thanks-shadow);
+        }
+
+        .thanks-top {
             display: flex;
             align-items: center;
-            justify-content: center;
-            min-height: 100vh;
-            min-height: 100svh;
-            height: 100%;
+            gap: 1rem;
+            margin-bottom: 1.4rem;
+        }
+
+        .thanks-logo {
+            width: 4.1rem;
+            height: 4.1rem;
+            object-fit: contain;
+        }
+
+        .thanks-kicker,
+        .thanks-card-label {
+            text-transform: uppercase;
+            letter-spacing: 0.18em;
+            font-size: 0.76rem;
+            color: var(--thanks-accent-soft);
+        }
+
+        .thanks-kicker {
             margin: 0;
-            padding: 2rem;
-            background: var(--bg-primary);
-            color: var(--text-primary);
-            overflow: hidden;
-            position: relative;
         }
 
-        .thank-you-container {
-            max-width: 600px;
-            width: 100%;
-            text-align: center;
-            background: var(--bg-card);
-            border: 1px solid var(--border-light);
-            border-radius: 2rem;
-            padding: 4rem 2rem;
-            position: relative;
-            z-index: 10;
-            box-shadow: 0 20px 40px rgba(0,0,0,0.2);
-            backdrop-filter: blur(20px);
-            animation: fadeIn 0.8s ease-out;
+        .thanks-title {
+            margin: 0.3rem 0 0.55rem;
+            font-family: var(--thanks-display);
+            font-size: clamp(2.6rem, 8vw, 4.4rem);
+            line-height: 0.92;
+            letter-spacing: -0.04em;
         }
 
-        .thank-you-icon {
-            font-size: 5rem;
-            color: var(--primary);
-            margin-bottom: 1.5rem;
-            background: linear-gradient(135deg, var(--primary), var(--secondary));
-            -webkit-background-clip: text;
-            background-clip: text;
-            -webkit-text-fill-color: transparent;
-            animation: popIn 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
-            opacity: 0;
-            transform: scale(0.5);
+        .thanks-body {
+            margin: 0;
+            color: var(--thanks-text-soft);
+            line-height: 1.7;
+            max-width: 42ch;
         }
 
-        .thank-you-title {
-            font-family: 'Outfit', sans-serif;
-            font-size: 3.5rem;
-            font-weight: 700;
-            margin-bottom: 1rem;
-            letter-spacing: -0.02em;
+        .thanks-summary {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 0.8rem;
+            margin: 1.5rem 0;
         }
 
-        .thank-you-subtitle {
-            font-size: 1.125rem;
-            color: var(--text-secondary);
-            margin-bottom: 3rem;
-            line-height: 1.6;
+        .thanks-card {
+            padding: 0.95rem 1rem;
+            border-radius: 1.2rem;
+            border: 1px solid var(--thanks-line);
+            background: rgba(255, 255, 255, 0.04);
         }
 
-        .return-btn {
+        .thanks-card-label {
+            display: block;
+            margin-bottom: 0.35rem;
+        }
+
+        .thanks-card-value {
+            color: var(--thanks-text-soft);
+            line-height: 1.55;
+        }
+
+        .thanks-actions {
+            display: flex;
+            gap: 0.8rem;
+            flex-wrap: wrap;
+        }
+
+        .thanks-action {
             display: inline-flex;
             align-items: center;
-            gap: 0.5rem;
-            padding: 1rem 2rem;
-            background: rgba(255, 255, 255, 0.05);
-            color: var(--text-primary);
+            justify-content: center;
+            min-height: 3rem;
+            padding: 0.85rem 1.2rem;
+            border-radius: 999px;
             text-decoration: none;
-            border-radius: 100px;
-            font-weight: 600;
-            font-family: 'Plus Jakarta Sans', sans-serif;
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            transition: all 0.3s ease;
+            font-weight: 700;
+            transition: transform 0.22s ease, background-color 0.22s ease, border-color 0.22s ease;
         }
 
-        .return-btn:hover {
-            background: rgba(255, 255, 255, 0.1);
-            transform: translateY(-2px);
-            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+        .thanks-action:hover {
+            transform: translateY(-1px);
         }
 
-        @keyframes popIn {
-            to { opacity: 1; transform: scale(1); }
+        .thanks-action-primary {
+            background: linear-gradient(135deg, rgba(255, 159, 74, 0.96), rgba(255, 198, 154, 0.96));
+            color: #201108;
+            box-shadow: 0 18px 34px rgba(255, 159, 74, 0.22);
         }
 
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        /* Abstract Background Elements */
-        .bg-blob {
-            position: absolute;
-            filter: blur(100px);
-            z-index: 0;
-            border-radius: 50%;
-            opacity: 0.4;
-        }
-        .blob-1 {
-            width: 400px;
-            height: 400px;
-            background: var(--primary);
-            top: -100px;
-            left: -100px;
-        }
-        .blob-2 {
-            width: 500px;
-            height: 500px;
-            background: var(--secondary);
-            bottom: -200px;
-            right: -100px;
+        .thanks-action-secondary {
+            color: var(--thanks-text);
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid rgba(255, 255, 255, 0.12);
         }
 
         @media (max-width: 640px) {
-            body {
-                padding: 1rem;
+            .thanks-summary {
+                grid-template-columns: 1fr;
             }
 
-            .thank-you-container {
-                padding: 2.75rem 1.25rem;
-                border-radius: 1.5rem;
-            }
-
-            .thank-you-title {
-                font-size: clamp(2.4rem, 13vw, 3rem);
-            }
-
-            .thank-you-subtitle {
-                font-size: 1rem;
-                margin-bottom: 2rem;
-            }
-
-            .return-btn {
-                width: 100%;
-                justify-content: center;
-                min-height: 3.25rem;
-                padding: 0.95rem 1.25rem;
-            }
-
-            .blob-1,
-            .blob-2 {
-                width: 260px;
-                height: 260px;
-                filter: blur(70px);
-            }
-
-            .blob-1 {
-                top: -60px;
-                left: -80px;
-            }
-
-            .blob-2 {
-                right: -70px;
-                bottom: -90px;
+            .thanks-actions {
+                display: grid;
+                grid-template-columns: 1fr;
             }
         }
     </style>
 </head>
 <body>
-    <div class="bg-blob blob-1"></div>
-    <div class="bg-blob blob-2"></div>
-    
-    <div class="thank-you-container">
-        <span class="material-symbols-outlined thank-you-icon">check_circle</span>
-        <h1 class="thank-you-title text-gradient">Thank You</h1>
-        <p class="thank-you-subtitle">Your onboarding submission was successfully received.<br>We will review your details and prepare your proposal shortly.</p>
-        <a href="index.html" class="return-btn">
-            <span class="material-symbols-outlined" style="font-size: 1.25rem;">arrow_back</span>
-            Return to Home
-        </a>
-    </div>
+    <main class="thanks-shell">
+        <div class="thanks-top">
+            <img src="assets/Seashell Logo.png" alt="Seashell Studio logo" class="thanks-logo">
+            <div>
+                <p class="thanks-kicker">Submission received</p>
+                <h1 class="thanks-title">Thank you.</h1>
+            </div>
+        </div>
+
+        <p class="thanks-body" id="thanksBody">Your onboarding submission was successfully received. We will use your selections to shape the first direction for your website.</p>
+        <section class="thanks-summary" id="thanksSummary" aria-label="Submission summary"></section>
+        <div class="thanks-actions">
+            <a class="thanks-action thanks-action-primary" href="index.html">Return Home</a>
+            <a class="thanks-action thanks-action-secondary" href="index.html">Start Another Intake</a>
+        </div>
+    </main>
+
+    <script>
+        const THANK_YOU_SUMMARY_STORAGE_KEY = 'seashellStudioThankYouSummary';
+        const summaryRoot = document.getElementById('thanksSummary');
+        const bodyCopy = document.getElementById('thanksBody');
+        const raw = window.sessionStorage.getItem(THANK_YOU_SUMMARY_STORAGE_KEY);
+
+        if (raw) {
+            try {
+                const summary = JSON.parse(raw);
+                const cards = [
+                    ['Business', summary.form?.businessName || 'Your project'],
+                    ['Palette', summary.palette || 'Not specified'],
+                    ['Typography', summary.font || 'Not specified'],
+                    ['Timeline', summary.timeline || 'Not specified'],
+                    ['Sections', Array.isArray(summary.sections) && summary.sections.length ? summary.sections.join(', ') : 'Not specified'],
+                    ['Features', Array.isArray(summary.features) && summary.features.length ? summary.features.join(', ') : 'No optional features selected']
+                ];
+
+                if (summary.form?.businessName) {
+                    bodyCopy.textContent = `Thanks, ${summary.form.businessName}. Your intake has been captured and the Seashell Studio direction is ready for review.`;
+                }
+
+                summaryRoot.innerHTML = cards.map(([label, value]) => `
+                    <article class="thanks-card">
+                        <span class="thanks-card-label">${label}</span>
+                        <span class="thanks-card-value">${value}</span>
+                    </article>
+                `).join('');
+            } catch (error) {
+                summaryRoot.innerHTML = `
+                    <article class="thanks-card">
+                        <span class="thanks-card-label">Status</span>
+                        <span class="thanks-card-value">Submission received.</span>
+                    </article>
+                `;
+            }
+        } else {
+            summaryRoot.innerHTML = `
+                <article class="thanks-card">
+                    <span class="thanks-card-label">Status</span>
+                    <span class="thanks-card-value">Submission received.</span>
+                </article>
+            `;
+        }
+    </script>
 </body>
 </html>

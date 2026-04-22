@@ -2,6 +2,7 @@ const MOBILE_BREAKPOINT = 1060;
 const LAST_ONBOARDING_STEP = 5;
 const STEP_IDS = [1, 2, 3, 4, 5];
 const DEFAULT_ONBOARDING_BACKGROUND = '#131313';
+const THANK_YOU_SUMMARY_STORAGE_KEY = 'seashellStudioThankYouSummary';
 const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 const backgroundModeMap = {
     'mode-light': 'light',
@@ -280,6 +281,9 @@ function updateOnboardingStepScales() {
     resetStepFourMobileTransformState();
     updateStepFourDesktopCompositionScale();
     requestAnimationFrame(() => {
+        if (currentStep === 3) {
+            syncLayoutPreviewDensity();
+        }
         resetStepFourMobileTransformState();
         requestAnimationFrame(() => {
             resetStepFourMobileTransformState();
@@ -354,10 +358,23 @@ function updateView() {
         onboardingView.classList.add('active');
         
         // Update Steps Visibility
+        // Active step is flex-displayed immediately so its fade-in can run.
+        // Inactive steps keep display:flex through their 0.4s fade-out, then
+        // get display:none so they no longer affect layout or measurement.
         STEP_IDS.forEach(i => {
             const stepEl = document.getElementById(`step-${i}`);
-            if (stepEl) {
-                stepEl.classList.toggle('active', i === currentStep);
+            if (!stepEl) return;
+            const willBeActive = i === currentStep;
+            if (willBeActive) {
+                stepEl.style.display = 'flex';
+                stepEl.classList.add('active');
+            } else {
+                stepEl.classList.remove('active');
+                setTimeout(() => {
+                    if (!stepEl.classList.contains('active')) {
+                        stepEl.style.display = 'none';
+                    }
+                }, 450);
             }
         });
 
@@ -531,6 +548,23 @@ window.nextStep = async function() {
                 ]);
 
             if (error) throw error;
+
+            window.sessionStorage.setItem(THANK_YOU_SUMMARY_STORAGE_KEY, JSON.stringify({
+                palette: colourPalette ? `Palette ${colourPalette}` : '',
+                backgroundMode: backgroundColour,
+                font: stylePreference,
+                sections: layoutSections,
+                features: optionalFeatures,
+                timeline,
+                references,
+                finalNotes,
+                form: {
+                    businessName,
+                    email,
+                    customers: mainCustomers,
+                    location
+                }
+            }));
             
             window.location.href = 'thank-you.html';
         } catch (error) {
@@ -718,17 +752,391 @@ const sections = [
     { id: 'footer', name: 'Footer', active: true, icon: 'view_stream', locked: true }
 ];
 
-const sectionTemplates = {
-    hero: '<div class="tpl-hero" style="position:relative; overflow:hidden;"><div style="display:flex; justify-content:space-between; align-items:center; height:100%;"><div style="flex:1; display:flex; flex-direction:column; gap:0.5em;"><div class="tpl-box" style="height:1.5em; width:90%;"></div><div class="tpl-box" style="height:0.5em; width:70%;"></div><div class="tpl-box" style="height:0.5em; width:60%;"></div><div class="tpl-box" style="height:1.5em; width:4em; border-radius:1em; margin-top:0.5em;"></div></div><div class="tpl-box" style="width:4em; height:4em; border-radius:0.5em;"></div></div></div>',
-    about: '<div class="tpl-std" style="flex-direction:row; gap:0.5em; align-items:center;"><div class="tpl-box" style="flex:1; height:3.5em; border-radius:0.25em;"></div><div style="flex:1; display:flex; flex-direction:column; gap:0.25em;"><div class="tpl-box" style="height:0.5em; width:80%;"></div><div class="tpl-box" style="height:0.25em; width:100%;"></div><div class="tpl-box" style="height:0.25em; width:100%;"></div><div class="tpl-box" style="height:0.25em; width:60%;"></div></div></div>',
-    gallery: '<div class="tpl-std" style="flex-direction:column; gap:0.5em;"><div style="display:flex; gap:0.25em;"><div class="tpl-box" style="flex:2; height:3em;"></div><div class="tpl-box" style="flex:1; height:3em;"></div></div><div style="display:flex; gap:0.25em;"><div class="tpl-box" style="flex:1; height:2em;"></div><div class="tpl-box" style="flex:1.5; height:2em;"></div><div class="tpl-box" style="flex:1; height:2em;"></div></div></div>',
-    testimonials: '<div class="tpl-std" style="flex-direction:column; gap:0.5em; align-items:center; justify-content:center;"><div style="display:flex; gap:0.5em; width:100%;"><div class="tpl-box" style="flex:1; height:3em; border-radius:0.5em; padding:0.25em; display:flex; flex-direction:column; gap:0.25em;"><div style="display:flex; gap:0.25em; align-items:center;"><div class="tpl-box" style="width:1em; height:1em; border-radius:50%; background:rgba(255,255,255,0.2)"></div><div class="tpl-box" style="height:0.25em; width:2em;"></div></div><div class="tpl-box" style="height:0.25em; width:100%;"></div><div class="tpl-box" style="height:0.25em; width:80%;"></div></div><div class="tpl-box" style="flex:1; height:3em; border-radius:0.5em; padding:0.25em; display:flex; flex-direction:column; gap:0.25em;"><div style="display:flex; gap:0.25em; align-items:center;"><div class="tpl-box" style="width:1em; height:1em; border-radius:50%; background:rgba(255,255,255,0.2)"></div><div class="tpl-box" style="height:0.25em; width:2em;"></div></div><div class="tpl-box" style="height:0.25em; width:100%;"></div><div class="tpl-box" style="height:0.25em; width:80%;"></div></div></div></div>',
-    bookings: '<div class="tpl-std" style="flex-direction:column; gap:0.25em;"><div style="display:flex; justify-content:space-between; align-items:center;"><div class="tpl-box" style="height:0.5em; width:3em;"></div><div style="display:flex; gap:0.15em;"><div class="tpl-box" style="height:0.25em; width:0.25em;"></div><div class="tpl-box" style="height:0.25em; width:0.25em;"></div></div></div><div class="tpl-box" style="height:3em; width:100%; border-radius:0.25em; display:grid; grid-template-columns:repeat(7, 1fr); gap:0.15em; padding:0.15em;"><div class="tpl-box" style="background:rgba(255,255,255,0.2)"></div><div class="tpl-box" style="background:rgba(255,255,255,0.2)"></div><div class="tpl-box"></div><div class="tpl-box"></div><div class="tpl-box" style="background:rgba(255,159,74,0.5)"></div><div class="tpl-box"></div><div class="tpl-box"></div><div class="tpl-box"></div><div class="tpl-box" style="background:rgba(255,159,74,0.5)"></div><div class="tpl-box"></div><div class="tpl-box"></div><div class="tpl-box"></div><div class="tpl-box"></div><div class="tpl-box"></div></div></div>',
-    pricing: '<div class="tpl-std" style="flex-direction:column; gap:0.25em;"><div style="display:flex; justify-content:center;"><div class="tpl-box" style="height:0.5em; width:3em;"></div></div><div style="display:flex; gap:0.25em; align-items:flex-end; height:100%; margin-top:0.25em;"><div class="tpl-box" style="flex:1; height:3em; border:1px solid rgba(255,255,255,0.1); border-radius:0.25em; padding:0.25em; display:flex; flex-direction:column; gap:0.25em; align-items:center;"><div class="tpl-box" style="height:0.25em; width:60%;"></div><div class="tpl-box" style="height:0.5em; width:40%; background:rgba(255,159,74,0.3);"></div><div class="tpl-box" style="height:0.5em; width:80%; border-radius:0.5em;"></div></div><div class="tpl-box" style="flex:1; height:3.5em; border:1px solid rgba(255,159,74,0.4); background:rgba(255,159,74,0.05); border-radius:0.25em; padding:0.25em; display:flex; flex-direction:column; gap:0.25em; align-items:center;"><div class="tpl-box" style="height:0.25em; width:60%;"></div><div class="tpl-box" style="height:0.5em; width:40%; background:rgba(255,159,74,0.6);"></div><div class="tpl-box" style="height:0.5em; width:80%; border-radius:0.5em; background:rgba(255,159,74,0.4);"></div></div><div class="tpl-box" style="flex:1; height:3em; border:1px solid rgba(255,255,255,0.1); border-radius:0.25em; padding:0.25em; display:flex; flex-direction:column; gap:0.25em; align-items:center;"><div class="tpl-box" style="height:0.25em; width:60%;"></div><div class="tpl-box" style="height:0.5em; width:40%; background:rgba(255,159,74,0.3);"></div><div class="tpl-box" style="height:0.5em; width:80%; border-radius:0.5em;"></div></div></div></div>',
-    team: '<div class="tpl-std" style="flex-direction:column; gap:0.25em; align-items:center;"><div class="tpl-box" style="height:0.4em; width:3em; margin-bottom:0.25em;"></div><div style="display:flex; gap:0.5em; width:100%; justify-content:center;"><div style="display:flex; flex-direction:column; align-items:center; gap:0.25em;"><div class="tpl-box" style="width:2em; height:2em; border-radius:50%;"></div><div class="tpl-box" style="height:0.2em; width:1.5em;"></div><div class="tpl-box" style="height:0.1em; width:1em;"></div></div><div style="display:flex; flex-direction:column; align-items:center; gap:0.25em;"><div class="tpl-box" style="width:2em; height:2em; border-radius:50%;"></div><div class="tpl-box" style="height:0.2em; width:1.5em;"></div><div class="tpl-box" style="height:0.1em; width:1em;"></div></div><div style="display:flex; flex-direction:column; align-items:center; gap:0.25em;"><div class="tpl-box" style="width:2em; height:2em; border-radius:50%;"></div><div class="tpl-box" style="height:0.2em; width:1.5em;"></div><div class="tpl-box" style="height:0.1em; width:1em;"></div></div></div></div>',
-    contact: '<div class="tpl-std" style="flex-direction:column; gap:0.25em; align-items:center;"><div class="tpl-box" style="height:3.5em; width:80%; border-radius:0.1em; padding:0.25em; display:flex; flex-direction:column; gap:0.15em;"><div style="display:flex; gap:0.1em;"><div style="flex:1; display:flex; flex-direction:column; gap:0.05em;"><div class="tpl-box" style="height:0.1em; width:50%;"></div><div class="tpl-box" style="height:0.4em; width:100%; background:rgba(255,255,255,0.2);"></div></div><div style="flex:1; display:flex; flex-direction:column; gap:0.05em;"><div class="tpl-box" style="height:0.1em; width:50%;"></div><div class="tpl-box" style="height:0.4em; width:100%; background:rgba(255,255,255,0.2);"></div></div></div><div style="display:flex; flex-direction:column; gap:0.05em;"><div class="tpl-box" style="height:0.1em; width:20%;"></div><div class="tpl-box" style="height:0.4em; width:100%; background:rgba(255,255,255,0.2);"></div></div><div style="display:flex; flex-direction:column; gap:0.05em;"><div class="tpl-box" style="height:0.1em; width:20%;"></div><div class="tpl-box" style="height:0.8em; width:100%; background:rgba(255,255,255,0.2);"></div></div><div class="tpl-box" style="height:0.3em; width:2em; background:rgba(255,159,74,0.6); border-radius:0.2em; align-self:flex-end; margin-top:0.1em;"></div></div></div>',
-    footer: '<div class="tpl-std" style="flex-direction:column; justify-content:flex-end; height:3.5em; padding-bottom:0.1em; padding-top:0.5em;"><div style="display:flex; justify-content:space-between; align-items:flex-start; width:100%; border-top:1px solid rgba(255,255,255,0.1); padding-top:0.25em;"><div style="display:flex; flex-direction:column; gap:0.15em;"><div class="tpl-box" style="height:0.25em; width:2em;"></div><div class="tpl-box" style="height:0.15em; width:1.5em;"></div><div class="tpl-box" style="height:0.15em; width:1.5em;"></div></div><div style="display:flex; gap:0.25em;"><div class="tpl-box" style="width:0.5em; height:0.5em; border-radius:50%;"></div><div class="tpl-box" style="width:0.5em; height:0.5em; border-radius:50%;"></div><div class="tpl-box" style="width:0.5em; height:0.5em; border-radius:50%;"></div></div></div></div>'
+const LAYOUT_PREVIEW_DENSITY_ORDER = ['relaxed', 'balanced', 'compact', 'dense', 'micro'];
+const LAYOUT_PREVIEW_PREFERRED_DENSITY = {
+    2: 'relaxed',
+    3: 'balanced',
+    4: 'compact',
+    5: 'compact',
+    6: 'dense',
+    7: 'micro',
+    8: 'micro'
 };
+
+const LAYOUT_PREVIEW_DENSITY_PRESETS = {
+    relaxed: {
+        '--preview-font-scale': '0.88',
+        '--preview-header-pad-y': '0.72rem',
+        '--preview-header-pad-x': '0.88rem',
+        '--preview-canvas-pad-top': '0.72rem',
+        '--preview-canvas-pad-x': '0.8rem',
+        '--preview-canvas-pad-bottom': '0.64rem',
+        '--preview-canvas-gap': '0.32rem',
+        '--preview-block-pad': '0.5rem',
+        '--preview-block-gap': '0.24rem',
+        '--preview-inline-gap': '0.24em',
+        '--preview-grid-gap': '0.16em',
+        '--preview-line-height': '0.34em',
+        '--preview-hero-line-height': '0.9em',
+        '--preview-chip-height': '0.95em',
+        '--preview-media-size': '3.3em',
+        '--preview-avatar-size': '0.92em',
+        '--preview-label-size': '0.38rem',
+        '--preview-count-font': '0.56rem',
+        '--preview-count-pad-x': '0.7rem'
+    },
+    balanced: {
+        '--preview-font-scale': '0.8',
+        '--preview-header-pad-y': '0.64rem',
+        '--preview-header-pad-x': '0.78rem',
+        '--preview-canvas-pad-top': '0.64rem',
+        '--preview-canvas-pad-x': '0.72rem',
+        '--preview-canvas-pad-bottom': '0.56rem',
+        '--preview-canvas-gap': '0.24rem',
+        '--preview-block-pad': '0.42rem',
+        '--preview-block-gap': '0.2rem',
+        '--preview-inline-gap': '0.2em',
+        '--preview-grid-gap': '0.14em',
+        '--preview-line-height': '0.3em',
+        '--preview-hero-line-height': '0.78em',
+        '--preview-chip-height': '0.8em',
+        '--preview-media-size': '2.95em',
+        '--preview-avatar-size': '0.84em',
+        '--preview-label-size': '0.34rem',
+        '--preview-count-font': '0.53rem',
+        '--preview-count-pad-x': '0.62rem'
+    },
+    compact: {
+        '--preview-font-scale': '0.72',
+        '--preview-header-pad-y': '0.58rem',
+        '--preview-header-pad-x': '0.72rem',
+        '--preview-canvas-pad-top': '0.58rem',
+        '--preview-canvas-pad-x': '0.64rem',
+        '--preview-canvas-pad-bottom': '0.5rem',
+        '--preview-canvas-gap': '0.2rem',
+        '--preview-block-pad': '0.34rem',
+        '--preview-block-gap': '0.16rem',
+        '--preview-inline-gap': '0.17em',
+        '--preview-grid-gap': '0.11em',
+        '--preview-line-height': '0.26em',
+        '--preview-hero-line-height': '0.66em',
+        '--preview-chip-height': '0.68em',
+        '--preview-media-size': '2.55em',
+        '--preview-avatar-size': '0.74em',
+        '--preview-label-size': '0.31rem',
+        '--preview-count-font': '0.49rem',
+        '--preview-count-pad-x': '0.56rem'
+    },
+    dense: {
+        '--preview-font-scale': '0.6',
+        '--preview-header-pad-y': '0.48rem',
+        '--preview-header-pad-x': '0.58rem',
+        '--preview-canvas-pad-top': '0.46rem',
+        '--preview-canvas-pad-x': '0.52rem',
+        '--preview-canvas-pad-bottom': '0.42rem',
+        '--preview-canvas-gap': '0.13rem',
+        '--preview-block-pad': '0.24rem',
+        '--preview-block-gap': '0.11rem',
+        '--preview-inline-gap': '0.12em',
+        '--preview-grid-gap': '0.08em',
+        '--preview-line-height': '0.2em',
+        '--preview-hero-line-height': '0.48em',
+        '--preview-chip-height': '0.5em',
+        '--preview-media-size': '1.92em',
+        '--preview-avatar-size': '0.58em',
+        '--preview-label-size': '0.26rem',
+        '--preview-count-font': '0.43rem',
+        '--preview-count-pad-x': '0.46rem'
+    },
+    micro: {
+        '--preview-font-scale': '0.52',
+        '--preview-header-pad-y': '0.42rem',
+        '--preview-header-pad-x': '0.52rem',
+        '--preview-canvas-pad-top': '0.38rem',
+        '--preview-canvas-pad-x': '0.46rem',
+        '--preview-canvas-pad-bottom': '0.36rem',
+        '--preview-canvas-gap': '0.1rem',
+        '--preview-block-pad': '0.2rem',
+        '--preview-block-gap': '0.08rem',
+        '--preview-inline-gap': '0.1em',
+        '--preview-grid-gap': '0.07em',
+        '--preview-line-height': '0.17em',
+        '--preview-hero-line-height': '0.4em',
+        '--preview-chip-height': '0.42em',
+        '--preview-media-size': '1.58em',
+        '--preview-avatar-size': '0.5em',
+        '--preview-label-size': '0.23rem',
+        '--preview-count-font': '0.39rem',
+        '--preview-count-pad-x': '0.4rem'
+    }
+};
+
+function previewLine(widthClass, extraClass = '') {
+    return `<div class="preview-line ${widthClass}${extraClass ? ` ${extraClass}` : ''}"></div>`;
+}
+
+function previewBox(extraClass = '') {
+    return `<div class="preview-box${extraClass ? ` ${extraClass}` : ''}"></div>`;
+}
+
+function renderHeroPreview() {
+    return `
+        <div class="tpl-hero preview-node preview-node--hero">
+            <div class="preview-node__row preview-node__row--hero">
+                <div class="preview-node__stack preview-node__stack--grow">
+                    ${previewLine('preview-line--headline preview-line--w90')}
+                    ${previewLine('preview-line--w72')}
+                    ${previewLine('preview-line--w58')}
+                    <div class="preview-chip preview-chip--cta"></div>
+                </div>
+                <div class="preview-media preview-media--hero"></div>
+            </div>
+        </div>
+    `;
+}
+
+function renderAboutPreview() {
+    return `
+        <div class="tpl-std preview-node preview-node--about">
+            <div class="preview-node__row preview-node__row--media">
+                <div class="preview-media preview-media--panel"></div>
+                <div class="preview-node__stack preview-node__stack--grow">
+                    ${previewLine('preview-line--w78')}
+                    ${previewLine('preview-line--w100')}
+                    ${previewLine('preview-line--w92')}
+                    ${previewLine('preview-line--w62')}
+                </div>
+            </div>
+        </div>
+    `;
+}
+
+function renderGalleryPreview() {
+    return `
+        <div class="tpl-std preview-node preview-node--gallery">
+            <div class="preview-node__stack preview-node__stack--grow">
+                <div class="preview-node__row">
+                    <div class="preview-media preview-media--gallery preview-media--wide"></div>
+                    <div class="preview-media preview-media--gallery"></div>
+                </div>
+                <div class="preview-node__row preview-node__row--gallery-secondary">
+                    <div class="preview-media preview-media--gallery"></div>
+                    <div class="preview-media preview-media--gallery preview-media--wide"></div>
+                    <div class="preview-media preview-media--gallery"></div>
+                </div>
+            </div>
+        </div>
+    `;
+}
+
+function renderTestimonialsPreview() {
+    return `
+        <div class="tpl-std preview-node preview-node--testimonials">
+            <div class="preview-node__row preview-node__row--equal">
+                <div class="preview-card-skeleton">
+                    <div class="preview-node__row preview-node__row--avatar">
+                        <div class="preview-avatar"></div>
+                        ${previewLine('preview-line--w46')}
+                    </div>
+                    ${previewLine('preview-line--w100')}
+                    ${previewLine('preview-line--w78')}
+                </div>
+                <div class="preview-card-skeleton">
+                    <div class="preview-node__row preview-node__row--avatar">
+                        <div class="preview-avatar"></div>
+                        ${previewLine('preview-line--w46')}
+                    </div>
+                    ${previewLine('preview-line--w100')}
+                    ${previewLine('preview-line--w78')}
+                </div>
+            </div>
+        </div>
+    `;
+}
+
+function renderBookingsPreview() {
+    return `
+        <div class="tpl-std preview-node preview-node--bookings">
+            <div class="preview-node__stack preview-node__stack--grow">
+                <div class="preview-node__row preview-node__row--spread">
+                    ${previewLine('preview-line--w38')}
+                    <div class="preview-dot-group">
+                        ${previewBox('preview-box--dot preview-box--accent')}
+                        ${previewBox('preview-box--dot')}
+                    </div>
+                </div>
+                <div class="preview-calendar">
+                    ${Array.from({ length: 14 }, (_, index) => previewBox(index === 4 || index === 8 ? 'preview-box--cell preview-box--accent' : 'preview-box--cell')).join('')}
+                </div>
+            </div>
+        </div>
+    `;
+}
+
+function renderPricingPreview() {
+    return `
+        <div class="tpl-std preview-node preview-node--pricing">
+            <div class="preview-node__stack preview-node__stack--grow">
+                <div class="preview-node__row preview-node__row--center">
+                    ${previewLine('preview-line--w38')}
+                </div>
+                <div class="preview-node__row preview-node__row--equal preview-node__row--pricing">
+                    <div class="preview-plan">
+                        ${previewLine('preview-line--w56')}
+                        <div class="preview-chip"></div>
+                        <div class="preview-button-skeleton"></div>
+                    </div>
+                    <div class="preview-plan preview-plan--featured">
+                        ${previewLine('preview-line--w56')}
+                        <div class="preview-chip preview-chip--accent"></div>
+                        <div class="preview-button-skeleton preview-button-skeleton--accent"></div>
+                    </div>
+                    <div class="preview-plan">
+                        ${previewLine('preview-line--w56')}
+                        <div class="preview-chip"></div>
+                        <div class="preview-button-skeleton"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    `;
+}
+
+function renderTeamPreview() {
+    return `
+        <div class="tpl-std preview-node preview-node--team">
+            <div class="preview-node__stack preview-node__stack--grow preview-node__stack--center">
+                ${previewLine('preview-line--w38')}
+                <div class="preview-node__row preview-node__row--equal preview-node__row--team">
+                    <div class="preview-profile">
+                        <div class="preview-avatar preview-avatar--large"></div>
+                        ${previewLine('preview-line--w60')}
+                        ${previewLine('preview-line--w42 preview-line--muted')}
+                    </div>
+                    <div class="preview-profile">
+                        <div class="preview-avatar preview-avatar--large"></div>
+                        ${previewLine('preview-line--w60')}
+                        ${previewLine('preview-line--w42 preview-line--muted')}
+                    </div>
+                    <div class="preview-profile">
+                        <div class="preview-avatar preview-avatar--large"></div>
+                        ${previewLine('preview-line--w60')}
+                        ${previewLine('preview-line--w42 preview-line--muted')}
+                    </div>
+                </div>
+            </div>
+        </div>
+    `;
+}
+
+function renderContactPreview() {
+    return `
+        <div class="tpl-std preview-node preview-node--contact">
+            <div class="preview-form-skeleton">
+                <div class="preview-node__row preview-node__row--equal">
+                    <div class="preview-field">
+                        ${previewLine('preview-line--w50 preview-line--muted')}
+                        <div class="preview-input"></div>
+                    </div>
+                    <div class="preview-field">
+                        ${previewLine('preview-line--w50 preview-line--muted')}
+                        <div class="preview-input"></div>
+                    </div>
+                </div>
+                <div class="preview-field">
+                    ${previewLine('preview-line--w24 preview-line--muted')}
+                    <div class="preview-input"></div>
+                </div>
+                <div class="preview-field preview-field--message">
+                    ${previewLine('preview-line--w24 preview-line--muted')}
+                    <div class="preview-input preview-input--tall"></div>
+                </div>
+                <div class="preview-button-skeleton preview-button-skeleton--accent preview-button-skeleton--align-end"></div>
+            </div>
+        </div>
+    `;
+}
+
+function renderFooterPreview() {
+    return `
+        <div class="tpl-std preview-node preview-node--footer">
+            <div class="preview-footer">
+                <div class="preview-footer__left">
+                    ${previewLine('preview-line--w38')}
+                    ${previewLine('preview-line--w30 preview-line--muted')}
+                    ${previewLine('preview-line--w30 preview-line--muted')}
+                </div>
+                <div class="preview-dot-group preview-dot-group--footer">
+                    ${previewBox('preview-box--dot')}
+                    ${previewBox('preview-box--dot')}
+                    ${previewBox('preview-box--dot')}
+                </div>
+            </div>
+        </div>
+    `;
+}
+
+const sectionTemplateRenderers = {
+    hero: renderHeroPreview,
+    about: renderAboutPreview,
+    gallery: renderGalleryPreview,
+    testimonials: renderTestimonialsPreview,
+    bookings: renderBookingsPreview,
+    pricing: renderPricingPreview,
+    team: renderTeamPreview,
+    contact: renderContactPreview,
+    footer: renderFooterPreview
+};
+
+function applyLayoutPreviewDensity(previewPanel, canvas, densityName, activeCount) {
+    const preset = LAYOUT_PREVIEW_DENSITY_PRESETS[densityName] || LAYOUT_PREVIEW_DENSITY_PRESETS.micro;
+
+    previewPanel.dataset.previewDensity = densityName;
+    previewPanel.dataset.activeCount = String(activeCount);
+    canvas.dataset.previewDensity = densityName;
+    canvas.dataset.activeCount = String(activeCount);
+
+    Object.entries(preset).forEach(([propertyName, propertyValue]) => {
+        previewPanel.style.setProperty(propertyName, propertyValue);
+    });
+}
+
+function layoutPreviewHasOverflow(canvas) {
+    if (!canvas) return false;
+
+    if (canvas.scrollHeight - canvas.clientHeight > 1) {
+        return true;
+    }
+
+    return Array.from(canvas.querySelectorAll('.tpl-hero, .tpl-std')).some(block => (
+        (block.scrollHeight - block.clientHeight > 1) ||
+        (block.scrollWidth - block.clientWidth > 1)
+    ));
+}
+
+function syncLayoutPreviewDensity() {
+    const canvas = document.getElementById('preview-canvas');
+    const previewPanel = document.querySelector('#step-3 .layout-step-preview');
+
+    if (!canvas || !previewPanel) return;
+
+    const activeCount = sections.filter(section => section.active).length;
+    const preferredDensity = LAYOUT_PREVIEW_PREFERRED_DENSITY[activeCount] || 'micro';
+    const preferredIndex = Math.max(0, LAYOUT_PREVIEW_DENSITY_ORDER.indexOf(preferredDensity));
+    let appliedDensity = LAYOUT_PREVIEW_DENSITY_ORDER[LAYOUT_PREVIEW_DENSITY_ORDER.length - 1];
+
+    for (let densityIndex = preferredIndex; densityIndex < LAYOUT_PREVIEW_DENSITY_ORDER.length; densityIndex += 1) {
+        const densityName = LAYOUT_PREVIEW_DENSITY_ORDER[densityIndex];
+        applyLayoutPreviewDensity(previewPanel, canvas, densityName, activeCount);
+
+        if (!layoutPreviewHasOverflow(canvas)) {
+            appliedDensity = densityName;
+            break;
+        }
+    }
+
+    applyLayoutPreviewDensity(previewPanel, canvas, appliedDensity, activeCount);
+}
 
 function renderList() {
     const list = document.getElementById('section-list');
@@ -757,31 +1165,17 @@ function renderList() {
 function renderPreview() {
     const canvas = document.getElementById('preview-canvas');
     if (!canvas) return;
-    canvas.innerHTML = '';
     const activeSections = sections.filter(s => s.active);
-    
-    const isMobileLayout = isMobileViewport();
-    let scale = 1;
-
-    if (isMobileLayout) {
-        if (activeSections.length >= 3) {
-            scale = Math.max(0.46, 0.94 - ((activeSections.length - 2) * 0.15));
-        }
-    } else if (activeSections.length > 3) {
-        scale = Math.max(0.4, 1 - (activeSections.length - 3) * 0.12);
-    }
-
-    canvas.style.fontSize = scale + 'em';
-    canvas.style.setProperty('--layout-preview-scale', scale.toString());
-    canvas.dataset.activeCount = String(activeSections.length);
-    
-    activeSections.forEach(s => {
-      canvas.innerHTML += sectionTemplates[s.id];
-    });
+    canvas.innerHTML = activeSections.map(section => {
+        const renderSection = sectionTemplateRenderers[section.id];
+        return renderSection ? renderSection() : '';
+    }).join('');
     
     const count = activeSections.length;
     const label = document.getElementById('active-sections-count');
     if (label) label.innerText = `${count} ACTIVE SECTIONS`;
+
+    syncLayoutPreviewDensity();
 }
 
 function toggleSection(id) {
@@ -875,4 +1269,7 @@ window.addEventListener('resize', () => {
     updatePaletteScrollHeight();
     updatePaletteScrollAffordance();
     updateOnboardingStepScales();
+    if (currentStep === 3) {
+        syncLayoutPreviewDensity();
+    }
 });

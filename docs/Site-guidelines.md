@@ -107,6 +107,19 @@ If content risks overflowing:
 - Rounded corners on all cards and buttons
 - No sharp edges
 
+#### Step shell tokens (onboarding)
+
+All onboarding steps (1–5) share the same outer shell. Spacing is controlled by CSS custom properties in `styles/main.css :root`:
+
+- `--step-container-padding-desktop` — padding on every `.step-container` at ≥ 1060px
+- `--step-header-margin-bottom` — gap between `.step-header` and step content
+
+Per-step overrides of `.step-container` padding, `.step-header` margin, or `.step-title` font-size are forbidden. If a step needs different spacing, change the token or use a dedicated inner wrapper — do not override the shell.
+
+#### Step visibility contract
+
+Only one onboarding step is visible at a time. `updateView()` in `main.js` adds `.active` to the current step (`display: flex`) and, after the 0.4s fade transition completes, sets `display: none` on every other step. Inactive steps do not participate in layout or measurement, which keeps `getBoundingClientRect()` / `offsetHeight` stable per step.
+
 ---
 
 ### 2.5 Buttons

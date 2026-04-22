@@ -104,5 +104,5 @@ Chosen defaults:
 
 - “Fix the mobile layout” means the onboarding flow, not the landing page or thank-you page.
 - The current visual design is acceptable; this pass should not redesign components or brand styling.
-- The strict no-scroll rule from [Site-guidelines.md](/c:/Users/tyler/Desktop/Seashell%20Studio/Seashell_studio_website/Structure/Site-guidelines.md) remains in force.
+- The strict no-scroll rule from [Site-guidelines.md](../Site-guidelines.md) remains in force.
 - The wireframes remain a spacing/reference guide, but the implementation should use flexible height distribution rather than fixed absolute mobile band coordinates.

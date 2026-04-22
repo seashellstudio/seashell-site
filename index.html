@@ -14,10 +14,10 @@
     <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0"
         rel="stylesheet">
 
-    <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet" href="style-step12.css">
-    <link rel="stylesheet" href="style-step35.css">
-    <link rel="stylesheet" href="wireframe-mobile.css">
+    <link rel="stylesheet" href="styles/main.css">
+    <link rel="stylesheet" href="styles/onboarding-steps-1-2.css">
+    <link rel="stylesheet" href="styles/onboarding-steps-3-5.css">
+    <link rel="stylesheet" href="styles/mobile.css">
 </head>
 
 <body class="theme-dark">
@@ -155,8 +155,8 @@
                         <div class="step-mobile-fit-content" id="step-1-mobile-fit">
                         <div class="container-inner flex-row">
                             <!-- Step 1 Content: Split or Full? It's centered block -->
-                            <div class="step-shell step-shell--wireframe step-1-content max-w-5xl mx-auto animate-in w-full">
-                                <header class="step-header step-header-zone step-1-header text-center md:text-left">
+                            <div class="step-shell step-shell--wireframe max-w-5xl mx-auto animate-in w-full">
+                                <header class="step-header step-header-zone text-center md:text-left">
                                     <h2 class="step-title">Pick Your <span
                                             class="text-gradient">Palette</span></h2>
                                     <p class="step-subtitle">Choose colours that reflect your brand.</p>
@@ -395,7 +395,7 @@
                                 <p class="step-subtitle">Decide the typography style.</p>
                             </header>
 
-                            <div class="step-content-zone step-content-zone--stack step-content-zone--style">
+                            <div class="step-content-zone step-content-zone--stack h-full flex-split step-content-zone--style">
                             <div class="step-band step-band--primary split-left font-selection-area">
                                 <div class="font-list-scroll">
                                     <div class="font-option-card" data-font="Inter" onclick="selectFont(this)">
@@ -809,7 +809,7 @@
                         <div class="step-mobile-fit-content" id="step-5-mobile-fit">
                         <div class="container-inner">
                             <div class="step-shell step-shell--wireframe step-shell--details">
-                            <div class="step-header step-header-zone mb-8">
+                            <div class="step-header step-header-zone">
                                 <h1 class="step-title">Almost done
                                 </h1>
                                 <p class="step-subtitle">Final details before we launch.</p>

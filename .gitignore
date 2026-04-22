@@ -1,1 +1,4 @@
 .vercel
+dev-tools/node_modules/
+dev-tools/screens-baseline/
+dev-tools/screens-after/

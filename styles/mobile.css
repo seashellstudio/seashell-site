@@ -155,11 +155,7 @@
   }
 
   #step-1 .step-band--primary,
-  #step-1 .step-band--secondary,
-  #step-2 .step-band--primary,
-  #step-2 .step-band--secondary,
-  #step-3 .step-band--primary,
-  #step-3 .step-band--secondary {
+  #step-1 .step-band--secondary {
     position: static !important;
     inset: auto !important;
     width: 100% !important;
@@ -174,6 +170,26 @@
     display: flex !important;
     flex-direction: column;
     gap: clamp(0.6rem, 0.54rem + 0.25vw, 0.72rem);
+  }
+
+  #step-2 .step-band--primary,
+  #step-2 .step-band--secondary,
+  #step-3 .step-band--primary,
+  #step-3 .step-band--secondary {
+    position: static !important;
+    inset: auto !important;
+    width: 100% !important;
+    min-height: 0 !important;
+    height: auto !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    border: 0 !important;
+    background: transparent !important;
+    box-shadow: none !important;
+    border-radius: 0 !important;
+    overflow: hidden;
+    display: flex !important;
+    flex-direction: column;
   }
 
   #step-1 .background-mode-block {
@@ -230,10 +246,14 @@
 
   #step-2 .font-preview-area {
     grid-row: 1;
+    flex: 1 1 auto;
+    min-height: 0;
   }
 
   #step-2 .font-selection-area {
     grid-row: 2;
+    flex: 1 1 auto;
+    min-height: 0;
   }
 
   #step-2 .font-preview-area,
@@ -262,7 +282,12 @@
     min-height: 0;
     max-height: none;
     overflow-y: auto;
-    padding-right: 0.2rem;
+    padding: var(--mobile-step-surface-padding) calc(var(--mobile-step-surface-padding) - 0.1rem) var(--mobile-step-surface-padding) var(--mobile-step-surface-padding);
+    background: var(--mobile-step-surface-fill);
+    border: var(--mobile-step-surface-border);
+    box-shadow: var(--mobile-step-surface-shadow);
+    border-radius: var(--mobile-step-surface-radius);
+    scrollbar-gutter: stable;
   }
 
   #step-3 .mobile-step-heading {
@@ -276,12 +301,35 @@
 
   #step-3 .layout-step-preview {
     grid-row: 1;
+    flex: 1 1 auto;
+    min-height: 0;
+    --preview-font-scale: 0.8;
+    --preview-header-pad-y: 0.64rem;
+    --preview-header-pad-x: 0.78rem;
+    --preview-canvas-pad-top: 0.64rem;
+    --preview-canvas-pad-x: 0.72rem;
+    --preview-canvas-pad-bottom: 0.56rem;
+    --preview-canvas-gap: 0.24rem;
+    --preview-block-pad: 0.42rem;
+    --preview-block-gap: 0.2rem;
+    --preview-inline-gap: 0.2em;
+    --preview-grid-gap: 0.14em;
+    --preview-line-height: 0.3em;
+    --preview-hero-line-height: 0.78em;
+    --preview-chip-height: 0.8em;
+    --preview-media-size: 2.95em;
+    --preview-avatar-size: 0.84em;
+    --preview-label-size: 0.34rem;
+    --preview-count-font: 0.53rem;
+    --preview-count-pad-x: 0.62rem;
   }
 
   #step-3 .layout-step-sidebar {
     grid-row: 2;
     display: flex !important;
     flex-direction: column;
+    flex: 1 1 auto;
+    min-height: 0;
   }
 
   #step-3 .layout-step-sidebar-header {
@@ -291,9 +339,13 @@
   #step-3 #section-list {
     flex: 1 1 auto;
     min-height: 0;
+    height: 100%;
     overflow-y: auto !important;
-    padding-right: 0.2rem !important;
-    padding-bottom: 0.35rem !important;
+    padding: var(--mobile-step-surface-padding) calc(var(--mobile-step-surface-padding) - 0.1rem) var(--mobile-step-surface-padding) var(--mobile-step-surface-padding) !important;
+    background: var(--mobile-step-surface-fill);
+    border: var(--mobile-step-surface-border);
+    box-shadow: var(--mobile-step-surface-shadow);
+    border-radius: var(--mobile-step-surface-radius);
     display: flex !important;
     flex-direction: column;
     gap: 0.5rem !important;
@@ -307,7 +359,20 @@
     min-height: 0;
   }
 
-  #step-3 .mockup-canvas {
+  #step-3 .preview-mockup {
+    background: var(--mobile-step-surface-fill);
+    border: var(--mobile-step-surface-border);
+    border-radius: var(--mobile-step-surface-radius);
+    box-shadow: var(--mobile-step-surface-shadow);
+    overflow: hidden;
+  }
+
+  #step-3 .mockup-inner {
+    border-radius: calc(var(--mobile-step-surface-radius) - 1px);
+  }
+
+  #step-3 .mockup-canvas,
+  #step-3 .mockup-canvas > * {
     min-height: 0;
   }
 
@@ -377,9 +442,7 @@
     margin-top: auto;
   }
 
-  #step-5 .mb-8 {
-    margin-bottom: 0 !important;
-  }
+
 
   #step-5 .finish-form-layout {
     position: static !important;

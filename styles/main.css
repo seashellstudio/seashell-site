@@ -24,6 +24,8 @@
   --font-label: 'Manrope', sans-serif;
 
   --step-title-size: clamp(2.5rem, 5vw, 3.75rem);
+  --step-container-padding-desktop: 0 3rem;
+  --step-header-margin-bottom: 2rem;
   --step-subtitle-size: 1.25rem;
   --ui-card-title-size: 1.5rem;
   --ui-body-size: 0.95rem;
@@ -586,7 +588,7 @@ ul, li { list-style: none; }
   display: flex; flex-direction: column; justify-content: center;
   min-width: 0;
   min-height: 0;
-  padding: 0 3rem;
+  padding: var(--step-container-padding-desktop);
   overflow-y: auto;
   overscroll-behavior-y: contain;
   opacity: 0;
@@ -602,7 +604,7 @@ ul, li { list-style: none; }
   min-width: 0;
 }
 
-.step-header { margin-bottom: 2rem; }
+.step-header { margin-bottom: var(--step-header-margin-bottom); }
 
 .step-pill {
   display: inline-flex; align-items: center; gap: 0.5rem;
@@ -700,11 +702,6 @@ ul, li { list-style: none; }
   gap: 0.8rem;
 }
 
-
-#step-4 .step-title {
-  font-size: var(--step-title-size);
-  margin-bottom: 0.35rem;
-}
 
 #step-4 .step-subtitle {
   font-size: var(--step-subtitle-size);
@@ -1739,14 +1736,6 @@ ul, li { list-style: none; }
 
 
 
-  #step-1 .step-title,
-  #step-2 .step-title,
-  #step-3 .step-title,
-  #step-4 .step-title,
-  #step-5 .step-title {
-    font-size: clamp(2rem, 1.53rem + 1.88vw, 2.75rem) !important;
-  }
-
   .btn-fab {
     width: auto;
     min-width: clamp(7rem, 6.53rem + 1.88vw, 7.75rem);
@@ -2224,12 +2213,6 @@ ul, li { list-style: none; }
   /* Step header scaling */
   #step-4 .step-header {
     flex: 0 0 auto;
-  }
-
-  #step-4 .step-title {
-    font-size: clamp(1.32rem, 1.15rem + 0.72vw, 1.62rem) !important;
-    margin-bottom: clamp(0.16rem, 0.14rem + 0.08vw, 0.24rem);
-    line-height: 1;
   }
 
   #step-4 .step-subtitle {

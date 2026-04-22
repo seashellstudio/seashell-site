@@ -1,0 +1,18 @@
+
+=== desktop (1440x900) ===
+  step-1: top=143.23px fontSize=60px visible=true
+  step-2: top=70.00px fontSize=60px visible=true
+  step-3: top=0.00px fontSize=60px visible=false
+  step-4: top=172.36px fontSize=60px visible=true
+  step-5: top=156.36px fontSize=60px visible=true
+  spread: 172.36px (tolerance: 1px)
+  FAIL: .step-title top varies by more than 1px
+
+=== mobile (390x844) ===
+  step-1: top=125.80px fontSize=32px visible=true
+  step-2: top=125.80px fontSize=32px visible=true
+  step-3: top=125.80px fontSize=32px visible=true
+  step-4: top=125.80px fontSize=21.208px visible=true
+  step-5: top=125.80px fontSize=32px visible=true
+  spread: 0.00px (tolerance: 1px)
+  PASS
