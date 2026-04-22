@@ -4,7 +4,7 @@ const fs = require('fs');
 (async () => {
   const browser = await chromium.launch();
   
-  const outDir = 'C:/Users/tyler/.gemini/antigravity/brain/f6d74ec5-78d1-4144-88c7-9d410770f652/scratch/screenshots';
+  const outDir = './screens';
   if (!fs.existsSync(outDir)) {
       fs.mkdirSync(outDir, { recursive: true });
   }
