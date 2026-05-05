@@ -24,8 +24,10 @@
   --font-label: 'Manrope', sans-serif;
 
   --step-title-size: clamp(2.5rem, 5vw, 3.75rem);
-  --step-container-padding-desktop: 0 3rem;
-  --step-header-margin-bottom: 2rem;
+  --step-title-size-desktop: 3rem;
+  --step-container-padding-desktop: 5rem;
+  --step-header-margin-bottom: 3.75rem;
+  --step-title-subtitle-gap: 1.875rem; /* 30px */
   --step-subtitle-size: 1.25rem;
   --ui-card-title-size: 1.5rem;
   --ui-body-size: 0.95rem;
@@ -585,7 +587,7 @@ ul, li { list-style: none; }
 
 .step-container {
   position: absolute; inset: 0;
-  display: flex; flex-direction: column; justify-content: center;
+  display: flex; flex-direction: column; justify-content: flex-start;
   min-width: 0;
   min-height: 0;
   padding: var(--step-container-padding-desktop);
@@ -598,10 +600,13 @@ ul, li { list-style: none; }
 .step-container.active { opacity: 1; pointer-events: auto; }
 
 .container-inner {
-  max-width: 1200px;
+  max-width: 1000px;
   margin: 0 auto;
   width: 100%;
   min-width: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
 }
 
 .step-header { margin-bottom: var(--step-header-margin-bottom); }
@@ -623,11 +628,16 @@ ul, li { list-style: none; }
 .step-title {
   font-size: var(--step-title-size);
   font-weight: 800; font-family: var(--font-headline);
-  color: white; letter-spacing: -0.05em; margin-bottom: 1rem; max-width: 42rem; line-height: 1.1;
+  color: white; letter-spacing: -0.05em; margin-bottom: var(--step-title-subtitle-gap); max-width: 42rem; line-height: 1.1;
   overflow-wrap: anywhere;
 }
 .step-subtitle {
   color: var(--on-surface-variant); font-size: var(--step-subtitle-size); max-width: 36rem; line-height: 1.5;
+  margin-bottom: 0;
+}
+
+@media (min-width: 1060px) {
+  .step-title { font-size: var(--step-title-size-desktop); }
 }
 
 .step-shell {
@@ -663,43 +673,88 @@ ul, li { list-style: none; }
 }
 
 #step-4 {
-  justify-content: center;
-  padding-top: 2.25rem;
-  padding-bottom: 5.75rem;
   --step-4-fit-scale: 1;
   --step-4-translate-y: 0px;
 }
 
-#step-4 .step-mobile-fit-viewport {
-  flex: 1 1 auto;
-  min-width: 0;
-  min-height: 0;
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: stretch;
+@media (max-width: 1059px) {
+  #step-4 .step-mobile-fit-viewport {
+    flex: 1 1 auto;
+    min-width: 0;
+    min-height: 0;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: stretch;
+  }
+
+  #step-4 .step-mobile-fit-content {
+    flex: 0 0 auto;
+    width: 100%;
+    max-width: 1260px;
+    margin-inline: auto;
+    transform: translateY(var(--step-4-translate-y, 0px)) scale(var(--step-4-fit-scale));
+    transform-origin: top center;
+    will-change: transform;
+  }
+
+  #step-4 .container-inner {
+    max-width: none;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    gap: 0.8rem;
+  }
 }
 
-#step-4 .step-mobile-fit-content {
-  flex: 0 0 auto;
-  width: 100%;
-  max-width: 1260px;
-  margin-inline: auto;
-  /* scale applies first (rightmost in list), then translateY — centers block on mobile via --step-4-translate-y */
-  transform: translateY(var(--step-4-translate-y, 0px)) scale(var(--step-4-fit-scale));
-  transform-origin: top center;
-  will-change: transform;
-}
+@media (min-width: 1060px) {
+  /* Universal passthrough — fit wrappers exist only for mobile scaling. */
+  .step-mobile-fit-viewport {
+    display: flex;
+    flex: 1 1 auto;
+    flex-direction: column;
+    min-height: 0;
+    width: 100%;
+  }
 
-#step-4 .container-inner {
-  max-width: none;
-  width: 100%;
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  gap: 0.8rem;
+  .step-mobile-fit-content {
+    display: flex;
+    flex: 1 1 auto;
+    flex-direction: column;
+    min-height: 0;
+    width: 100%;
+    max-width: none;
+    margin-inline: 0;
+    transform: none;
+  }
+
+  /* Inner container + shell fill remaining viewport height.
+     Header sits at top; content region flows beneath. */
+  .step-container > .step-mobile-fit-viewport .container-inner {
+    flex: 1 1 auto;
+    min-height: 0;
+  }
+
+  .step-shell {
+    flex: 1 1 auto;
+    min-height: 0;
+  }
+
+  /* Content zones (steps 1-3) fill remaining step-shell height */
+  .step-shell > .step-content-zone {
+    flex: 1 1 auto;
+    min-height: 0;
+  }
+
+  /* Stack variant arranges bands vertically */
+  .step-content-zone--stack {
+    display: flex;
+    flex-direction: column;
+  }
+
 }
 
 
@@ -750,7 +805,7 @@ ul, li { list-style: none; }
 
 @media (min-width: 1060px) and (max-width: 1439px) {
   #step-4 .step-mobile-fit-content {
-    max-width: 1200px;
+    max-width: 1000px;
   }
 
   .features-row-primary {
@@ -1787,7 +1842,6 @@ ul, li { list-style: none; }
   }
 
   #step-4 .feature-toggle-card {
-    min-height: var(--features-top-card-height);
     height: 100%;
     padding: 0.92rem 0.98rem 0.9rem;
     gap: 0.62rem;
@@ -1840,14 +1894,19 @@ ul, li { list-style: none; }
   }
 
   #step-4 .features-composition {
-    flex: 1 1 auto;
+    flex: 1 1 0%;
+    display: flex;
+    flex-direction: column;
     width: 100%;
     min-width: 0;
     min-height: 0;
-    overflow: hidden;
   }
 
   #step-4 .features-layout {
+    display: flex;
+    flex-direction: column;
+    flex: 1 1 0%;
+    min-height: 0;
     width: 100%;
     gap: 0.7rem;
     padding-bottom: 0;
@@ -1855,6 +1914,8 @@ ul, li { list-style: none; }
 
   #step-4 .features-row-primary,
   #step-4 .features-row-secondary {
+    flex: 1 1 0%;
+    min-height: 0;
     width: 100%;
     margin-inline: 0;
   }
@@ -1869,19 +1930,20 @@ ul, li { list-style: none; }
   #step-4 .features-row-secondary {
     grid-template-columns: repeat(2, minmax(0, 1fr));
     gap: 0.7rem;
+    align-items: stretch;
+    grid-auto-rows: 1fr;
   }
 
   #step-4 .feature-toggle-card {
-    min-height: 7.5rem;
-    height: auto;
+    height: 100%;
     padding: 0.7rem 0.98rem 0.65rem;
     gap: 0.4rem;
   }
 
   #step-4 .social-card,
   #step-4 .language-card {
-    min-height: 14rem;
-    height: auto;
+    height: 100%;
+    min-height: 0;
     padding: 0.9rem 1.2rem;
     gap: 0.6rem;
   }
@@ -2000,7 +2062,7 @@ ul, li { list-style: none; }
     display: flex;
     align-items: flex-start;
     justify-content: flex-start;
-    overflow: hidden;
+    overflow: visible;
   }
 
   #step-4 .step-mobile-fit-content {
@@ -2022,7 +2084,7 @@ ul, li { list-style: none; }
     display: flex;
     align-items: stretch;
     justify-content: flex-start;
-    overflow: hidden;
+    overflow: visible;
   }
 
   #step-4 .features-composition {
@@ -2034,7 +2096,7 @@ ul, li { list-style: none; }
     display: flex;
     flex-direction: column;
     gap: clamp(0.38rem, 0.31rem + 0.28vw, 0.55rem);
-    overflow: hidden;
+    overflow: visible;
     padding: 0;
   }
 
@@ -2103,38 +2165,38 @@ ul, li { list-style: none; }
 
   /* Responsive sizing for content inside cards. */
   #step-4 .feature-card-header .icon-box {
-    width: clamp(1.25rem, 1.16rem + 0.35vw, 1.45rem);
-    height: clamp(1.25rem, 1.16rem + 0.35vw, 1.45rem);
+    width: clamp(1.55rem, 1.44rem + 0.44vw, 1.8rem);
+    height: clamp(1.55rem, 1.44rem + 0.44vw, 1.8rem);
   }
 
   #step-4 .feature-card-header .icon-box .material-symbols-outlined {
-    font-size: clamp(0.72rem, 0.66rem + 0.22vw, 0.85rem);
+    font-size: clamp(0.9rem, 0.83rem + 0.28vw, 1.05rem);
   }
 
   #step-4 .feature-toggle-card .card-title,
   #step-4 .social-card .card-title,
   #step-4 .language-card .card-title {
-    font-size: clamp(0.66rem, 0.61rem + 0.22vw, 0.78rem);
-    line-height: 1.08;
+    font-size: clamp(0.9rem, 0.82rem + 0.34vw, 1.06rem);
+    line-height: 1.1;
   }
 
   #step-4 .feature-toggle-card .card-desc,
   #step-4 .social-card .card-desc,
   #step-4 .language-card .card-desc {
-    font-size: clamp(0.5rem, 0.47rem + 0.12vw, 0.58rem);
-    line-height: 1.22;
+    font-size: clamp(0.7rem, 0.64rem + 0.22vw, 0.82rem);
+    line-height: 1.3;
   }
 
   #step-4 .feature-meta {
-    font-size: clamp(0.34rem, 0.32rem + 0.08vw, 0.39rem);
+    font-size: clamp(0.5rem, 0.46rem + 0.14vw, 0.58rem);
     line-height: 1.05;
   }
 
   #step-4 .feature-toggle-card,
   #step-4 .social-card,
   #step-4 .language-card {
-    padding: clamp(0.44rem, 0.38rem + 0.18vw, 0.54rem) clamp(0.44rem, 0.4rem + 0.16vw, 0.56rem);
-    gap: clamp(0.24rem, 0.22rem + 0.1vw, 0.32rem);
+    padding: clamp(0.56rem, 0.5rem + 0.22vw, 0.68rem) clamp(0.56rem, 0.5rem + 0.22vw, 0.68rem);
+    gap: clamp(0.34rem, 0.3rem + 0.14vw, 0.44rem);
     border-radius: var(--mobile-wireframe-band-radius);
   }
 
@@ -2154,24 +2216,24 @@ ul, li { list-style: none; }
   }
 
   #step-4 .social-option {
-    min-height: clamp(1.28rem, 1.2rem + 0.32vw, 1.5rem);
-    padding: clamp(0.2rem, 0.18rem + 0.08vw, 0.26rem) clamp(0.26rem, 0.24rem + 0.08vw, 0.32rem);
-    gap: clamp(0.15rem, 0.13rem + 0.08vw, 0.22rem);
+    min-height: clamp(1.7rem, 1.58rem + 0.42vw, 1.96rem);
+    padding: clamp(0.28rem, 0.25rem + 0.1vw, 0.36rem) clamp(0.36rem, 0.32rem + 0.12vw, 0.44rem);
+    gap: clamp(0.22rem, 0.2rem + 0.1vw, 0.3rem);
     border-radius: 0.5rem;
   }
 
   #step-4 .social-option-check {
-    width: clamp(0.58rem, 0.54rem + 0.14vw, 0.68rem);
-    height: clamp(0.58rem, 0.54rem + 0.14vw, 0.68rem);
+    width: clamp(0.78rem, 0.72rem + 0.2vw, 0.9rem);
+    height: clamp(0.78rem, 0.72rem + 0.2vw, 0.9rem);
   }
 
   #step-4 .social-option-icon {
-    width: clamp(0.56rem, 0.52rem + 0.14vw, 0.66rem);
-    height: clamp(0.56rem, 0.52rem + 0.14vw, 0.66rem);
+    width: clamp(0.76rem, 0.7rem + 0.2vw, 0.88rem);
+    height: clamp(0.76rem, 0.7rem + 0.2vw, 0.88rem);
   }
 
   #step-4 .social-option-name {
-    font-size: clamp(0.42rem, 0.39rem + 0.12vw, 0.5rem);
+    font-size: clamp(0.62rem, 0.57rem + 0.18vw, 0.72rem);
   }
 
   /* Language chips - tighter for two-column. */
@@ -2180,30 +2242,30 @@ ul, li { list-style: none; }
   }
 
   #step-4 .language-chip {
-    min-height: clamp(1rem, 0.94rem + 0.22vw, 1.16rem);
-    padding: clamp(0.12rem, 0.1rem + 0.08vw, 0.16rem) clamp(0.24rem, 0.22rem + 0.08vw, 0.3rem);
-    font-size: clamp(0.34rem, 0.32rem + 0.08vw, 0.39rem);
+    min-height: clamp(1.32rem, 1.22rem + 0.3vw, 1.52rem);
+    padding: clamp(0.18rem, 0.16rem + 0.1vw, 0.24rem) clamp(0.34rem, 0.3rem + 0.12vw, 0.42rem);
+    font-size: clamp(0.5rem, 0.46rem + 0.14vw, 0.58rem);
     letter-spacing: 0.05em;
   }
 
   #step-4 .language-label {
-    font-size: clamp(0.34rem, 0.32rem + 0.08vw, 0.39rem);
+    font-size: clamp(0.5rem, 0.46rem + 0.14vw, 0.58rem);
   }
 
   #step-4 .language-input {
-    padding: clamp(0.26rem, 0.24rem + 0.08vw, 0.32rem) clamp(1.05rem, 0.98rem + 0.22vw, 1.18rem) clamp(0.26rem, 0.24rem + 0.08vw, 0.32rem) clamp(0.38rem, 0.34rem + 0.14vw, 0.46rem);
-    font-size: clamp(0.48rem, 0.45rem + 0.12vw, 0.56rem);
+    padding: clamp(0.34rem, 0.3rem + 0.12vw, 0.42rem) clamp(1.3rem, 1.2rem + 0.34vw, 1.52rem) clamp(0.34rem, 0.3rem + 0.12vw, 0.42rem) clamp(0.5rem, 0.45rem + 0.18vw, 0.62rem);
+    font-size: clamp(0.66rem, 0.6rem + 0.2vw, 0.76rem);
     border-radius: 0.42rem;
   }
 
   #step-4 .language-clear-btn {
-    width: clamp(0.82rem, 0.76rem + 0.22vw, 0.95rem);
-    height: clamp(0.82rem, 0.76rem + 0.22vw, 0.95rem);
-    right: 0.22rem;
+    width: clamp(1.05rem, 0.97rem + 0.28vw, 1.22rem);
+    height: clamp(1.05rem, 0.97rem + 0.28vw, 1.22rem);
+    right: 0.28rem;
   }
 
   #step-4 .language-clear-btn .material-symbols-outlined {
-    font-size: clamp(0.5rem, 0.46rem + 0.14vw, 0.58rem);
+    font-size: clamp(0.66rem, 0.6rem + 0.2vw, 0.76rem);
   }
 
   #step-4 .language-field-group {

@@ -14,14 +14,13 @@
 }
 
 #step-3 .layout-step-shell {
-  --layout-shell-height: clamp(33rem, 39vw, 38rem);
-  --layout-preview-height: clamp(22rem, 29vw, 26rem);
   display: grid;
   grid-template-columns: minmax(18rem, 24rem) minmax(0, 1fr);
   gap: 1.5rem;
   align-items: stretch;
-  height: min(100%, var(--layout-shell-height));
-  max-height: var(--layout-shell-height);
+  align-content: stretch;
+  flex: 1 1 auto;
+  min-height: 0;
 }
 
 #step-3 .layout-step-sidebar {
@@ -44,10 +43,9 @@
 }
 
 #step-3 .preview-mockup {
-  max-width: 100%;
-  min-height: var(--layout-preview-height);
-  max-height: 100%;
-  height: auto;
+  width: 100%;
+  flex: 1 1 auto;
+  min-height: 0;
 }
 
 #step-3 #section-list {
@@ -60,10 +58,22 @@
   padding-bottom: 0.5rem !important;
   scrollbar-width: none;
   -ms-overflow-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
 }
 
 #step-3 #section-list::-webkit-scrollbar {
   display: none;
+}
+
+/* Section cards divide sidebar height equally */
+#step-3 #section-list .section-item {
+  flex: 1 1 auto;
+  min-height: 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 }
 
 @media (max-width: 1059px) {
@@ -236,7 +246,7 @@
 }
 
 .preview-mockup {
-  width: 100%; max-width: 48rem; height: 100%;
+  width: 100%; max-width: none; height: 100%;
   background: rgba(24, 24, 27, 0.4); backdrop-filter: blur(16px);
   border-radius: 1.5rem; padding: 1px;
   box-shadow: 0 0 0 1px rgba(255,255,255,0.1);
@@ -599,10 +609,6 @@
 @media(min-width: 1060px) { .form-grid { grid-template-columns: 7fr 5fr; gap: 2rem; } }
 .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 0.75rem; }
 
-#step-5 .container-inner {
-  max-width: 1060px;
-}
-
 .finish-form-layout {
   align-items: start;
   gap: 1rem;
@@ -610,8 +616,58 @@
 
 @media(min-width: 1060px) {
   .finish-form-layout {
-    grid-template-columns: minmax(0, 1.18fr) minmax(19rem, 0.9fr);
+    grid-template-columns: minmax(0, 7fr) minmax(19rem, 5fr);
+    grid-template-rows: auto 1fr;
     gap: 1rem 2rem;
+    align-items: stretch;
+  }
+
+  #step-5 .step-shell--details {
+    display: flex;
+    flex-direction: column;
+  }
+
+  #step-5 .finish-form-layout {
+    flex: 1 1 auto;
+    min-height: 0;
+  }
+
+  /* References textarea fills the side column height */
+  #step-5 .finish-form-side .input-group:last-child {
+    flex: 1 1 auto;
+    display: flex;
+    flex-direction: column;
+    min-height: 0;
+  }
+
+  #step-5 .finish-form-side .input-group:last-child textarea {
+    flex: 1;
+    height: auto;
+    min-height: 0;
+    resize: none;
+  }
+
+  /* Final notes textarea fills the bottom grid row */
+  #step-5 .finish-grid-full {
+    grid-column: 1 / -1;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    min-height: 0;
+  }
+
+  #step-5 .finish-grid-full .input-group {
+    flex: 1 1 auto;
+    display: flex;
+    flex-direction: column;
+    min-height: 0;
+  }
+
+  #input-final-notes {
+    flex: 1;
+    height: auto;
+    min-height: 0;
+    resize: none;
   }
 }
 
@@ -646,7 +702,7 @@
   width: 100%; border: 1px solid rgba(162, 141, 126, 0.3); border-radius: 0.5rem;
   padding: 0.9rem 1rem; font-size: 12px; color: var(--on-surface);
   background: var(--surface-container-high); font-family: var(--font-body);
-  outline: none; transition: box-shadow 0.3s;
+  outline: none; transition: box-shadow 0.3s; resize: none;
 }
 #step-5 .input-group input::placeholder,
 #step-5 .input-group textarea::placeholder {
@@ -858,7 +914,6 @@
   #step-5 .finish-form-side .input-group,
   #step-5 .finish-grid-full .input-group {
     padding: clamp(0.14rem, 0.12rem + 0.08vw, 0.2rem);
-    border-radius: var(--mobile-wireframe-band-radius);
   }
 
   #step-5 .finish-grid-full {
