@@ -111,10 +111,24 @@ If content risks overflowing:
 
 All onboarding steps (1–5) share the same outer shell. Spacing is controlled by CSS custom properties in `styles/main.css :root`:
 
-- `--step-container-padding-desktop` — padding on every `.step-container` at ≥ 1060px
-- `--step-header-margin-bottom` — gap between `.step-header` and step content
+- `--step-container-padding-desktop` — padding on every `.step-container` at ≥ 1060px (currently `4.5rem 6rem`)
+- `--step-header-margin-bottom` — gap between `.step-header` and step content (currently `1.875rem` = 30px)
+- `--step-title-subtitle-gap` — gap between `.step-title` and `.step-subtitle` (currently `0.9375rem` = 15px)
+- `--step-title-size-desktop` — locked `.step-title` font-size at ≥ 1060px (currently `3rem`)
+
+**2:1 Ratio Rule:** `--step-header-margin-bottom` must always equal exactly 2× `--step-title-subtitle-gap`. Never override either token independently on a per-step basis. If a step requires different spacing, change the global tokens or use a dedicated inner wrapper inside the content region.
 
 Per-step overrides of `.step-container` padding, `.step-header` margin, or `.step-title` font-size are forbidden. If a step needs different spacing, change the token or use a dedicated inner wrapper — do not override the shell.
+
+#### Universal heading template (desktop)
+
+On desktop (≥ 1060px), every onboarding step uses the identical DOM chain: `.step-container > .step-mobile-fit-viewport > .step-mobile-fit-content > .container-inner > .step-shell > .step-header + <content region>`. `.step-header` is always the first flow child of `.step-shell`, followed by `.step-subtitle` (30px gap) and then the step's content region. No step may introduce an extra `.container-inner` wrapper, sidebar-embedded heading, or wrapper at a different depth. Because desktop renders fit-wrappers as transparent flex passthroughs (`transform: none`), the header sits at the universal `--step-container-padding-desktop` offset on every step.
+
+#### Mobile-fit wrappers (`.step-mobile-fit-*`)
+
+The `.step-mobile-fit-viewport` and `.step-mobile-fit-content` wrappers exist only for mobile fit-to-viewport scaling, where JS (`updateStepCompositionScale`) sets a per-step CSS variable and the wrapper applies it via `transform: scale()`. On desktop (≥ 1060px) these wrappers must render as transparent flex passthroughs: `display: flex; flex: 1 1 auto; transform: none`. No desktop-only `transform: scale()` may be applied to onboarding content — desktop layout flows natively inside `.container-inner > .step-shell`.
+
+On mobile, `.step-header` lives inside the scaled wrapper and scales with content. This is the accepted tradeoff for desktop DOM uniformity — title scaling at small viewports is visually negligible and preferred over maintaining a divergent step-4 structure.
 
 #### Step visibility contract
 

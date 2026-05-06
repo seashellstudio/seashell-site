@@ -26,8 +26,8 @@
   --step-title-size: clamp(2.5rem, 5vw, 3.75rem);
   --step-title-size-desktop: 3rem;
   --step-container-padding-desktop: 5rem;
-  --step-header-margin-bottom: 3.75rem;
-  --step-title-subtitle-gap: 1.875rem; /* 30px */
+  --step-header-margin-bottom: 1.875rem; /* 30px — subtitle-to-content gap */
+  --step-title-subtitle-gap: 0.9375rem; /* 15px — title-to-subtitle gap; always half of --step-header-margin-bottom */
   --step-subtitle-size: 1.25rem;
   --ui-card-title-size: 1.5rem;
   --ui-body-size: 0.95rem;
