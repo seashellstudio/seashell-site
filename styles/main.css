@@ -816,10 +816,6 @@ ul, li { list-style: none; }
   .features-row-secondary {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
-
-  .feature-toggle-card {
-    min-height: 11rem;
-  }
 }
 
 @media (min-width: 1060px) and (max-width: 1185px) {
@@ -841,10 +837,6 @@ ul, li { list-style: none; }
 
   .features-row-secondary {
     grid-template-columns: repeat(2, minmax(0, 1fr));
-  }
-
-  .feature-toggle-card {
-    min-height: 10.75rem;
   }
 }
 
@@ -1912,15 +1904,11 @@ ul, li { list-style: none; }
     padding-bottom: 0;
   }
 
-  #step-4 .features-row-primary,
-  #step-4 .features-row-secondary {
-    flex: 1 1 0%;
+  #step-4 .features-row-primary {
+    flex: 0 0 auto;
     min-height: 0;
     width: 100%;
     margin-inline: 0;
-  }
-
-  #step-4 .features-row-primary {
     grid-template-columns: repeat(5, minmax(0, 1fr));
     gap: 0.7rem;
     align-items: stretch;
@@ -1928,6 +1916,10 @@ ul, li { list-style: none; }
   }
 
   #step-4 .features-row-secondary {
+    flex: 1 1 0%;
+    min-height: 0;
+    width: 100%;
+    margin-inline: 0;
     grid-template-columns: repeat(2, minmax(0, 1fr));
     gap: 0.7rem;
     align-items: stretch;
