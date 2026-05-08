@@ -1940,6 +1940,23 @@ ul, li { list-style: none; }
     gap: 0.6rem;
   }
 
+  #step-4 .social-card .social-grid {
+    flex: 1 1 0%;
+    min-height: 0;
+    align-content: space-between;
+  }
+
+  #step-4 .language-card .language-suggestions {
+    flex: 1 1 0%;
+    min-height: 0;
+    align-content: space-between;
+  }
+
+  #step-4 .language-card .language-field-group {
+    flex: 0 0 auto;
+    margin-top: auto;
+  }
+
   #step-4 .feature-card-header {
     display: grid;
     grid-template-columns: minmax(0, 1fr) 2.25rem;
