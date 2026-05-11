@@ -1837,6 +1837,7 @@ ul, li { list-style: none; }
     height: 100%;
     padding: 1.4rem 1.2rem 1.3rem;
     gap: 0.75rem;
+    justify-content: space-between;
   }
 
   #step-4 .feature-card-header {
@@ -1845,6 +1846,27 @@ ul, li { list-style: none; }
     align-items: start;
     column-gap: 0.72rem;
     min-height: 0;
+  }
+
+  #step-4 .features-row-primary .feature-card-header {
+    display: block;
+    position: relative;
+    min-height: 0;
+  }
+
+  #step-4 .features-row-primary .feature-card-header .icon-box {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 1.5rem;
+    height: 1.5rem;
+    flex: none;
+  }
+
+  #step-4 .features-row-primary .feature-card-heading {
+    padding-right: 1.75rem;
+    min-width: 0;
+    align-items: stretch;
   }
 
   #step-4 .feature-card-heading,
@@ -1868,11 +1890,14 @@ ul, li { list-style: none; }
   }
 
   #step-4 .feature-toggle-card .card-title {
+    font-size: clamp(1.2rem, 1.5vw, 1.55rem);
     line-height: 1.08;
+    overflow-wrap: break-word;
     margin-bottom: 0;
   }
 
   #step-4 .feature-toggle-card .card-desc {
+    font-size: clamp(0.9rem, 1.0vw, 1.1rem);
     line-height: 1.42;
     max-width: none;
     overflow-wrap: anywhere;
@@ -1930,6 +1955,7 @@ ul, li { list-style: none; }
     height: 100%;
     padding: 1.4rem 1.2rem 1.3rem;
     gap: 0.75rem;
+    justify-content: space-between;
   }
 
   #step-4 .social-card,
@@ -1966,6 +1992,26 @@ ul, li { list-style: none; }
     min-height: 0;
   }
 
+  #step-4 .features-row-primary .feature-card-header {
+    display: block;
+    position: relative;
+    min-height: 0;
+  }
+
+  #step-4 .features-row-primary .feature-card-header .icon-box {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 1.5rem;
+    height: 1.5rem;
+  }
+
+  #step-4 .features-row-primary .feature-card-heading {
+    padding-right: 1.75rem;
+    min-width: 0;
+    align-items: stretch;
+  }
+
   #step-4 .feature-card-header .icon-box {
     width: 3.5rem;
     height: 3.5rem;
@@ -1985,7 +2031,13 @@ ul, li { list-style: none; }
     padding-top: 0.1rem;
   }
 
-  #step-4 .feature-toggle-card .card-title,
+  #step-4 .feature-toggle-card .card-title {
+    font-size: clamp(1.2rem, 1.5vw, 1.55rem);
+    line-height: 1.08;
+    overflow-wrap: break-word;
+    margin-bottom: 0;
+  }
+
   #step-4 .social-card .card-title,
   #step-4 .language-card .card-title {
     font-size: 1.9rem;
@@ -1997,7 +2049,11 @@ ul, li { list-style: none; }
     font-size: 0.85rem;
   }
 
-  #step-4 .feature-toggle-card .card-desc,
+  #step-4 .feature-toggle-card .card-desc {
+    font-size: clamp(0.9rem, 1.0vw, 1.1rem);
+    line-height: 1.4;
+  }
+
   #step-4 .social-card .card-desc,
   #step-4 .language-card .card-desc,
   #step-4 .language-helper {
