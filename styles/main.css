@@ -1841,7 +1841,7 @@ ul, li { list-style: none; }
 
   #step-4 .feature-card-header {
     display: grid;
-    grid-template-columns: minmax(0, 1fr) 2.25rem;
+    grid-template-columns: minmax(0, 1fr) 2.75rem;
     align-items: start;
     column-gap: 0.72rem;
     min-height: 0;
@@ -1857,8 +1857,8 @@ ul, li { list-style: none; }
   }
 
   #step-4 .feature-card-header .icon-box {
-    width: 2.25rem;
-    height: 2.25rem;
+    width: 2.75rem;
+    height: 2.75rem;
     flex: none;
     align-self: start;
   }
@@ -1943,13 +1943,13 @@ ul, li { list-style: none; }
   #step-4 .social-card .social-grid {
     flex: 1 1 0%;
     min-height: 0;
-    align-content: space-between;
+    grid-auto-rows: 1fr;
   }
 
   #step-4 .language-card .language-suggestions {
     flex: 1 1 0%;
     min-height: 0;
-    align-content: space-between;
+    align-content: stretch;
   }
 
   #step-4 .language-card .language-field-group {
@@ -1959,7 +1959,7 @@ ul, li { list-style: none; }
 
   #step-4 .feature-card-header {
     display: grid;
-    grid-template-columns: minmax(0, 1fr) 2.25rem;
+    grid-template-columns: minmax(0, 1fr) 2.75rem;
     align-items: start;
     column-gap: 0.72rem;
     row-gap: 0;
@@ -1967,8 +1967,8 @@ ul, li { list-style: none; }
   }
 
   #step-4 .feature-card-header .icon-box {
-    width: 2.25rem;
-    height: 2.25rem;
+    width: 2.75rem;
+    height: 2.75rem;
     align-self: start;
   }
 
@@ -1988,21 +1988,21 @@ ul, li { list-style: none; }
   #step-4 .feature-toggle-card .card-title,
   #step-4 .social-card .card-title,
   #step-4 .language-card .card-title {
-    font-size: 1.02rem;
+    font-size: 1.25rem;
     line-height: 1.08;
     margin-bottom: 0;
   }
 
   #step-4 .feature-meta {
-    font-size: 0.58rem;
+    font-size: 0.68rem;
   }
 
   #step-4 .feature-toggle-card .card-desc,
   #step-4 .social-card .card-desc,
   #step-4 .language-card .card-desc,
   #step-4 .language-helper {
-    font-size: 0.8rem;
-    line-height: 1.36;
+    font-size: 0.95rem;
+    line-height: 1.4;
   }
 
   #step-4 .social-grid {
@@ -2011,17 +2011,17 @@ ul, li { list-style: none; }
   }
 
   #step-4 .social-option {
-    min-height: 2.4rem;
-    padding: 0.5rem 0.7rem;
+    height: 100%;
+    padding: 0.9rem 1rem;
   }
 
   #step-4 .social-option-check {
-    width: 1rem;
-    height: 1rem;
+    width: 1.25rem;
+    height: 1.25rem;
   }
 
   #step-4 .social-option-name {
-    font-size: 0.82rem;
+    font-size: 1rem;
   }
 
   #step-4 .language-suggestions {
@@ -2029,14 +2029,14 @@ ul, li { list-style: none; }
   }
 
   #step-4 .language-chip {
-    min-height: 1.7rem;
-    padding: 0.35rem 0.65rem;
-    font-size: 0.58rem;
+    align-self: stretch;
+    padding: 0.5rem 0.9rem;
+    font-size: 0.72rem;
     width: auto;
   }
 
   #step-4 .language-label {
-    font-size: 0.58rem;
+    font-size: 0.72rem;
   }
 
   #step-4 .language-input {
