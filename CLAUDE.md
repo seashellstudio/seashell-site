@@ -51,6 +51,6 @@ The owner of this project does not code and relies entirely on AI assistants to 
 
 Vanilla HTML/CSS/JS — no framework, no build step. Hosted on Vercel. Playwright is available in `dev-tools/` for screenshot/layout audits.
 
-## What is not yet built
+## Step 5 Backend
 
-The onboarding form is functional on the frontend but does not submit data anywhere. No backend, no Supabase wiring, no Stripe, no email automation. Do not assume these exist.
+Step 5 submits to Supabase (`onboarding_submissions` table) via the JS client loaded from CDN. On success, a summary is written to `sessionStorage` and the user is redirected to `thank-you.html`, which reads that summary to display a confirmation card. The upload box on Step 5 is UI-only — no file upload backend exists. No Stripe, no email automation.

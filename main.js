@@ -186,36 +186,6 @@ function updateMobileActionBarOffset() {
     onboardingView.style.setProperty('--mobile-floating-action-height', `${actionBarHeight}px`);
 }
 
-/** Desktop-only: fit #step-4-mobile-fit into the step (mobile uses updateStepCompositionScale). */
-function updateStepFourDesktopCompositionScale() {
-    const stepFour = document.getElementById('step-4');
-    const fit = document.getElementById('step-4-mobile-fit');
-
-    if (!stepFour || !fit || !stepFour.classList.contains('active')) return;
-    if (isMobileViewport()) return;
-
-    stepFour.style.setProperty('--step-4-fit-scale', '1');
-
-    const stepStyle = getComputedStyle(stepFour);
-    const paddingTop = parseFloat(stepStyle.paddingTop) || 0;
-    const paddingBottom = parseFloat(stepStyle.paddingBottom) || 0;
-    const paddingLeft = parseFloat(stepStyle.paddingLeft) || 0;
-    const paddingRight = parseFloat(stepStyle.paddingRight) || 0;
-    const availableHeight = stepFour.clientHeight - paddingTop - paddingBottom;
-    const availableWidth = stepFour.clientWidth - paddingLeft - paddingRight;
-
-    const prevHeight = fit.style.height;
-    fit.style.height = 'auto';
-    const contentHeight = fit.scrollHeight;
-    const contentWidth = fit.scrollWidth;
-    fit.style.height = prevHeight;
-
-    if (!availableWidth || !availableHeight || !contentWidth || !contentHeight) return;
-
-    const scale = Math.min(1, availableWidth / contentWidth, availableHeight / contentHeight);
-    stepFour.style.setProperty('--step-4-fit-scale', scale.toFixed(4));
-}
-
 function resetStepFourMobileTransformState() {
     const stepFour = document.getElementById('step-4');
     if (!stepFour) return;
@@ -276,10 +246,9 @@ function updateOnboardingStepScales() {
     updateStepCompositionScale('step-1', 'step-1-mobile-fit', '--step-1-mobile-scale');
     updateStepCompositionScale('step-2', 'step-2-mobile-fit', '--step-2-mobile-scale');
     updateStepCompositionScale('step-3', 'step-3-mobile-fit', '--step-3-mobile-scale');
-    updateStepCompositionScale('step-4', 'step-4-mobile-fit', '--step-4-mobile-scale');
+    updateStepCompositionScale('step-4', 'step-4-mobile-fit', '--step-4-fit-scale');
     updateStepCompositionScale('step-5', 'step-5-mobile-fit', '--step-5-mobile-scale');
     resetStepFourMobileTransformState();
-    updateStepFourDesktopCompositionScale();
     requestAnimationFrame(() => {
         if (currentStep === 3) {
             syncLayoutPreviewDensity();

@@ -166,7 +166,6 @@
     border: var(--mobile-step-surface-border);
     border-radius: var(--mobile-step-surface-radius);
     box-shadow: var(--mobile-step-surface-shadow);
-    overflow: hidden;
     display: flex !important;
     flex-direction: column;
     gap: clamp(0.6rem, 0.54rem + 0.25vw, 0.72rem);
@@ -214,7 +213,7 @@
     flex: 1 1 auto;
     min-height: 0;
     max-height: none !important;
-    overflow: hidden;
+    overflow: visible;
   }
 
   #step-1 .palette-scroll-viewport {
@@ -222,7 +221,7 @@
     max-height: none !important;
     overflow-y: auto;
     overflow-x: hidden;
-    padding: 0 0.25rem 0.35rem 0;
+    padding: 0.75rem 0.75rem 1.2rem 0.75rem;
   }
 
   #step-1 .palette-grid {
@@ -282,12 +281,11 @@
     min-height: 0;
     max-height: none;
     overflow-y: auto;
-    padding: var(--mobile-step-surface-padding) calc(var(--mobile-step-surface-padding) - 0.1rem) var(--mobile-step-surface-padding) var(--mobile-step-surface-padding);
+    padding: var(--mobile-step-surface-padding);
     background: var(--mobile-step-surface-fill);
     border: var(--mobile-step-surface-border);
     box-shadow: var(--mobile-step-surface-shadow);
     border-radius: var(--mobile-step-surface-radius);
-    scrollbar-gutter: stable;
   }
 
   #step-3 .mobile-step-heading {
@@ -376,13 +374,21 @@
     min-height: 0;
   }
 
+  /* Allow glow to bleed outward through all intermediate containers
+     to #step-4's own padding zone, which is the clip boundary. */
+  #view-onboarding #step-4,
+  #step-4 .step-mobile-fit-viewport,
+  #step-4 .container-inner {
+    overflow: visible;
+  }
+
   #step-4 .features-composition {
     width: 100%;
     height: 100%;
     display: flex !important;
     flex-direction: column;
     gap: var(--mobile-step-shell-gap);
-    overflow: hidden;
+    overflow: visible;
   }
 
   #step-4 .features-layout {
@@ -398,7 +404,7 @@
     background: transparent;
     border: 0;
     box-shadow: none;
-    overflow: hidden;
+    overflow: visible;
   }
 
   #step-4 .features-row-primary {

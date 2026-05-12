@@ -2,3 +2,8 @@
 dev-tools/node_modules/
 dev-tools/screens-baseline/
 dev-tools/screens-after/
+dev-tools/screens/
+dev-tools/playwright-report/
+dev-tools/test-results/
+dev-tools/verify-closeup.png
+dev-tools/verify-full.png

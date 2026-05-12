@@ -1,10 +1,11 @@
 const { chromium } = require('playwright');
 const fs = require('fs');
+const path = require('path');
 
 (async () => {
   const browser = await chromium.launch();
-  
-  const outDir = './screens';
+
+  const outDir = path.join(__dirname, 'screens');
   if (!fs.existsSync(outDir)) {
       fs.mkdirSync(outDir, { recursive: true });
   }

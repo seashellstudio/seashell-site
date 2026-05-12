@@ -14,10 +14,10 @@
     <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0"
         rel="stylesheet">
 
-    <link rel="stylesheet" href="styles/main.css">
-    <link rel="stylesheet" href="styles/onboarding-steps-1-2.css">
-    <link rel="stylesheet" href="styles/onboarding-steps-3-5.css">
-    <link rel="stylesheet" href="styles/mobile.css">
+    <link rel="stylesheet" href="styles/main.css?v=1.1">
+    <link rel="stylesheet" href="styles/onboarding-steps-1-2.css?v=1.1">
+    <link rel="stylesheet" href="styles/onboarding-steps-3-5.css?v=1.1">
+    <link rel="stylesheet" href="styles/mobile.css?v=1.1">
 </head>
 
 <body class="theme-dark">
@@ -153,9 +153,8 @@
                     <div id="step-1" class="step-container">
                         <div class="step-mobile-fit-viewport">
                         <div class="step-mobile-fit-content" id="step-1-mobile-fit">
-                        <div class="container-inner flex-row">
-                            <!-- Step 1 Content: Split or Full? It's centered block -->
-                            <div class="step-shell step-shell--wireframe max-w-5xl mx-auto animate-in w-full">
+                        <div class="container-inner">
+                            <div class="step-shell step-shell--wireframe animate-in w-full">
                                 <header class="step-header step-header-zone text-center md:text-left">
                                     <h2 class="step-title">Pick Your <span
                                             class="text-gradient">Palette</span></h2>
@@ -522,19 +521,15 @@
                     <div id="step-3" class="step-container">
                         <div class="step-mobile-fit-viewport">
                         <div class="step-mobile-fit-content" id="step-3-mobile-fit">
+                        <div class="container-inner">
                         <div class="step-shell step-shell--wireframe step-shell--layout">
-                        <header class="step-header step-header-zone mobile-step-heading mobile-step3-heading text-center md:text-left">
+                        <header class="step-header step-header-zone text-center md:text-left">
                             <h1 class="step-title">Layout</h1>
                             <p class="step-subtitle text-sm">Select the sections of your website.</p>
                         </header>
                         <div class="step-content-zone step-content-zone--stack h-full flex-split layout-step-shell">
                             <!-- Left Panel: Section List -->
                             <div class="step-band step-band--primary split-left layout-step-sidebar">
-                                <div class="shrink-0 layout-step-sidebar-header">
-                                    <h1 class="step-title">Layout
-                                    </h1>
-                                    <p class="step-subtitle text-sm">Select the sections of your website.</p>
-                                </div>
                                 <div class="flex-1 overflow-y-auto custom-scrollbar" id="section-list">
                                     <!-- Populated by JS -->
                                 </div>
@@ -562,6 +557,7 @@
                         </div>
                         </div>
                         </div>
+                        </div>
                     </div>
 
                     <!-- Step 4 Container -->
@@ -569,13 +565,12 @@
                         <div class="step-mobile-fit-viewport">
                         <div class="step-mobile-fit-content" id="step-4-mobile-fit">
                         <div class="container-inner">
-                                <div class="step-shell step-shell--wireframe step-shell--features">
+                            <div class="step-shell step-shell--wireframe step-shell--features">
+                                <div class="step-header step-header-zone">
+                                    <h1 class="step-title">Optional Features</h1>
+                                    <p class="step-subtitle">Choose additional features for your website.</p>
+                                </div>
                                 <div class="features-composition" id="features-composition">
-                                    <div class="step-header step-header-zone">
-                                        <h1 class="step-title">Optional Features</h1>
-                                        <p class="step-subtitle">Choose additional features for your website.</p>
-                                    </div>
-
                                     <div class="features-layout">
                                         <div class="features-row features-row-primary">
                                     <!-- Contact Card -->
