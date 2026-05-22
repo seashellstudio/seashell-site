@@ -14,6 +14,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0"
         rel="stylesheet">
 
+    <link rel="icon" type="image/png" href="assets/Seashell Logo.png">
     <link rel="stylesheet" href="styles/main.css?v=1.1">
     <link rel="stylesheet" href="styles/onboarding-steps-1-2.css?v=1.1">
     <link rel="stylesheet" href="styles/onboarding-steps-3-5.css?v=1.1">
@@ -47,7 +48,7 @@
                             <h1 class="hero-title">
                                 <span class="hero-line hero-line-primary">Get a Professional</span>
                                 <span class="hero-line hero-line-secondary">Website for Your Business</span>
-                                <span class="hero-line hero-line-accent">Starting at $300.</span>
+                                <span class="hero-line hero-line-accent">Starting at $350.</span>
                             </h1>
                         </div>
                         <div class="secondary-headers">
@@ -751,25 +752,27 @@
 
                                         <div class="language-suggestions" aria-label="Common languages">
                                             <button type="button" class="language-chip"
-                                                onclick="setLanguageSuggestion(event, 'Punjabi')">Punjabi</button>
-                                            <button type="button" class="language-chip"
-                                                onclick="setLanguageSuggestion(event, 'Mandarin')">Mandarin</button>
-                                            <button type="button" class="language-chip"
                                                 onclick="setLanguageSuggestion(event, 'Arabic')">Arabic</button>
-                                            <button type="button" class="language-chip"
-                                                onclick="setLanguageSuggestion(event, 'Spanish')">Spanish</button>
-                                            <button type="button" class="language-chip"
-                                                onclick="setLanguageSuggestion(event, 'Portuguese')">Portuguese</button>
-                                            <button type="button" class="language-chip"
-                                                onclick="setLanguageSuggestion(event, 'Urdu')">Urdu</button>
-                                            <button type="button" class="language-chip"
-                                                onclick="setLanguageSuggestion(event, 'Gujarati')">Gujarati</button>
-                                            <button type="button" class="language-chip"
-                                                onclick="setLanguageSuggestion(event, 'Serbian')">Serbian</button>
                                             <button type="button" class="language-chip"
                                                 onclick="setLanguageSuggestion(event, 'French')">French</button>
                                             <button type="button" class="language-chip"
+                                                onclick="setLanguageSuggestion(event, 'Gujarati')">Gujarati</button>
+                                            <button type="button" class="language-chip"
                                                 onclick="setLanguageSuggestion(event, 'Hindi')">Hindi</button>
+                                            <button type="button" class="language-chip"
+                                                onclick="setLanguageSuggestion(event, 'Korean')">Korean</button>
+                                            <button type="button" class="language-chip"
+                                                onclick="setLanguageSuggestion(event, 'Mandarin')">Mandarin</button>
+                                            <button type="button" class="language-chip"
+                                                onclick="setLanguageSuggestion(event, 'Portuguese')">Portuguese</button>
+                                            <button type="button" class="language-chip"
+                                                onclick="setLanguageSuggestion(event, 'Punjabi')">Punjabi</button>
+                                            <button type="button" class="language-chip"
+                                                onclick="setLanguageSuggestion(event, 'Serbian')">Serbian</button>
+                                            <button type="button" class="language-chip"
+                                                onclick="setLanguageSuggestion(event, 'Spanish')">Spanish</button>
+                                            <button type="button" class="language-chip"
+                                                onclick="setLanguageSuggestion(event, 'Urdu')">Urdu</button>
                                         </div>
 
                                         <div class="language-field-group">
@@ -840,13 +843,32 @@
                                 <div class="finish-form-side">
                                     <div class="input-group">
                                         <label>Brand Assets</label>
-                                        <div class="upload-box">
+                                        <div class="upload-box" id="upload-box"
+                                             role="button" tabindex="0"
+                                             aria-label="Upload brand assets. Click or drag files here.">
                                             <div class="upload-bg-hover"></div>
-                                            <span class="material-symbols-outlined"
-                                                style="font-size:2rem; color:var(--primary); margin-bottom:0.25rem;">cloud_upload</span>
-                                            <span class="upload-title">Upload Media</span>
-                                            <span class="upload-desc">Logo or Assets</span>
+
+                                            <input type="file"
+                                                   id="brand-assets-input"
+                                                   multiple
+                                                   accept=".jpg,.jpeg,.png,.gif,.webp,.svg,.pdf,.ai,.eps,.zip"
+                                                   style="position:absolute;inset:0;opacity:0;pointer-events:none;width:100%;height:100%;">
+
+                                            <span class="upload-idle-content">
+                                                <span class="material-symbols-outlined"
+                                                    style="font-size:2rem; color:var(--primary); margin-bottom:0.25rem;">cloud_upload</span>
+                                                <span class="upload-title">Upload Media</span>
+                                                <span class="upload-desc">Logo or Assets</span>
+                                            </span>
+
+                                            <span class="upload-selected-content" style="display:none;">
+                                                <span class="material-symbols-outlined upload-check-icon">check_circle</span>
+                                                <span class="upload-count-label"></span>
+                                                <span class="upload-clear-btn" id="upload-clear-btn" role="button" tabindex="0"
+                                                      aria-label="Remove selected files">Clear</span>
+                                            </span>
                                         </div>
+                                        <span class="upload-error-msg" id="upload-error-msg" style="display:none;"></span>
                                     </div>
 
                                     <div class="input-group">

@@ -4,9 +4,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Thank You | Seashell Studio</title>
+    <link rel="icon" type="image/png" href="assets/Seashell Logo.png">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Cormorant+Garamond:wght@500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap" rel="stylesheet">
     <style>
         :root {
             --thanks-bg: #090a0d;
@@ -17,7 +18,7 @@
             --thanks-accent-soft: var(--primary, #ffc69a);
             --thanks-line: rgba(255, 255, 255, 0.08);
             --thanks-shadow: 0 24px 70px rgba(0, 0, 0, 0.32);
-            --thanks-display: "Cormorant Garamond", serif;
+            --thanks-display: "Plus Jakarta Sans", sans-serif;
             --thanks-body: "Manrope", sans-serif;
         }
 
@@ -35,10 +36,9 @@
         body {
             display: grid;
             place-items: center;
+            min-height: 100vh;
             padding: 1rem;
-            background:
-                radial-gradient(circle at top left, rgba(255, 159, 74, 0.14), transparent 20%),
-                linear-gradient(180deg, rgba(13, 16, 24, 0.98), rgba(8, 10, 14, 1));
+            background: #131313;
             color: var(--thanks-text);
             font-family: var(--thanks-body);
             overflow: hidden;
@@ -48,7 +48,7 @@
             width: min(42rem, 100%);
             padding: clamp(1.4rem, 4vw, 2.6rem);
             border-radius: 2rem;
-            background: linear-gradient(180deg, rgba(18, 22, 30, 0.92), rgba(12, 15, 21, 0.84));
+            background: #1c1b1b;
             border: 1px solid var(--thanks-line);
             box-shadow: var(--thanks-shadow);
         }
@@ -82,7 +82,7 @@
             margin: 0.3rem 0 0.55rem;
             font-family: var(--thanks-display);
             font-size: clamp(2.6rem, 8vw, 4.4rem);
-            line-height: 0.92;
+            line-height: 1;
             letter-spacing: -0.04em;
         }
 
@@ -90,7 +90,10 @@
             margin: 0;
             color: var(--thanks-text-soft);
             line-height: 1.7;
-            max-width: 42ch;
+        }
+
+        .thanks-body-followup {
+            margin-top: 0.35em;
         }
 
         .thanks-summary {
@@ -151,6 +154,20 @@
             border: 1px solid rgba(255, 255, 255, 0.12);
         }
 
+        .thanks-palette-swatches {
+            display: flex;
+            gap: 0.35rem;
+            align-items: center;
+        }
+
+        .thanks-palette-swatch {
+            width: 1.25rem;
+            height: 1.25rem;
+            border-radius: 50%;
+            flex-shrink: 0;
+            border: 1px solid rgba(255, 255, 255, 0.12);
+        }
+
         @media (max-width: 640px) {
             .thanks-summary {
                 grid-template-columns: 1fr;
@@ -173,11 +190,11 @@
             </div>
         </div>
 
-        <p class="thanks-body" id="thanksBody">Your onboarding submission was successfully received. We will use your selections to shape the first direction for your website.</p>
+        <p class="thanks-body" id="thanksBody">We've got everything we need.</p>
+        <p class="thanks-body thanks-body-followup">Keep an eye on your email. We'll be in touch soon.</p>
         <section class="thanks-summary" id="thanksSummary" aria-label="Submission summary"></section>
         <div class="thanks-actions">
             <a class="thanks-action thanks-action-primary" href="index.html">Return Home</a>
-            <a class="thanks-action thanks-action-secondary" href="index.html">Start Another Intake</a>
         </div>
     </main>
 
@@ -190,9 +207,13 @@
         if (raw) {
             try {
                 const summary = JSON.parse(raw);
+                const paletteValue = (Array.isArray(summary.paletteColors) && summary.paletteColors.length)
+                    ? `<span class="thanks-palette-swatches">${summary.paletteColors.map(c => `<span class="thanks-palette-swatch" style="background:${c}"></span>`).join('')}</span>`
+                    : (summary.palette || 'Not specified');
+
                 const cards = [
                     ['Business', summary.form?.businessName || 'Your project'],
-                    ['Palette', summary.palette || 'Not specified'],
+                    ['Palette', paletteValue],
                     ['Typography', summary.font || 'Not specified'],
                     ['Timeline', summary.timeline || 'Not specified'],
                     ['Sections', Array.isArray(summary.sections) && summary.sections.length ? summary.sections.join(', ') : 'Not specified'],
@@ -200,7 +221,7 @@
                 ];
 
                 if (summary.form?.businessName) {
-                    bodyCopy.textContent = `Thanks, ${summary.form.businessName}. Your intake has been captured and the Seashell Studio direction is ready for review.`;
+                    bodyCopy.textContent = `Thanks, ${summary.form.businessName}! We've got everything we need.`;
                 }
 
                 summaryRoot.innerHTML = cards.map(([label, value]) => `
