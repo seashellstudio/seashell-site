@@ -161,11 +161,11 @@
     width: 100% !important;
     height: auto !important;
     min-height: 0 !important;
-    padding: var(--mobile-step-surface-padding) !important;
-    background: var(--mobile-step-surface-fill);
-    border: var(--mobile-step-surface-border);
-    border-radius: var(--mobile-step-surface-radius);
-    box-shadow: var(--mobile-step-surface-shadow);
+    padding: 0 !important;
+    background: transparent !important;
+    border: 0 !important;
+    border-radius: 0 !important;
+    box-shadow: none !important;
     display: flex !important;
     flex-direction: column;
     gap: clamp(0.6rem, 0.54rem + 0.25vw, 0.72rem);
