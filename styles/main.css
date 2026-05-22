@@ -1051,7 +1051,7 @@ ul, li { list-style: none; }
   background: rgba(255, 255, 255, 0.04);
   color: var(--on-surface);
   font-family: var(--font-label);
-  font-size: 0.625rem;
+  font-size: 0.75rem;
   letter-spacing: 0.08em;
   text-transform: uppercase;
   transition: background 0.3s ease, border-color 0.3s ease, transform 0.3s ease, color 0.3s ease;
@@ -1063,6 +1063,12 @@ ul, li { list-style: none; }
   border-color: rgba(255, 198, 154, 0.42);
   color: #ffe0c3;
   outline: none;
+}
+
+.language-chip.is-selected {
+  border-color: rgba(255, 159, 74, 0.7);
+  background: rgba(255, 159, 74, 0.12);
+  color: #ffe0c3;
 }
 
 .social-card,
@@ -1807,6 +1813,7 @@ ul, li { list-style: none; }
   #step-4 {
     --features-desktop-gap: 0.9rem;
     --features-top-card-height: 9.7rem;
+    padding-inline: clamp(2rem, calc(-6.5rem + 12.5vw), 5rem);
   }
 
   #step-4 .features-layout {
@@ -1835,8 +1842,8 @@ ul, li { list-style: none; }
 
   #step-4 .feature-toggle-card {
     height: 100%;
-    padding: 1.4rem 1.2rem 1.3rem;
-    gap: 0.75rem;
+    padding: clamp(0.65rem, 1.4vw, 1.4rem) clamp(0.5rem, 1.25vw, 1.2rem) clamp(0.6rem, 1.3vw, 1.3rem);
+    gap: clamp(0.4rem, 0.7vw, 0.75rem);
   }
 
   #step-4 .feature-card-header {
@@ -1857,13 +1864,13 @@ ul, li { list-style: none; }
     position: absolute;
     top: 0;
     right: 0;
-    width: 1.5rem;
-    height: 1.5rem;
+    width: clamp(1rem, 1.5vw, 1.5rem);
+    height: clamp(1rem, 1.5vw, 1.5rem);
     flex: none;
   }
 
   #step-4 .features-row-primary .feature-card-heading {
-    padding-right: 1.75rem;
+    padding-right: clamp(1.1rem, 1.8vw, 1.75rem);
     min-width: 0;
     align-items: stretch;
   }
@@ -1889,14 +1896,14 @@ ul, li { list-style: none; }
   }
 
   #step-4 .feature-toggle-card .card-title {
-    font-size: clamp(1.2rem, 1.5vw, 1.55rem);
+    font-size: clamp(1.0125rem, 1.5vw, 1.3625rem);
     line-height: 1.08;
     overflow-wrap: break-word;
     margin-bottom: 0;
   }
 
   #step-4 .feature-toggle-card .card-desc {
-    font-size: clamp(0.9rem, 1.0vw, 1.1rem);
+    font-size: clamp(0.775rem, 1.0vw, 0.975rem);
     line-height: 1.42;
     max-width: none;
     overflow-wrap: anywhere;
@@ -1907,6 +1914,7 @@ ul, li { list-style: none; }
 @media (min-width: 1060px) {
   #step-4 {
     overflow: hidden;
+    padding-inline: clamp(2rem, calc(-6.5rem + 12.5vw), 5rem);
   }
 
   #step-4 .features-composition {
@@ -1934,7 +1942,7 @@ ul, li { list-style: none; }
     width: 100%;
     margin-inline: 0;
     grid-template-columns: repeat(5, minmax(0, 1fr));
-    gap: 0.7rem;
+    gap: clamp(0.45rem, 0.7vw, 0.7rem);
     align-items: stretch;
     grid-auto-rows: 1fr;
   }
@@ -1952,8 +1960,8 @@ ul, li { list-style: none; }
 
   #step-4 .feature-toggle-card {
     height: 100%;
-    padding: 1.4rem 1.2rem 1.3rem;
-    gap: 0.75rem;
+    padding: clamp(0.65rem, 1.4vw, 1.4rem) clamp(0.5rem, 1.25vw, 1.2rem) clamp(0.6rem, 1.3vw, 1.3rem);
+    gap: clamp(0.4rem, 0.7vw, 0.75rem);
   }
 
   #step-4 .social-card,
@@ -1967,13 +1975,14 @@ ul, li { list-style: none; }
   #step-4 .social-card .social-grid {
     flex: 1 1 0%;
     min-height: 0;
-    grid-auto-rows: 1fr;
+    grid-auto-rows: auto;
+    align-content: start;
   }
 
   #step-4 .language-card .language-suggestions {
     flex: 1 1 0%;
     min-height: 0;
-    align-content: stretch;
+    align-content: flex-start;
   }
 
   #step-4 .language-card .language-field-group {
@@ -2000,12 +2009,12 @@ ul, li { list-style: none; }
     position: absolute;
     top: 0;
     right: 0;
-    width: 1.5rem;
-    height: 1.5rem;
+    width: clamp(1rem, 1.5vw, 1.5rem);
+    height: clamp(1rem, 1.5vw, 1.5rem);
   }
 
   #step-4 .features-row-primary .feature-card-heading {
-    padding-right: 1.75rem;
+    padding-right: clamp(1.1rem, 1.8vw, 1.75rem);
     min-width: 0;
     align-items: stretch;
   }
@@ -2030,7 +2039,7 @@ ul, li { list-style: none; }
   }
 
   #step-4 .feature-toggle-card .card-title {
-    font-size: clamp(1.2rem, 1.5vw, 1.55rem);
+    font-size: clamp(1.0125rem, 1.5vw, 1.3625rem);
     line-height: 1.08;
     overflow-wrap: break-word;
     margin-bottom: 0;
@@ -2038,24 +2047,24 @@ ul, li { list-style: none; }
 
   #step-4 .social-card .card-title,
   #step-4 .language-card .card-title {
-    font-size: 1.9rem;
+    font-size: 1.7125rem;
     line-height: 1.08;
     margin-bottom: 0;
   }
 
   #step-4 .feature-meta {
-    font-size: 0.85rem;
+    font-size: 0.725rem;
   }
 
   #step-4 .feature-toggle-card .card-desc {
-    font-size: clamp(0.9rem, 1.0vw, 1.1rem);
+    font-size: clamp(0.775rem, 1.0vw, 0.975rem);
     line-height: 1.4;
   }
 
   #step-4 .social-card .card-desc,
   #step-4 .language-card .card-desc,
   #step-4 .language-helper {
-    font-size: 1.2rem;
+    font-size: 1.075rem;
     line-height: 1.4;
   }
 
@@ -2065,7 +2074,7 @@ ul, li { list-style: none; }
   }
 
   #step-4 .social-option {
-    height: 100%;
+    height: auto;
     padding: 0.6rem 0.85rem;
     gap: 0.6rem;
   }
@@ -2076,7 +2085,7 @@ ul, li { list-style: none; }
   }
 
   #step-4 .social-option-name {
-    font-size: 1.05rem;
+    font-size: 0.925rem;
   }
 
   #step-4 .social-option-icon {
@@ -2089,7 +2098,7 @@ ul, li { list-style: none; }
   }
 
   #step-4 .language-chip {
-    align-self: stretch;
+    align-self: flex-start;
     padding: 0.4rem 0.75rem;
     font-size: 0.8rem;
     width: auto;
@@ -2097,12 +2106,12 @@ ul, li { list-style: none; }
   }
 
   #step-4 .language-label {
-    font-size: 0.85rem;
+    font-size: 0.725rem;
   }
 
   #step-4 .language-input {
     padding: 0.55rem 2rem 0.55rem 0.875rem;
-    font-size: 0.875rem;
+    font-size: 0.75rem;
   }
 }
 
@@ -2246,7 +2255,7 @@ ul, li { list-style: none; }
   #step-4 .feature-toggle-card .card-title,
   #step-4 .social-card .card-title,
   #step-4 .language-card .card-title {
-    font-size: clamp(0.9rem, 0.82rem + 0.34vw, 1.06rem);
+    font-size: clamp(0.8375rem, 0.82rem + 0.34vw, 0.9975rem);
     line-height: 1.1;
   }
 
@@ -2314,7 +2323,7 @@ ul, li { list-style: none; }
   #step-4 .language-chip {
     min-height: clamp(1.32rem, 1.22rem + 0.3vw, 1.52rem);
     padding: clamp(0.18rem, 0.16rem + 0.1vw, 0.24rem) clamp(0.34rem, 0.3rem + 0.12vw, 0.42rem);
-    font-size: clamp(0.5rem, 0.46rem + 0.14vw, 0.58rem);
+    font-size: clamp(0.625rem, 0.585rem + 0.14vw, 0.705rem);
     letter-spacing: 0.05em;
   }
 
