@@ -49,7 +49,7 @@ seashellstudio.ca`;
         method: "POST",
         headers: authHeaders,
         body: JSON.stringify({
-          from: "support@seashellstudio.ca",
+          from: "noreply@seashellstudio.ca",
           to: clientEmail,
           subject: "Thanks for your submission — Seashell Studio",
           text: clientBody,
@@ -59,7 +59,7 @@ seashellstudio.ca`;
         method: "POST",
         headers: authHeaders,
         body: JSON.stringify({
-          from: "support@seashellstudio.ca",
+          from: "noreply@seashellstudio.ca",
           to: "seashellstudiog@gmail.com",
           subject: `New onboarding submission from ${businessName}`,
           text: `New submission received from ${businessName} (${clientEmail}).`,
