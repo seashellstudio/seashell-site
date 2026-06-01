@@ -4,6 +4,8 @@ const STEP_IDS = [1, 2, 3, 4, 5];
 const DEFAULT_ONBOARDING_BACKGROUND = '#131313';
 const THANK_YOU_SUMMARY_STORAGE_KEY = 'seashellStudioThankYouSummary';
 const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+let selectedUploadFiles = [];
 const backgroundModeMap = {
     'mode-light': 'light',
     'mode-palette': 'palette',
@@ -275,6 +277,17 @@ function setFeatureSectionSelected(cardElement, isSelected) {
     }
 }
 
+function syncLanguageChipStates() {
+    const languageInput = document.getElementById('language-input');
+    if (!languageInput) return;
+    const selected = new Set(
+        languageInput.value.split(',').map(s => s.trim()).filter(Boolean)
+    );
+    $$('.language-chip').forEach(chip => {
+        chip.classList.toggle('is-selected', selected.has(chip.textContent.trim()));
+    });
+}
+
 window.syncLanguageFeatureState = function() {
     const languageCard = $('.language-card');
     const languageInput = document.getElementById('language-input');
@@ -285,6 +298,7 @@ window.syncLanguageFeatureState = function() {
         languageFieldGroup.classList.toggle('has-value', hasLanguage);
     }
 
+    syncLanguageChipStates();
     setFeatureSectionSelected(languageCard, hasLanguage);
 };
 
@@ -411,10 +425,9 @@ function getSelectedPaletteValue() {
         return selectedPaletteColor;
     }
 
-    const cols = 6;
-    const rows = 4;
+    const cols = 4;
     const x = (index % cols) + 1;
-    const y = rows - Math.floor(index / cols);
+    const y = Math.floor(index / cols) + 1;
     return `${x},${y}`;
 }
 
@@ -444,6 +457,111 @@ function getOptionalFeatures() {
     return optionalFeatures;
 }
 
+const UPLOAD_MAX_FILE_SIZE_MB = 20;
+const UPLOAD_ALLOWED_TYPES = [
+    'image/jpeg', 'image/png', 'image/gif', 'image/webp', 'image/svg+xml',
+    'application/pdf', 'application/postscript', 'application/zip', 'application/x-zip-compressed'
+];
+
+function validateUploadFiles(files) {
+    const valid = [], errors = [];
+    for (const file of files) {
+        if (file.type && !UPLOAD_ALLOWED_TYPES.includes(file.type)) {
+            errors.push(`${file.name}: unsupported file type`); continue;
+        }
+        if (file.size > UPLOAD_MAX_FILE_SIZE_MB * 1024 * 1024) {
+            errors.push(`${file.name}: exceeds ${UPLOAD_MAX_FILE_SIZE_MB}MB limit`); continue;
+        }
+        valid.push(file);
+    }
+    return { valid, errors };
+}
+
+function syncUploadBoxUI() {
+    const box = document.getElementById('upload-box');
+    const idleContent = box?.querySelector('.upload-idle-content');
+    const selectedContent = box?.querySelector('.upload-selected-content');
+    const countLabel = box?.querySelector('.upload-count-label');
+    const errorMsg = document.getElementById('upload-error-msg');
+    if (!box) return;
+    const hasFiles = selectedUploadFiles.length > 0;
+    box.classList.toggle('is-selected', hasFiles);
+    if (idleContent) idleContent.style.display = hasFiles ? 'none' : '';
+    if (selectedContent) selectedContent.style.display = hasFiles ? 'flex' : 'none';
+    if (countLabel) {
+        const n = selectedUploadFiles.length;
+        countLabel.textContent = n === 1 ? '1 file selected' : `${n} files selected`;
+    }
+    if (errorMsg) errorMsg.style.display = 'none';
+}
+
+function initUploadBox() {
+    const box = document.getElementById('upload-box');
+    const fileInput = document.getElementById('brand-assets-input');
+    const clearBtn = document.getElementById('upload-clear-btn');
+    const errorMsg = document.getElementById('upload-error-msg');
+    if (!box || !fileInput) return;
+
+    box.addEventListener('click', () => { fileInput.click(); });
+    box.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); fileInput.click(); }
+    });
+
+    fileInput.addEventListener('change', () => {
+        if (!fileInput.files?.length) return;
+        const { valid, errors } = validateUploadFiles(Array.from(fileInput.files));
+        const existingNames = new Set(selectedUploadFiles.map(f => f.name));
+        selectedUploadFiles = [...selectedUploadFiles, ...valid.filter(f => !existingNames.has(f.name))];
+        syncUploadBoxUI();
+        if (errors.length && errorMsg) { errorMsg.textContent = errors[0]; errorMsg.style.display = ''; }
+    });
+
+    box.addEventListener('dragover', (e) => { e.preventDefault(); box.classList.add('is-dragover'); });
+    box.addEventListener('dragleave', () => { box.classList.remove('is-dragover'); });
+    box.addEventListener('drop', (e) => {
+        e.preventDefault();
+        box.classList.remove('is-dragover');
+        const droppedFiles = e.dataTransfer?.files;
+        if (!droppedFiles?.length) return;
+        const { valid, errors } = validateUploadFiles(Array.from(droppedFiles));
+        const existingNames = new Set(selectedUploadFiles.map(f => f.name));
+        selectedUploadFiles = [...selectedUploadFiles, ...valid.filter(f => !existingNames.has(f.name))];
+        syncUploadBoxUI();
+        if (errors.length && errorMsg) { errorMsg.textContent = errors[0]; errorMsg.style.display = ''; }
+    });
+
+    clearBtn?.addEventListener('click', (e) => {
+        e.stopPropagation();
+        selectedUploadFiles = []; fileInput.value = ''; syncUploadBoxUI();
+    });
+    clearBtn?.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter' || e.key === ' ') {
+            e.preventDefault(); e.stopPropagation();
+            selectedUploadFiles = []; fileInput.value = ''; syncUploadBoxUI();
+        }
+    });
+}
+
+async function uploadBrandAssetsToSupabase(supabaseClient, files, businessName) {
+    if (!files?.length) return [];
+    const timestamp = Date.now();
+    const folder = businessName
+        ? businessName.toLowerCase().replace(/[^a-z0-9]/g, '-').replace(/-+/g, '-').slice(0, 40)
+        : 'unknown';
+    const publicUrls = [];
+    for (const file of files) {
+        const safeName = file.name.replace(/[^a-zA-Z0-9._-]/g, '_');
+        const storagePath = `${folder}/${timestamp}-${safeName}`;
+        const { error } = await supabaseClient.storage
+            .from('brand-assets')
+            .upload(storagePath, file, { cacheControl: '3600', upsert: false });
+        if (error) { console.warn(`Upload failed for ${file.name}:`, error.message); continue; }
+        const { data: urlData } = supabaseClient.storage.from('brand-assets').getPublicUrl(storagePath);
+        if (urlData?.publicUrl) publicUrls.push(urlData.publicUrl);
+    }
+    return publicUrls;
+}
+
 window.nextStep = async function() {
     if (currentStep < 5) {
         navigateToStep(currentStep + 1);
@@ -455,9 +573,13 @@ window.nextStep = async function() {
 
         try {
             const colourPalette = getSelectedPaletteValue();
+            const activePalEl = document.querySelector('.palette-option.active-palette');
+            const paletteColors = activePalEl
+                ? Array.from(activePalEl.children).map(el => el.style.background)
+                : [];
             const activeFontEl = $('.font-option-card.active');
             const stylePreference = activeFontEl ? activeFontEl.getAttribute('data-font') : '';
-            const layoutSections = sections.filter(s => s.active).map(s => s.id);
+            const layoutSections = sections.filter(s => s.active).map(s => s.id.charAt(0).toUpperCase() + s.id.slice(1));
             const optionalFeatures = getOptionalFeatures();
 
             const businessNameInput = document.getElementById('input-business-name');
@@ -497,6 +619,10 @@ window.nextStep = async function() {
             const supabaseClient = window.supabase.createClient(supabaseUrl, supabaseKey);
             const backgroundColour = getActiveBackgroundMode();
 
+            nextBtn.innerText = "Uploading...";
+            const brandAssetUrls = await uploadBrandAssetsToSupabase(supabaseClient, selectedUploadFiles, businessName);
+            nextBtn.innerText = "Submitting...";
+
             const { error } = await supabaseClient
                 .from('onboarding_submissions')
                 .insert([
@@ -512,7 +638,8 @@ window.nextStep = async function() {
                         location: location,
                         timeline: timeline,
                         references: references,
-                        final_notes: finalNotes
+                        final_notes: finalNotes,
+                        brand_assets: brandAssetUrls.length > 0 ? brandAssetUrls : null
                     }
                 ]);
 
@@ -520,6 +647,7 @@ window.nextStep = async function() {
 
             window.sessionStorage.setItem(THANK_YOU_SUMMARY_STORAGE_KEY, JSON.stringify({
                 palette: colourPalette ? `Palette ${colourPalette}` : '',
+                paletteColors,
                 backgroundMode: backgroundColour,
                 font: stylePreference,
                 sections: layoutSections,
@@ -573,8 +701,14 @@ window.setLanguageSuggestion = function(event, language) {
     if (event) event.stopPropagation();
     const languageInput = document.getElementById('language-input');
     if (!languageInput) return;
-    languageInput.value = language;
-    languageInput.focus();
+    const current = languageInput.value.split(',').map(s => s.trim()).filter(Boolean);
+    const idx = current.indexOf(language);
+    if (idx === -1) {
+        current.push(language);
+    } else {
+        current.splice(idx, 1);
+    }
+    languageInput.value = current.join(', ');
     syncLanguageFeatureState();
 };
 
@@ -1191,6 +1325,7 @@ window.selectFont = function(el) {
 // Init
 document.addEventListener('DOMContentLoaded', () => {
     updateView();
+    initUploadBox();
     syncLanguageFeatureState();
     syncSocialFeatureState();
     renderList();

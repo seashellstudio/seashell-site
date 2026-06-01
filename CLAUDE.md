@@ -51,6 +51,41 @@ The owner of this project does not code and relies entirely on AI assistants to 
 
 Vanilla HTML/CSS/JS — no framework, no build step. Hosted on Vercel. Playwright is available in `dev-tools/` for screenshot/layout audits.
 
+**Windows note:** PowerShell script execution is disabled. Use `cmd /c npm` and `cmd /c npx` instead of `npm`/`npx` directly.
+
+Deploy by pushing to git — Vercel auto-deploys on push to main. Git root is this directory (`Seashell_studio_website/`) — run all `git` commands here.
+
+## Hard constraints — non-negotiable
+
+- **No page scrolls — ever.** Fixed-viewport application. If content overflows, shrink it (smaller fonts, tighter gaps). Never add `overflow: scroll/auto` to fix overflow — fix the layout.
+- **Mobile breakpoint is 1060px.** Desktop = sidebar on the left. Mobile = top progress bar, no sidebar.
+- **`transform: scale()` is mobile-only.** Never apply on desktop to onboarding content. Never apply to elements using `width: 100%`, `clamp()`, or fluid grids.
+- **`main.css` has two `@media (min-width: 1060px)` blocks.** For Step 4 desktop rules, both blocks must be updated — the second wins the cascade. Always grep for any selector in both blocks before editing.
+- **Required step DOM chain** (never skip or reorder layers):
+  ```
+  .step-container > .step-mobile-fit-viewport > .step-mobile-fit-content > .container-inner > .step-shell > .step-header + <content>
+  ```
+  No per-step padding overrides on `.step-shell` or `.step-container`. One `.container-inner` level only.
+
+## Running locally
+
+```bash
+# From this directory:
+cmd /c npx serve . -p 8000
+
+# From dev-tools/:
+cmd /c npm install
+node capture_screens.js              # desktop + mobile screenshots for all 5 steps
+node mobile-onboarding-audit.cjs     # mobile layout audit with DOMRect measurements
+node step-header-alignment-audit.cjs # step header spacing ratio verification
+node verify-glow.js                  # glow effect verification
+cmd /c npx playwright test                  # full test suite (7 tests)
+cmd /c npx playwright test -g "step 1"     # single test by name
+
+# Targeted step screenshot (change navigateToStep number):
+node -e "const { chromium } = require('playwright'); (async () => { const browser = await chromium.launch(); const page = await browser.newPage(); await page.setViewportSize({ width: 1440, height: 900 }); await page.goto('http://127.0.0.1:8000'); await page.waitForTimeout(500); await page.evaluate(() => window.navigateToStep(4)); await page.waitForTimeout(600); await page.screenshot({ path: 'screens/check.png' }); await browser.close(); })();"
+```
+
 ## Step 5 Backend
 
-Step 5 submits to Supabase (`onboarding_submissions` table) via the JS client loaded from CDN. On success, a summary is written to `sessionStorage` and the user is redirected to `thank-you.html`, which reads that summary to display a confirmation card. The upload box on Step 5 is UI-only — no file upload backend exists. No Stripe, no email automation.
+Step 5 submits to Supabase (`onboarding_submissions` table) via the JS client loaded from CDN. On success, a summary is written to `sessionStorage` and the user is redirected to `thank-you.html`, which reads that summary to display a confirmation card. `thank-you.html` is standalone — its CSS is self-contained `<style>` tags, no shared stylesheets. The upload box on Step 5 uploads files to Supabase Storage (`brand-assets` bucket); public URLs are stored in the `brand_assets text[]` column on `onboarding_submissions`. No Stripe, no email automation.
