@@ -632,14 +632,21 @@
     min-height: 0;
   }
 
-  /* Location input fills remaining left column height, aligning its bottom with reference */
-  #step-5 .finish-form-main .input-group:last-child {
-    flex: 1 1 auto;
+  /* All 4 left-column groups share height equally */
+  #step-5 .finish-form-main .input-group {
+    flex: 1 1 0%;
     display: flex;
     flex-direction: column;
     min-height: 0;
   }
 
+  /* Inputs in groups 1-3 fill remaining height after their label */
+  #step-5 .finish-form-main .input-group input {
+    flex: 1;
+    min-height: 0;
+  }
+
+  /* Location: icon-wrapper fills group height, input fills wrapper */
   #step-5 .finish-form-main .input-group:last-child .input-icon-wrapper {
     flex: 1;
     min-height: 0;
