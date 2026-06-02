@@ -564,6 +564,15 @@
     padding: 0.55rem 0.7rem;
   }
 
+  /* Focus ring: overflow:hidden on parent containers clips box-shadow, so use
+     outline instead — outline is not clipped by overflow:hidden in any browser. */
+  #step-5 .input-group input:focus,
+  #step-5 .input-group textarea:focus {
+    box-shadow: none;
+    outline: 1px solid rgba(255, 159, 74, 0.5);
+    outline-offset: 0px;
+  }
+
   #step-5 .input-group input::placeholder,
   #step-5 .input-group textarea::placeholder {
     font-size: 13px;
