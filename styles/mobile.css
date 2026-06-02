@@ -576,13 +576,13 @@
     padding: 0.55rem 0.7rem;
   }
 
-  /* Focus ring: overflow:hidden on parent containers clips box-shadow, so use
-     outline instead — outline is not clipped by overflow:hidden in any browser. */
+  /* Focus ring: 4 levels of overflow:hidden above the input clip any outward
+     effect (box-shadow, outline). Inset box-shadow renders inside the border-box
+     and is physically impossible to clip by any parent overflow. */
   #step-5 .input-group input:focus,
   #step-5 .input-group textarea:focus {
-    box-shadow: none;
-    outline: 1px solid rgba(255, 159, 74, 0.5);
-    outline-offset: 0px;
+    box-shadow: inset 0 0 0 1px rgba(255, 159, 74, 0.5);
+    outline: none;
   }
 
   #step-5 .input-group input::placeholder,
