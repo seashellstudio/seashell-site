@@ -561,7 +561,11 @@
     min-height: 72px;
   }
 
-  #step-5 #input-reference,
+  #step-5 #input-reference {
+    height: auto;
+    min-height: 0;
+  }
+
   #step-5 #input-final-notes {
     height: auto;
     min-height: 68px;

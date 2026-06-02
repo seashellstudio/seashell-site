@@ -230,7 +230,7 @@ function updateFinalDetailsReferenceAlignment() {
 
     referenceField.style.height = '';
 
-    if (isMobileViewport() || !step.classList.contains('active')) {
+    if (!step.classList.contains('active')) {
         return;
     }
 
