@@ -492,7 +492,7 @@
     margin: 0 !important;
     padding: 0 !important;
     display: grid !important;
-    grid-template-columns: minmax(0, 1fr) minmax(0, 1.04fr);
+    grid-template-columns: minmax(0, 1.5fr) minmax(0, 1fr);
     grid-template-rows: auto auto;
     gap: var(--mobile-step-content-gap);
     z-index: auto !important;
