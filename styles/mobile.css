@@ -423,6 +423,10 @@
     min-height: 0;
   }
 
+  #step-4 .feature-meta {
+    display: none;
+  }
+
   #step-4 .feature-toggle-card,
   #step-4 .social-card,
   #step-4 .language-card {
@@ -493,6 +497,15 @@
     overflow: hidden;
   }
 
+  #step-5 .finish-grid-full .input-group {
+    height: 100%;
+  }
+
+  #step-5 .finish-grid-full .input-group textarea {
+    height: 100%;
+    min-height: 0;
+  }
+
   #step-5 .finish-form-main .input-group,
   #step-5 .finish-form-side .input-group,
   #step-5 .finish-grid-full .input-group {
@@ -536,5 +549,27 @@
     transform: translateX(-50%);
     justify-content: space-between;
     gap: clamp(0.7rem, 0.57rem + 0.5vw, 0.9rem);
+  }
+
+  /* Step 5 input sizing — overrides the 16px set in onboarding-steps-3-5.css.
+     Tradeoff: iOS Safari briefly zooms on input focus (acceptable for a one-time form). */
+  #step-5 .input-group input,
+  #step-5 .input-group textarea {
+    font-size: 13px;
+    padding: 0.55rem 0.7rem;
+  }
+
+  #step-5 .input-group input::placeholder,
+  #step-5 .input-group textarea::placeholder {
+    font-size: 13px;
+  }
+
+  /* Location field: reduce icon inset and left padding to match smaller font */
+  #step-5 .icon-pos {
+    left: 0.5rem;
+  }
+
+  #step-5 #input-location {
+    padding-left: 1.6rem !important;
   }
 }
