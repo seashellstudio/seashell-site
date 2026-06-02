@@ -34,6 +34,8 @@ Seashell_studio_website/
 │   └── mobile.css          Mobile-specific overrides (<1060px)
 ├── assets/                 Images used on the live site
 ├── docs/                   Planning docs, wireframes, Site-guidelines.md
+├── supabase/
+│   └── functions/send-onboarding-email/index.ts   Deno Edge Function — sends confirmation emails via Resend
 ├── dev-tools/              Playwright test scripts (not deployed)
 └── .vercel/                Deployment config — do not modify
 ```
@@ -88,4 +90,6 @@ node -e "const { chromium } = require('playwright'); (async () => { const browse
 
 ## Step 5 Backend
 
-Step 5 submits to Supabase (`onboarding_submissions` table) via the JS client loaded from CDN. On success, a summary is written to `sessionStorage` and the user is redirected to `thank-you.html`, which reads that summary to display a confirmation card. `thank-you.html` is standalone — its CSS is self-contained `<style>` tags, no shared stylesheets. The upload box on Step 5 uploads files to Supabase Storage (`brand-assets` bucket); public URLs are stored in the `brand_assets text[]` column on `onboarding_submissions`. No Stripe, no email automation.
+Step 5 submits to Supabase (`onboarding_submissions` table) via the JS client loaded from CDN. On success, a summary is written to `sessionStorage` and the user is redirected to `thank-you.html`, which reads that summary to display a confirmation card. `thank-you.html` is standalone — its CSS is self-contained `<style>` tags, no shared stylesheets. The upload box on Step 5 uploads files to Supabase Storage (`brand-assets` bucket); public URLs are stored in the `brand_assets text[]` column on `onboarding_submissions`.
+
+**Email automation (partially set up):** `supabase/functions/send-onboarding-email/index.ts` is a Deno Edge Function that sends a client confirmation and a Tyler notification via Resend. Full wiring (RESEND_API_KEY secret + pg_net trigger) is tracked in `docs/superpowers/plans/2026-05-22-resend-onboarding-email.md`. Check that plan's checkbox state before assuming emails are live. **No Stripe integration.**
