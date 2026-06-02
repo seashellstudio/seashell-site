@@ -379,6 +379,18 @@
     min-height: 0;
   }
 
+  #step-3 .section-item .sec-icon {
+    font-size: 1rem;
+  }
+
+  #step-3 .section-item .sec-name {
+    font-size: 0.58rem;
+  }
+
+  #step-3 .section-item .sec-action {
+    font-size: 0.72rem;
+  }
+
   /* Allow glow to bleed outward through all intermediate containers
      to #step-4's own padding zone, which is the clip boundary. */
   #view-onboarding #step-4,
