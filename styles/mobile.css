@@ -443,6 +443,18 @@
     display: none;
   }
 
+  #step-4 .feature-toggle-card .card-desc {
+    font-size: 0.6rem;
+    line-height: 1.3;
+  }
+
+  #step-4 .language-chip {
+    font-size: 0.52rem;
+    padding: 0.1rem 0.22rem;
+    min-height: 1rem;
+    letter-spacing: 0.04em;
+  }
+
   #step-4 .feature-toggle-card,
   #step-4 .social-card,
   #step-4 .language-card {
@@ -474,13 +486,14 @@
     position: static !important;
     inset: auto !important;
     width: 100% !important;
-    height: 100% !important;
+    height: auto !important;
+    flex: 0 0 auto !important;
     min-height: 0 !important;
     margin: 0 !important;
     padding: 0 !important;
     display: grid !important;
     grid-template-columns: minmax(0, 1fr) minmax(0, 1.04fr);
-    grid-template-rows: minmax(0, 1fr) minmax(6.5rem, 0.7fr);
+    grid-template-rows: auto auto;
     gap: var(--mobile-step-content-gap);
     z-index: auto !important;
   }
@@ -489,44 +502,44 @@
   #step-5 .finish-form-side {
     min-width: 0;
     min-height: 0;
-    height: 100%;
+    height: auto;
     display: grid !important;
     overflow: hidden;
   }
 
   #step-5 .finish-form-main {
-    grid-template-rows: repeat(4, minmax(0, 1fr));
+    grid-template-rows: repeat(4, auto);
     gap: clamp(0.5rem, 0.45rem + 0.19vw, 0.6rem);
   }
 
   #step-5 .finish-form-side {
-    grid-template-rows: minmax(0, 1.28fr) minmax(0, 0.9fr) minmax(0, 1fr);
+    grid-template-rows: auto auto auto;
     gap: clamp(0.5rem, 0.45rem + 0.19vw, 0.6rem);
   }
 
   #step-5 .finish-grid-full {
     grid-column: 1 / -1;
     min-height: 0;
-    height: 100%;
+    height: auto;
     margin-top: 0;
     padding-top: 0 !important;
     overflow: hidden;
   }
 
   #step-5 .finish-grid-full .input-group {
-    height: 100%;
+    height: auto;
   }
 
   #step-5 .finish-grid-full .input-group textarea {
-    height: 100%;
-    min-height: 0;
+    height: auto;
+    min-height: 68px;
   }
 
   #step-5 .finish-form-main .input-group,
   #step-5 .finish-form-side .input-group,
   #step-5 .finish-grid-full .input-group {
     display: grid;
-    grid-template-rows: auto minmax(0, 1fr);
+    grid-template-rows: auto auto;
     gap: 0.3rem;
     min-height: 0;
     margin: 0;
@@ -535,23 +548,23 @@
   }
 
   #step-5 .timeline-bar {
-    height: 100%;
+    height: auto;
   }
 
   #step-5 .timeline-btn {
     min-height: 0;
-    height: 100%;
+    height: auto;
   }
 
   #step-5 .upload-box {
-    height: 100%;
-    min-height: 0;
+    height: auto;
+    min-height: 72px;
   }
 
   #step-5 #input-reference,
   #step-5 #input-final-notes {
-    height: 100%;
-    min-height: 0;
+    height: auto;
+    min-height: 68px;
   }
 
   #step-5 .input-icon-wrapper {
