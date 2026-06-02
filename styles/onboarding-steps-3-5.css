@@ -632,6 +632,23 @@
     min-height: 0;
   }
 
+  /* Location input fills remaining left column height, aligning its bottom with reference */
+  #step-5 .finish-form-main .input-group:last-child {
+    flex: 1 1 auto;
+    display: flex;
+    flex-direction: column;
+    min-height: 0;
+  }
+
+  #step-5 .finish-form-main .input-group:last-child .input-icon-wrapper {
+    flex: 1;
+    min-height: 0;
+  }
+
+  #step-5 .finish-form-main .input-group:last-child input {
+    height: 100%;
+  }
+
   /* References textarea fills the side column height */
   #step-5 .finish-form-side .input-group:last-child {
     flex: 1 1 auto;
