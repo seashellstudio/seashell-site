@@ -271,6 +271,10 @@
     min-height: 0;
   }
 
+  #step-2 .preview-divider {
+    display: none;
+  }
+
   #step-2 .preview-body {
     flex: 1 1 auto;
     min-height: 0;
